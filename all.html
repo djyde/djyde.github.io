@@ -1,0 +1,19 @@
+---
+layout: page
+title: 所有文章
+permalink: /all/
+---
+
+<h4>生活</h4>
+<ul>
+	{% for post in site.tags.live %}
+		<li><a href="{{ post.url }}">{{ post.title }}</a></li>
+	{% endfor %}
+</ul>
+
+<h4>Android</h4>
+<ul>
+	{% for post in site.tags.android %}
+		<li><a href="{{ post.url }}">{{ post.title }}</a></li>
+	{% endfor %}
+</ul>
