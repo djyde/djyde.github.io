@@ -3,6 +3,7 @@ layout: post
 title: 在Volley中自定义HTTP头实现模拟PC端访问网页
 date: 2014-08-26 03:15:00
 tag: android
+published: true
 ---
 最近在用Volley + Jsoup 抓V2EX网站首页数据的时候一直抓不到自己想抓到的数据，换了很多种Jsoup不同的选择器依然抓不到要抓的。后来索性把Volley取到的V2EX首页原代码Log出来，才发现原来是因为手机端访问V2EX会自动跳转到手机版，而手机版里根本就没有这个，难怪一直抓不出来。
 
