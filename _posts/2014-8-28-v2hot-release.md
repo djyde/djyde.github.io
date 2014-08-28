@@ -25,6 +25,7 @@ tag: android
 ![截图3](http://img.wdjimg.com/mms/screenshot/8/b2/9fa6b68141b54fae232a7b9d61a6cb28_320_568.jpeg)
 
 下载地址：
+[直接下载APK]({{site.url}}/assets/apk/V2HOT.apk)
 [豌豆荚](http://www.wandoujia.com/apps/com.randy.client.v2hot)
 
 程序员最大的优越性是永远不差程序员，这几天彻夜赶工，终于完成了这个app，也是我转Android开发的第一个app，希望大家感觉有用。
