@@ -18,9 +18,9 @@ date: 2014-8-28 16:15:00
 
 应用截图：
 
-![截图1]({{site.url}}/assets/screenshot/v2hot_1.png)
-![截图2]({{site.url}}/assets/screenshot/v2hot_2.png)
-![截图3]({{site.url}}/assets/screenshot/v2hot_3.png)
+![截图1](http://img.wdjimg.com/mms/screenshot/3/3c/4249b835451a4fd2a674df2cd3c093c3_320_568.jpeg)
+![截图2](http://img.wdjimg.com/mms/screenshot/0/24/50b837b8ea5c078e0deaac4d07cb9240_320_568.jpeg)
+![截图3](http://img.wdjimg.com/mms/screenshot/8/b2/9fa6b68141b54fae232a7b9d61a6cb28_320_568.jpeg)
 
 下载地址：
 [豌豆荚](http://www.wandoujia.com/apps/com.randy.client.v2hot)
@@ -29,7 +29,7 @@ date: 2014-8-28 16:15:00
 
 而程序员最大的乐趣是能做出自己想要的东西，We as if the magician. What we want, just do it. 附送一张手绘设计图，从刚开始做web开发的时候就喜欢自己先画出设计图再做UI，现在依然如此。
 
-![设计图]({{site.url}}/assets/image/v2hot_design.jpg)
+![设计图]({{site.url}}/assets/image/v2hot_design.png)
 
 **即将开源**，请关注我的[github](http://github.com/djyde)和blog。
 
