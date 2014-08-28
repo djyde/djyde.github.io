@@ -2,6 +2,7 @@
 layout: post
 title: 我的第一个应用 - V2HOT上线
 date: 2014-8-28 16:15:00
+tag: android
 ---
 
 在坐公交的时候，我常常淘出手机消磨时间。入口一般是 微信->微博->chrome。对我来说打开浏览器是一个麻烦的举动，而我是一个v2ex的用户，经常希望在闲余的时间看看这个社区里在讨论什么东西，尤其是热议主题，非常有质量且能消磨时间。我手上的设备是nexus5，有人曾为v2ex做过Android客户端，但是没有查看今日热议主题的功能，而且对我来说只需要看看热议主题就行，不希望再看到其它我不太想在碎片时间看到的内容。
@@ -20,6 +21,7 @@ date: 2014-8-28 16:15:00
 
 ![截图1](http://img.wdjimg.com/mms/screenshot/3/3c/4249b835451a4fd2a674df2cd3c093c3_320_568.jpeg)
 ![截图2](http://img.wdjimg.com/mms/screenshot/0/24/50b837b8ea5c078e0deaac4d07cb9240_320_568.jpeg)
+
 ![截图3](http://img.wdjimg.com/mms/screenshot/8/b2/9fa6b68141b54fae232a7b9d61a6cb28_320_568.jpeg)
 
 下载地址：
