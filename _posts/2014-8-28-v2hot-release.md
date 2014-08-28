@@ -29,7 +29,7 @@ date: 2014-8-28 16:15:00
 
 而程序员最大的乐趣是能做出自己想要的东西，We as if the magician. What we want, just do it. 附送一张手绘设计图，从刚开始做web开发的时候就喜欢自己先画出设计图再做UI，现在依然如此。
 
-![设计图]({{site.url}}/assets/image/v2hot_design)
+![设计图]({{site.url}}/assets/image/v2hot_design.jpg)
 
 **即将开源**，请关注我的[github](http://github.com/djyde)和blog。
 
