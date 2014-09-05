@@ -16,3 +16,5 @@ tag: android
 开源就是力量。
 
 [V2HOT on Github](http://github.com/djyde/v2hot)
+
+另外在下是学生党，暂时没有能力注册Google Play开发者账号，如果你觉得这个app不错，欢迎通过我的支付宝账号 djyde520@gmail.com 进行捐助。谢谢大家。
