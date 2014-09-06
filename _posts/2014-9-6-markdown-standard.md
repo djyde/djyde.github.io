@@ -2,6 +2,7 @@
 layout: post
 title: 对Markdown标准化的构想
 date: 2014-9-6
+tag: internet
 ---
 John Gruber和Aaron Swartz创造Markdown至今已经有十年，在这十年我们用Markdown节约了大量的时间，像Github、Stackoverflow这样的网站都能看到Markdown的身影，这篇文章也是用它写成。
 

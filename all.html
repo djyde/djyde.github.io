@@ -4,9 +4,9 @@ title: 所有文章
 permalink: /all/
 ---
 
-<h4>生活</h4>
+<h4>互联网</h4>
 <ul>
-	{% for post in site.tags.live %}
+	{% for post in site.tags.internet %}
 		<li><a href="{{ post.url }}">{{ post.title }}</a></li>
 	{% endfor %}
 </ul>
@@ -18,3 +18,9 @@ permalink: /all/
 	{% endfor %}
 </ul>
 
+<h4>生活</h4>
+<ul>
+	{% for post in site.tags.live %}
+		<li><a href="{{ post.url }}">{{ post.title }}</a></li>
+	{% endfor %}
+</ul>
