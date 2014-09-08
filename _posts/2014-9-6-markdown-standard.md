@@ -8,7 +8,7 @@ John Gruber和Aaron Swartz创造Markdown至今已经有十年，在这十年我�
 
 如果用面向对象的思维去看待Markdown，它就像是一个interface，所有人可以根据自己不同的需求去编写自己的Markdown实现，比如Github Flavored Markdown。这样的灵活性促进了它迅猛的发展，但同样也给使用者带来了一些问题。
 
-虽然同样使用Markdown，但在不同的环境下，常用的写法则不一定正确。比如说我通常使用下划线嵌套实现字体倾斜（ \_e.g\_ ），但在Github中，这样的写法是不允许的，因为当我们需要写像hello\_world\_example 这样的字符串的时候，会被解析成hello_world_exapmle，Github选择忽略这种写法，只能使用星号实现斜体，这种做法无疑是正确的。
+虽然同样使用Markdown，但在不同的环境下，常用的写法则不一定正确。比如说我通常使用下划线嵌套实现字体倾斜（ \_e.g\_ ），但在Github中，这样的写法是不允许的，因为当我们需要写像hello\_world\_example这样的字符串的时候，会被解析成hello  *world* exapmle，Github选择忽略这种写法，只能使用星号实现斜体，这种做法无疑是正确的。
 
 这样的乱象带给用户很大的不便，由其在面对一个陌生的编辑环境的时候，没有人告诉你，应该按照怎样的标准去编写Markdown，有时甚至会在提交文本后发生无可挽回的结果。
 
