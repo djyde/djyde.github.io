@@ -18,6 +18,13 @@ permalink: /all/
 	{% endfor %}
 </ul>
 
+<h4>技术</h4>
+<ul>
+	{% for post in site.tags.tech %}
+		<li><a href="{{ post.url }}">{{ post.title }}</a></li>
+	{% endfor %}
+</ul>
+
 <h4>生活</h4>
 <ul>
 	{% for post in site.tags.live %}
