@@ -5,6 +5,8 @@ date: 2014-10-17
 tag: android
 ---
 
+[官方文档](http://realm.io/docs/java/)
+
 **开始**
 ------
 **请注意我们当前不支持除 Android 环境以外的 Java 环境使用 Realm**
@@ -287,6 +289,7 @@ realm.removeAllChangeListeners();
 下一步
 ----
 你可以查看我们的[example](https://github.com/realm/realm-java/tree/master/examples)中的实例（我们会陆续提供更多samples）。
+
 Happy hacking!你可以在[realm-java](https://groups.google.com/d/forum/realm-java)里和真人开发者交流。
 
 FAQ
