@@ -1,0 +1,166 @@
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <title>从 React 谈 Web UI 开发 - Randy's Blog</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/styles/rexo.css">
+  <link href="//cdn.bootcss.com/highlight.js/9.11.0/styles/zenburn.min.css" rel="stylesheet">
+  <link href="//ppp.djyde.com/css?family=Noto+Serif+SC" rel="stylesheet">
+  <script src="//cdn.bootcss.com/highlight.js/9.9.0/highlight.min.js"></script>
+  <script src="//cdn.bootcss.com/highlight.js/9.8.0/languages/javascript.min.js"></script>
+  <script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/typescript.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+  <body>
+    <header>
+  <div class="description">
+    <div style="background-image: url(//bstatic.djyde.com/assets/006tKfTcgy1fkuuijv4pwj30ku0na3zq.jpg); width: 128px; height: 128px; background-size: cover; border-radius: 50%; margin: 0 auto;">
+    </div>
+    <p class="name">Randy Lu</p>
+    <p class="desc">Software Engineer. Blogging about life, tech and music.</p>
+  </div>
+  <nav>
+    <ul class="nav">
+      
+        <li class="nav-item">
+          <a href="/">Blog</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/timeline">Timeline</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/music">Music</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/rss.xml">RSS</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/about">About</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/blog/donation">Donate</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="http://stickeroverflow.xyz">购买贴纸</a>
+        </li>
+      
+    </ul>
+  </nav>
+</header>
+    <div>
+      <div class="post-body">
+  <h1 class="title">从 React 谈 Web UI 开发</h1>
+  <p class="date">01, Jan, 2017</p>
+  <div class="post-content">
+    <p><blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">If using React makes u confused, it&#39;s time to think about what React actually is. It&#39;s a great DOM diff algorithm with component system.</p>&mdash; Randy (@randyloop) <a href="https://twitter.com/randyloop/status/814663047541231616" target="_blank" rel="noopener">December 30, 2016</a></blockquote></p>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>此前我在 Twitter 上这样表达过对 React 的理解，但是 Twitter 篇幅有限，所以在这篇文章里，我要做更详尽的阐述。</p>
+<p>我从前不喜欢 React, 是因为写 React 的 render function 不像写 template 一样方便，尤其是存在复杂的判断渲染的时候，Vue 的 template 一个 v-if 就搞定了。而在 React 里写，需要把这个判断写成 function, 然后条件判断 return 哪一个 view. 这是我最初对 React 的偏见所在之一。</p>
+<p>然而经过自己的实践和思考，加上阅读一些文章，我发现以前的想法是错的。我在使用 React 的时候，没有做到 Thinking in React. 从而对 React 产生了不解和困惑。</p>
+<p>有很多人把 React 当成框架来用，这是用不好 React 的根本原因。很少人认真思考 <strong>A JavaScript library for building User Interface</strong> 背后的含义，把 React 用得一团糟。</p>
+<p>何谓 For Building User Interface? 意思就是，这个库仅仅是用于构建 UI 的，这是 React 本质要解决的问题。我甚至和很多人说，事实上 React 本身是不是 React 已经不重要了，重要的是我们写 UI 的思维。<strong>React 这个 library 本身仅仅是用来实现这个思维的手段</strong>。React 提供的，是优秀的 DOM diff 算法，和一套 Component system。换成代码来说，也就是：</p>
+<pre><code class="javascript">(state) =&gt; View
+</code></pre>
+<p>这是 React building UI 的核心思想，所有的组件，就是接受 state, 返回一个 View. 这样看上去比较抽象，比如我们有一个 Clock 组件：</p>
+<pre><code class="javascript">const Clock = (time) =&gt; `
+&lt;div id=&#39;clock&#39;&gt;
+    &lt;span&gt;It&#39;s now: &lt;/span&gt;
+    &lt;span&gt;${time}&lt;/span&gt;
+&lt;/div&gt;
+`
+</code></pre>
+<p>Clock 是一个 function, 接受一个 time 参数，返回的是一串 HTML String. 在程序里，我们可以给一个 Interval, 每秒传一个当前的 time, 得到一个新的 HTML String, 然后 apply 到某个 DOM 上。</p>
+<pre><code class="javascript">const $app = document.getElementById(&#39;app&#39;)
+
+setInterval(() =&gt; {
+  $app.innerHTMl = Clock(Date.now())
+}, 1000)
+</code></pre>
+<p>这样的实现是能达到目的的，但是问题在于，每次 <code>innerHTML</code> 时，整个 <code>#app</code> 的 DOM 树会被重新渲染。</p>
+<p><img src="/images/plain-render-clock.gif" alt></p>
+<p>我们都知道，DOM 更新的花费是昂贵的。整个 DOM 树，实际上只是一个 <code>span</code> 在不断变化，所以我们需要 DOM diff 算法来得知到底哪一个 DOM 节点才需要被更新，从而节省开销：</p>
+<pre><code class="javascript">const Clock = ({time}) =&gt; (
+  &lt;div id=&#39;clock&#39;&gt;
+    &lt;span&gt;It&#39;s now: &lt;/span&gt;
+    &lt;span&gt;{time}&lt;/span&gt;
+  &lt;/div&gt;
+)
+
+const $app = document.getElementById(&#39;app&#39;)
+
+setInterval(() =&gt; {
+  ReactDOM.render(&lt;Clock time={Date.now()} /&gt;, $app)
+}, 1000)
+</code></pre>
+<p>在 React 里，把 props 传入，返回一个类似 HTML 的结构，然后 render 到指定的 DOM 节点上。这里 React 会算出哪个节点应该被更新：</p>
+<p><img src="/images/react-render-clock.gif" alt></p>
+<p>我们这样手动去 setInterval 然后 render 未免有点傻，我们可以更改 state (也就是通常用到的 <code>setState</code>) 自动地让 React 随着 state 的改变而重新 render. 这里的 time 就是一个 state. 这叫做 Reactive.</p>
+<p>Functional Programming 里有 Pure Function 的概念。Pure Function 之所以 Pure, 是因为不存在 side effect. 举个例子，我们写一个求和 function：</p>
+<pre><code class="javascript">function add (a, b) {
+  return a + b
+}
+</code></pre>
+<p>这个求和函数就是一个 pure function. 因为函数内部没有对 input 做任何改变，并且返回一个新的值。我传 1 和 1，得到的永远是 2.</p>
+<p>Pure Function 的好处是利于维护和测试。要测试一个 Pure Function, 仅仅是传不同的值，预言对应的返回值。</p>
+<p>现在回头看 React 的 Component, 也可以算是一个 Pure Function——接收不同的 props, 然后 render 对应的 View. 上面 Clock 的例子，props 和返回的 View 是映射关系。</p>
+<p>光是 <code>state =&gt; View</code> 还不够，在构建 UI 的时候，我们希望 state 改变的时候，立即 rerender 整个 View, 也就是我们经常用到的 <code>setState()</code>. </p>
+<p>这样就很容易理解为什么我说 React 仅仅是实现构建 UI 思想的手段，因为构建 UI 的思想总结起来就是：</p>
+<ol>
+<li>State 是 Reactive 的 (比如 React 的 <code>setState</code>)</li>
+<li>state =&gt; View (依靠 DOM diff)</li>
+<li>View 组成 Component</li>
+<li>管理 state （依靠第三方的 state manager）</li>
+</ol>
+<p>无论是 React 还是 Vue, 大抵都是这样的思想。Vue 1 还不完全是，Vue 2 就更接近了，只是后者写法既可以写得像 template, 又可以写直接写 vdom. </p>
+<p>而开发者常常感到困难的地方实际上是上面的第 4 点——管理 state. <strong>写 React 写得痛苦，大部分原因是用把 library 当成 framework 去用</strong>，把处理 state 的逻辑瞎写到 View 层中去，也就是所谓的 Dump Component.</p>
+<p>改变 state 是 side effect, 我们应该把它从 View 层中分离出去。我多次提到，<strong>View 层真正要做的，仅仅是根据 state 返回对应的 View</strong>. state 的变化逻辑，应该在给 state manager 库去做，例如 Redux, Mobx. 下面我用 Mobx 作为例子：</p>
+<p><img src="/images/mobx-ticker.gif" alt></p>
+<p><em><a href="https://jsbin.com/fumerup/edit?js,output" target="_blank" rel="noopener">https://jsbin.com/fumerup/edit?js,output</a></em></p>
+<p>如果没有接触过 Mobx 不用慌张，只需要知道，Mobx 的 Observable 变化时，被 observer 包装的 React 组件会重新渲染。使用 state manager, 明显地分离了 View 和 side-effect:</p>
+<p><img src="/images/state-effect-view.png" alt></p>
+<p>测试这样的程序，首先为 side effect 的逻辑做测试，再为 View 做测试。View 的测试在这里就十分简单了，给他传一个 store 实例，借助 <a href="https://github.com/airbnb/enzyme" target="_blank" rel="noopener">enzyme</a> 之类的 testing utilities 预言不同的 action 得到的返回 View.</p>
+<p>React 是 Reactive Programming 在 Web User Interface 上实现的手段，它只不过是一个库，提供了reactive render, component system 和降低开销的 DOM diff 算法. 把 React 换掉，只要不是手动操作 DOM, 其它的框架也不过大同小异。重要的是理解它背后的思想。说到底，前端开发在解决什么问题，用什么样的方式解决问题，在使用任何框架和库之前先把这两个问题思考明白，就不会认为前端难学了。</p>
+
+  </div>
+  <center><img class="signature" width="128px" src="//bstatic.djyde.com/sign_square_white.png"></center>
+  <div class="post-footer">
+  <hr>
+  <p>讨论请发邮件到 randypriv@gmail.com</p>
+  <p>未经授权，禁止转载</p>
+  <p>通过支付宝 djyde520@gmail.com 或赞赏码赞助此文</p>
+  <p>或通过订阅我的<a href="https://xiaozhuanlan.com/djyde">付费专栏</a>支持本博客</p>
+  <br>
+  <p>
+    <img class="bmc" src="//bstatic.djyde.com/assets/006tKfTcgy1fkuufy2cadj30w00w0tb2.jpg">
+  </p>
+</div>
+
+</div>
+    </div>
+    <div id="footer">
+  <p>
+  <img width="256px" src="//s2.ax1x.com/2019/04/04/A2V9YT.png">
+  </p>
+  <p>2014-2019 <a href="/">Randy's Blog</a></p>
+
+</div>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72147868-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

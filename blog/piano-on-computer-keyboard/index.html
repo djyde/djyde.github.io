@@ -1,0 +1,123 @@
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <title>电脑键盘上的流行钢琴伴奏 - Randy's Blog</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/styles/rexo.css">
+  <link href="//cdn.bootcss.com/highlight.js/9.11.0/styles/zenburn.min.css" rel="stylesheet">
+  <link href="//ppp.djyde.com/css?family=Noto+Serif+SC" rel="stylesheet">
+  <script src="//cdn.bootcss.com/highlight.js/9.9.0/highlight.min.js"></script>
+  <script src="//cdn.bootcss.com/highlight.js/9.8.0/languages/javascript.min.js"></script>
+  <script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/typescript.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+  <body>
+    <header>
+  <div class="description">
+    <div style="background-image: url(//bstatic.djyde.com/assets/006tKfTcgy1fkuuijv4pwj30ku0na3zq.jpg); width: 128px; height: 128px; background-size: cover; border-radius: 50%; margin: 0 auto;">
+    </div>
+    <p class="name">Randy Lu</p>
+    <p class="desc">Software Engineer. Blogging about life, tech and music.</p>
+  </div>
+  <nav>
+    <ul class="nav">
+      
+        <li class="nav-item">
+          <a href="/">Blog</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/timeline">Timeline</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/music">Music</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/rss.xml">RSS</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/about">About</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/blog/donation">Donate</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="http://stickeroverflow.xyz">购买贴纸</a>
+        </li>
+      
+    </ul>
+  </nav>
+</header>
+    <div>
+      <div class="post-body">
+  <h1 class="title">电脑键盘上的流行钢琴伴奏</h1>
+  <p class="date">19, Feb, 2017</p>
+  <div class="post-content">
+    <p>我在好几个月前入了一个 MIDI 键盘，自学了一段时间的流行钢琴伴奏(弹唱)和相关的乐理，但是由于工作和其它事情的原因，没有太多的时间练习指法，以至于仍然很难熟练地弹唱一首流行歌曲。</p>
+<p>我想，我要花很长时间来练习我的键盘指法，但是作为一个程序员，我对电脑键盘的键位了如指掌。于是我开始考虑把钢琴键盘移植到电脑键盘上。</p>
+<p>如果你 Google 一下 online piano 的关键词，你会搜出很多在 PC 上模拟钢琴键盘的 demo. 但是这些 demo 的出发点都是把钢琴键盘上每一个黑键白键都序列化地映射在电脑键盘上。这种程序演奏一下单音，弹首小星星还行，但是真的要在上面弹一首流行伴奏，几乎不可能。</p>
+<p>首先和弦是由几个不同音高的音组合成的，如果单纯把音序列化地映射到每个按键上，即使是最简单的三和弦，你都没有办法准确地在电脑键盘上同时按下 1 3 5 来弹出一个 C chord. 借鉴五笔输入法的设计，我设计出了通过按键映射和弦(chord)，以及对应的分解和弦(broken chord)的键盘布局方案，来降低演奏时对指法的要求，简化流行钢琴伴奏。</p>
+<p>利用这个周末，我已经把这个想法初步实现了出来，在这个初步版本里，已经实现了例如右手柱式和弦的几种转位、自动弹奏左手降两个八度的根音、分解和弦在键盘上的映射等等这些基本能力，通过这些能力已经可以玩一些简单的伴奏 pattern，比如常说的 151， 1531 等等。</p>
+<h2 id="How-it-likes"><a href="#How-it-likes" class="headerlink" title="How it likes"></a>How it likes</h2><p><img src="/images/pciano-screenshot.png" alt></p>
+<p>在浏览器上面，我写了一个钢琴键盘排列，来展示当前所按到的音。</p>
+<p>为了证明这个东西真的能弹出伴奏，我特意录了一个用它来弹唱的视频，唱的是薛之谦的《绅士》：</p>
+<video src="//o86cdh9ph.qnssl.com/video/IMG_7722.mp4" controls preload="none"></video>
+
+<h2 id="Why-it-works"><a href="#Why-it-works" class="headerlink" title="Why it works"></a>Why it works</h2><p>流行钢琴伴奏和古典钢琴不同，流行钢琴伴奏的重点在于节拍的掌握以及对和弦进行丰富。事实上许多流行歌曲都围绕一个相同的和弦进程（chord progression）来创作旋律，所以<strong>一首伴奏好不好听，很大程度上取决于怎样用不同的 pattern 来丰富你的和弦进程而已。</strong>除了一首歌的 Intro 外，基本可以用和弦去完成一首歌曲的伴奏。在这个前提下，用电脑键盘来弹奏流行钢琴也不是不可能的事。因为我可以通过按键映射和弦以及分解和弦。</p>
+<h2 id="How-it-works"><a href="#How-it-works" class="headerlink" title="How it works"></a>How it works</h2><p>下图表示了初期版本的键位映射关系：</p>
+<p><img src="/images/IMG_7700.JPG" alt></p>
+<ul>
+<li>CDEFGAB 分别是以 C major scale 为基础的和弦。比如按下 C 就会弹奏 <code>C</code>, 按 A 则会弹奏 <code>Am</code>.</li>
+<li>Y P H J 分别是分解和弦的根音、五音、高八度一音和高八度三音。程序会根据当前弹奏的和弦自动分解并映射到这些按键上</li>
+<li>control, shift, space 分别对应三和弦的第一、第二转位以及低八度的第二转位</li>
+</ul>
+<p>从技术上来说，我把 Piano Keyboard 转化成了程序里的数据结构，通过计算得出相应和弦的转位。</p>
+<p><img src="/images/pciano-code-snippet.png" alt></p>
+<h2 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h2><p>电脑键盘比不上真钢琴或者 MIDI 键盘在于延音和力度都没有办法控制。脚踏板是钢琴的灵魂，因此用电脑键盘演奏有时会觉得一些位置非常单调、生硬，不够丰富，但又无能为力。</p>
+<!--## 写在最后
+
+王小波的数学老师有一次对他说：「我现在所教的数学，你们也许一生都用不到，但我还是要教，因为这些知识是好的，应该让你产知道」。在我看来，学习总会有用，无论学的是什么，它总会在某一天派上用场。如果我没有学乐理，我写不出这样的程序来。另外，在写这个程序的过程中，我也后悔高中没有学好排列组合。-->
+<h2 id="Play-it-now"><a href="#Play-it-now" class="headerlink" title="Play it now"></a>Play it now</h2><p>代码开源在 <a href="https://github.com/djyde/Pciano" target="_blank" rel="noopener">https://github.com/djyde/Pciano</a></p>
+<p>用电脑访问 <a href="https://djyde.github.io/Pciano/" target="_blank" rel="noopener">https://djyde.github.io/Pciano/</a> 即可</p>
+
+  </div>
+  <center><img class="signature" width="128px" src="//bstatic.djyde.com/sign_square_white.png"></center>
+  <div class="post-footer">
+  <hr>
+  <p>讨论请发邮件到 randypriv@gmail.com</p>
+  <p>未经授权，禁止转载</p>
+  <p>通过支付宝 djyde520@gmail.com 或赞赏码赞助此文</p>
+  <p>或通过订阅我的<a href="https://xiaozhuanlan.com/djyde">付费专栏</a>支持本博客</p>
+  <br>
+  <p>
+    <img class="bmc" src="//bstatic.djyde.com/assets/006tKfTcgy1fkuufy2cadj30w00w0tb2.jpg">
+  </p>
+</div>
+
+</div>
+    </div>
+    <div id="footer">
+  <p>
+  <img width="256px" src="//s2.ax1x.com/2019/04/04/A2V9YT.png">
+  </p>
+  <p>2014-2019 <a href="/">Randy's Blog</a></p>
+
+</div>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72147868-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

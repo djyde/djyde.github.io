@@ -1,0 +1,198 @@
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <title>搭建自己的 Gitlab CI Runner - Randy's Blog</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/styles/rexo.css">
+  <link href="//cdn.bootcss.com/highlight.js/9.11.0/styles/zenburn.min.css" rel="stylesheet">
+  <link href="//ppp.djyde.com/css?family=Noto+Serif+SC" rel="stylesheet">
+  <script src="//cdn.bootcss.com/highlight.js/9.9.0/highlight.min.js"></script>
+  <script src="//cdn.bootcss.com/highlight.js/9.8.0/languages/javascript.min.js"></script>
+  <script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/typescript.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+  <body>
+    <header>
+  <div class="description">
+    <div style="background-image: url(//bstatic.djyde.com/assets/006tKfTcgy1fkuuijv4pwj30ku0na3zq.jpg); width: 128px; height: 128px; background-size: cover; border-radius: 50%; margin: 0 auto;">
+    </div>
+    <p class="name">Randy Lu</p>
+    <p class="desc">Software Engineer. Blogging about life, tech and music.</p>
+  </div>
+  <nav>
+    <ul class="nav">
+      
+        <li class="nav-item">
+          <a href="/">Blog</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/timeline">Timeline</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/music">Music</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/rss.xml">RSS</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/about">About</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="/blog/donation">Donate</a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="http://stickeroverflow.xyz">购买贴纸</a>
+        </li>
+      
+    </ul>
+  </nav>
+</header>
+    <div>
+      <div class="post-body">
+  <h1 class="title">搭建自己的 Gitlab CI Runner</h1>
+  <p class="date">20, Apr, 2017</p>
+  <div class="post-content">
+    <blockquote>
+<p>假定你已经有一台可用的，可联网的机器</p>
+</blockquote>
+<h2 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h2><p>这篇文章将介绍如何使用自己的机器来搭建用于 Gitlab CI 的 runner.  在搭建自己的 CI Runner 之前，需要先明确一些概念：</p>
+<h3 id="CI-Continuous-Integration"><a href="#CI-Continuous-Integration" class="headerlink" title="CI (Continuous Integration)"></a>CI (Continuous Integration)</h3><p>CI 的全称是 Continuous Integration (持续集成)，是 extreme programming (极限编程) 的一部分。我们常用 CI 来做一些自动化工作，这种自动化工作会运行在一台集中的机器上，比如程序的打包，单元测试，部署等。这种构建方式避免了了打包环境差异引动的错误，并且通过 Gitlab 的 hook, 在代码提交的各个环节自动地完成一系列的构建工作。</p>
+<h3 id="CI-Runner"><a href="#CI-Runner" class="headerlink" title="CI Runner"></a>CI Runner</h3><p>和第三方的 Travis CI, CircleCI 不同，<strong>Gitlab 本身并不提供机器</strong>，只提供一个注册机器的接口。这些机器用于运行构建逻辑，在 Gitlab 中被称为 Runner.</p>
+<p><img src="//bstatic.djyde.com/assets/006tNc79gy1fet5ffxwglj31ac0y2wj8.jpg" alt="runners"></p>
+<h2 id="Gitlab-Runner-环境"><a href="#Gitlab-Runner-环境" class="headerlink" title="Gitlab Runner 环境"></a>Gitlab Runner 环境</h2><p>在这里直接使用 Gitlab Runner 的官方 docker image:</p>
+<h3 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h3><pre><code class="bash">curl -sSL https://get.daocloud.io/docker | sh
+</code></pre>
+<h3 id="拉取-gitlab-runner-镜像"><a href="#拉取-gitlab-runner-镜像" class="headerlink" title="拉取 gitlab-runner 镜像"></a>拉取 gitlab-runner 镜像</h3><p>因为众所周知的原因，国内 pull docker 镜像非常不稳定，所以在这里用 Daocloud 提供的镜像：</p>
+<pre><code class="bash">curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://718dbf2d.m.daocloud.io
+
+sudo service docker restart
+</code></pre>
+<p>拉取镜像：</p>
+<pre><code class="bash">sudo docker pull gitlab/gitlab-runner:latest
+</code></pre>
+<h3 id="添加-gitlab-runner-container"><a href="#添加-gitlab-runner-container" class="headerlink" title="添加 gitlab-runner container"></a>添加 gitlab-runner container</h3><pre><code class="bash">sudo docker run -d --name gitlab-runner --restart always \
+  -v /srv/gitlab-runner/config:/etc/gitlab-runner \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  gitlab/gitlab-runner:latest
+</code></pre>
+<h3 id="配置用于-runner-的-docker-image"><a href="#配置用于-runner-的-docker-image" class="headerlink" title="配置用于 runner 的 docker image"></a>配置用于 runner 的 docker image</h3><blockquote>
+<p>虽然 Gitlab 支持多种 runner 运行方式，但本文建议使用 docker，因为使用 docker 较为灵活，一台机器可以创建多个 docker images 分别为不同的项目进行 CI, 但仍能保持环境隔离。</p>
+</blockquote>
+<p>配置 Docker image 最简单的方式是写 <code>Dockerfile</code>, 比如可以用 Node.js 官方的 Docker image:</p>
+<pre><code class="dockerfile"># Dockerfile
+FROM node:7.9.0
+</code></pre>
+<p>由于每个业务总会有各自的环境要求，比如应用依赖底层的库。这时可以通过 <code>Dockerfile</code> 配置：</p>
+<pre><code class="dockerfile"># Dockerfile
+FROM node:7.9.0
+
+RUN apt-get update &amp;&amp; apt-get install -y \
+    package-foo
+    package-bar
+</code></pre>
+<h3 id="构建-Docker-Image"><a href="#构建-Docker-Image" class="headerlink" title="构建 Docker Image"></a>构建 Docker Image</h3><p>写好 <code>Dockerfile</code> 后，需要把它构建成 Image:</p>
+<pre><code class="bash">ls
+# Dockerfile
+
+docker build -t IMAGE_NAME .
+</code></pre>
+<p>Build 完后，通过 <code>sudo docker image ls</code> 查看 image 状态。</p>
+<h3 id="注册-Runner"><a href="#注册-Runner" class="headerlink" title="注册 Runner"></a>注册 Runner</h3><p>接下来就可以注册 Runner:</p>
+<pre><code class="bash">sudo docker exec -it gitlab-runner gitlab-ci-multi-runner register
+</code></pre>
+<p>程序会要求你填写相关的信息，这些信息可以从 Gitlab 项目的 <code>Settings -&gt; Runners</code> 页面中找到：</p>
+<p><img src="//bstatic.djyde.com/assets/006tNc79gy1fetavn7r0lj319u0os78u.jpg" alt="Gitlab runner info"></p>
+<pre><code class="bash">Please enter the gitlab-ci coordinator URL:
+# http://gitlab.alibaba-inc.com/ci
+
+Please enter the gitlab-ci token for this runner:
+# 项目的 token
+
+Please enter the gitlab-ci description for this runner:
+# Runner 的 description
+
+Please enter the gitlab-ci tags for this runner (comma separated):
+# Runner 的 tag
+
+Whether to run untagged builds [true/false]:
+# true
+
+Please enter the executor: docker, parallels, shell, kubernetes, docker-ssh, ssh, virtualbox, docker+machine, docker-ssh+machine:
+# docker
+
+Please enter the default Docker image (e.g. ruby:2.1):
+# 填入构建 Docker image 时填写的 image 名称
+</code></pre>
+<p>这时 runner 就会出现在 <code>runners</code> 页面：</p>
+<p><img src="//bstatic.djyde.com/assets/006tNc79gy1fetbnh1e12j310008qdgs.jpg" alt></p>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><h3 id="CI-运行时出现-ERROR-Job-failed-API-error-404-repository-xxx-not-found-does-not-exist-or-no-pull-access"><a href="#CI-运行时出现-ERROR-Job-failed-API-error-404-repository-xxx-not-found-does-not-exist-or-no-pull-access" class="headerlink" title="CI 运行时出现 ERROR: Job failed: API error (404): repository xxx not found: does not exist or no pull access"></a>CI 运行时出现 <code>ERROR: Job failed: API error (404): repository xxx not found: does not exist or no pull access</code></h3><p>这是由于 Gitlab 会默认从远程拉取 image，而我们的 image 是在本地构建的，所以需要对 gitlab-runner 进行配置，把 <code>pull_policy</code> 设置为 <code>if-not-present</code> 或 <code>never</code>.</p>
+<pre><code class="bash"># 进入 gitlab-runner 的 bash 环境
+sudo docker exec -it gitlab-runner bash
+
+# 编辑 config.toml
+nano /etc/gitlab-runner/config.toml
+</code></pre>
+<p>编辑 <code>config.toml</code> 中对应的 runner:</p>
+<pre><code class="diff">[[runners]]
+  name = &quot;&quot;
+  url = &quot;&quot;
+  token = &quot;&quot;
+  executor = &quot;docker&quot;
+  [runners.docker]
+    tls_verify = false
+    image = &quot;nb-node&quot;
+    privileged = false
+    disable_cache = false
+    volumes = [&quot;/cache&quot;]
++   pull_policy = &quot;if-not-present&quot;
+  [runners.cache]
+</code></pre>
+<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><ul>
+<li><a href="https://docs.gitlab.com/runner/install/docker.html" target="_blank" rel="noopener">Run GitLab Runner in a container</a></li>
+<li><a href="https://www.daocloud.io/mirror#accelerator-doc" target="_blank" rel="noopener">配置 Docker 加速器</a></li>
+<li><a href="https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/" target="_blank" rel="noopener">Best practices for writing Dockerfiles</a></li>
+<li><a href="https://docs.gitlab.com/runner/executors/docker.html#using-the-if-not-present-pull-policy" target="_blank" rel="noopener">Using the if-not-present pull policy</a></li>
+</ul>
+
+  </div>
+  <center><img class="signature" width="128px" src="//bstatic.djyde.com/sign_square_white.png"></center>
+  <div class="post-footer">
+  <hr>
+  <p>讨论请发邮件到 randypriv@gmail.com</p>
+  <p>未经授权，禁止转载</p>
+  <p>通过支付宝 djyde520@gmail.com 或赞赏码赞助此文</p>
+  <p>或通过订阅我的<a href="https://xiaozhuanlan.com/djyde">付费专栏</a>支持本博客</p>
+  <br>
+  <p>
+    <img class="bmc" src="//bstatic.djyde.com/assets/006tKfTcgy1fkuufy2cadj30w00w0tb2.jpg">
+  </p>
+</div>
+
+</div>
+    </div>
+    <div id="footer">
+  <p>
+  <img width="256px" src="//s2.ax1x.com/2019/04/04/A2V9YT.png">
+  </p>
+  <p>2014-2019 <a href="/">Randy's Blog</a></p>
+
+</div>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72147868-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
