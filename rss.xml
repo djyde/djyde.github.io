@@ -5,9 +5,9 @@
   
   <link href="/rss.xml" rel="self"/>
   
-  <link href="http://lutaonan.com/"/>
+  <link href="/"/>
   <updated>2019-07-18T12:14:32.384Z</updated>
-  <id>http://lutaonan.com/</id>
+  <id>/</id>
   
   <author>
     <name>Randy Lu</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>未来属于声明式编程</title>
-    <link href="http://lutaonan.com/blog/declarative-programming-is-the-future/"/>
-    <id>http://lutaonan.com/blog/declarative-programming-is-the-future/</id>
+    <link href="/blog/declarative-programming-is-the-future/"/>
+    <id>/blog/declarative-programming-is-the-future/</id>
     <published>2019-07-18T12:11:30.000Z</published>
     <updated>2019-07-18T12:14:32.384Z</updated>
     
@@ -39,8 +39,8 @@
   
   <entry>
     <title>软件开发的品味</title>
-    <link href="http://lutaonan.com/blog/taste-of-software-design/"/>
-    <id>http://lutaonan.com/blog/taste-of-software-design/</id>
+    <link href="/blog/taste-of-software-design/"/>
+    <id>/blog/taste-of-software-design/</id>
     <published>2019-07-10T06:13:47.000Z</published>
     <updated>2019-07-17T08:57:03.761Z</updated>
     
@@ -63,8 +63,8 @@
   
   <entry>
     <title>井底之蛙的一片天空</title>
-    <link href="http://lutaonan.com/blog/to-hongkong-people/"/>
-    <id>http://lutaonan.com/blog/to-hongkong-people/</id>
+    <link href="/blog/to-hongkong-people/"/>
+    <id>/blog/to-hongkong-people/</id>
     <published>2019-06-17T11:01:55.000Z</published>
     <updated>2019-06-17T11:53:32.371Z</updated>
     
@@ -85,8 +85,8 @@
   
   <entry>
     <title>我想得到它，因为它是好的</title>
-    <link href="http://lutaonan.com/blog/want-it-cuz-it-is-right/"/>
-    <id>http://lutaonan.com/blog/want-it-cuz-it-is-right/</id>
+    <link href="/blog/want-it-cuz-it-is-right/"/>
+    <id>/blog/want-it-cuz-it-is-right/</id>
     <published>2019-06-13T11:06:31.000Z</published>
     <updated>2019-06-17T11:53:22.666Z</updated>
     
@@ -108,8 +108,8 @@
   
   <entry>
     <title>为你写的一首诗</title>
-    <link href="http://lutaonan.com/blog/a-poem-for-you/"/>
-    <id>http://lutaonan.com/blog/a-poem-for-you/</id>
+    <link href="/blog/a-poem-for-you/"/>
+    <id>/blog/a-poem-for-you/</id>
     <published>2019-06-12T13:03:25.000Z</published>
     <updated>2019-06-13T13:15:40.583Z</updated>
     
@@ -133,8 +133,8 @@
   
   <entry>
     <title>博客近期的变化</title>
-    <link href="http://lutaonan.com/blog/nearly-blog-change/"/>
-    <id>http://lutaonan.com/blog/nearly-blog-change/</id>
+    <link href="/blog/nearly-blog-change/"/>
+    <id>/blog/nearly-blog-change/</id>
     <published>2019-06-11T15:16:29.000Z</published>
     <updated>2019-06-13T13:15:40.585Z</updated>
     
@@ -154,12 +154,12 @@
   
   <entry>
     <title>11 寸 iPad Pro 体验</title>
-    <link href="http://lutaonan.com/blog/ipad-pro-11-review/"/>
-    <id>http://lutaonan.com/blog/ipad-pro-11-review/</id>
+    <link href="/blog/ipad-pro-11-review/"/>
+    <id>/blog/ipad-pro-11-review/</id>
     <published>2019-04-06T05:28:13.000Z</published>
     <updated>2019-05-15T08:20:13.891Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="https://bstatic.djyde.com/DSC02308.JPG?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><p>这次入手 iPad Pro 完全是个意外，原本的计划是入手新款 iPad mini 更新一下我用了三年的 iPad mini 2. 后来想一想，不如用 24 期免息直接入手 iPad Pro. </p><p>之所以想换代，主要是这些原因：</p><ul><li>没有 Touch ID. 尤其是用 1Password 的时候，每次都得重新输入主密码。</li><li>卡顿明显。</li></ul><p>恰逢这周末在深圳出差，我故意不带我的 15 寸 Macbook Pro, 只带了 iPad Pro. 然后又深度体验了一周。</p><h2 id="用-Kindle-App-阅读"><a href="#用-Kindle-App-阅读" class="headerlink" title="用 Kindle App 阅读"></a>用 Kindle App 阅读</h2><p>虽然我也有一台 Kindle Paperwhite, 但是我更倾向于用 iPad 阅读。因为我的眼睛对屏幕不挑剔，使用 iPad 阅读不会像别人说的眼睛不舒服。而 iPad 能提供比 Kindle 大的阅读面积。</p><p>iPad mini 2 相对于 Kindle Paperwhite 来说已经大了不少，而在 iPad Pro 11 寸阅读给我的感受是读书就像是在读报纸。这次出差在飞机上总共读完了两本书，体验完胜 Kindle. </p><p><img src="//bstatic.djyde.com/FullSizeRender.jpg?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><p>即使尺寸大，但握在手上也不会觉得笨重。</p><p><img src="//bstatic.djyde.com/IMG_0025.JPG?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><h2 id="浏览网页、社交网络"><a href="#浏览网页、社交网络" class="headerlink" title="浏览网页、社交网络"></a>浏览网页、社交网络</h2><p>并不是说 iPad mini 2 不能做到，而是 mini 2 的性能让我没有欲望这样做。但是我很愿意在 iPad Pro 上 Google 一翻，刷刷 Twitter / 微博，收发 Email. 一切都很顺畅。</p><p><img src="//bstatic.djyde.com/Snapseed%203.jpg?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><p>周末出差时，我的周报都是在 iPad Pro 上完成的。我用讯飞语音完成周报的文字录入，准确率比想象中高得多。讯飞可以满足大部分的文字录入需求，当然，有些场景不方便使用语音输入。这时有个键盘是更好的选择。迫于贫穷，我没有买 Smart Keyboard, 而是买了只要 178 元的罗技 k380.</p><p><img src="//bstatic.djyde.com/9C93C41D5DB7-1.jpeg?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><p>K380 很适合对便携性有要求的用户，重量轻，支持 3 个设备一键切换。手感就是普通薄膜键盘的手感。唯一的缺点是和 iPad Pro 搭配使用的话，你要额外买一个支架架住 iPad.</p><h2 id="处理照片"><a href="#处理照片" class="headerlink" title="处理照片"></a>处理照片</h2><p>这次到深圳出差顺便逛了一下海边，用 SONY RX100 拍了不少照片。当晚到顺电买了一个 MOMAX 的 Type-C HUB. 插到 iPad Pro 上，会自动打开系统照片 App 的导入页面，可以直接把 SD 卡里的照片导出。然后用 Snapseed 就能处理图片。</p><p><img src="//bstatic.djyde.com/42FE525EA268-1.jpeg?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><p>在没有 Macbook Pro 的情况下可以完成整个从照片导出到照片后期的过程，倒是令我惊喜的。</p><p>这是一张用 iPad Pro 后期的照片。</p><p><img src="//bstatic.djyde.com/413142799.jpg?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><p>因为家里有 NAS, 64GB 倒不会不够用，照片导出和处理完，直接扔到 NAS 就完事了。</p><h2 id="写字"><a href="#写字" class="headerlink" title="写字"></a>写字</h2><p>我本身就很喜欢写字，手写歌词，于是我也入了 Apple Pencil 2 以及笔记 App 「Goodnotes 5」. </p><p>刚开始在屏幕上写字有点不习惯它的手感 —— 太硬了。但是适应了一段时间后慢慢找到了点感觉。</p><p>这是在纸上写的字：</p><p><img src="//bstatic.djyde.com/DSC01772.JPG?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><p>这是在 iPad 上写的同样的字：</p><p><img src="//bstatic.djyde.com/DSC02391.JPG?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>因为配置高和屏幕大，iPad Pro 可以做的比原本 iPad mini 多得多 —— 处理照片、浏览网页、用 Apple Pencil 做笔记（当然现在新款 iPad mini 也支持 Apple Pencil 一代）。</p><p>作为程序员，在短暂出游时能不能以 iPad Pro 替代 Macbook, 我是持怀疑态度的。在编程领域，iPad Pro 离生产力工具还差得很远。但是 iPad Pro 能满足我除编程以外 99% 的需求。</p><p>另外一个矛盾的地方是，如果我带上键盘去用 iPad Pro, 那么我为什么不直接用 Macbook 呢？有人会说，iPad Pro 11 寸的重量只有 468 克，而我手上的 Macbook Pro 15 寸则有 1830 克，是几乎 5 台 iPad Pro 的重量。但说实话，背在背包里，我根本不介意这 1400 克的差异，所以于我而言，iPad Pro 太尴尬了，它可以做很多，但 Macbook Pro 可以做得更多。</p><p>对于程序员群体，iPad Pro 是一个可有可无的设备。而对于那些主要以文字录入、图片处理、手写笔记为主要任务的群体，那么 iPad Pro 还是很值得入手的。</p><h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><ul><li><a href="https://lutaonan.com/link/ipad-stand">iPad Pro 支架</a></li><li><a href="https://lutaonan.com/link/logitech-k380">罗技 k380 蓝牙键盘</a></li></ul>]]></content>
+    <content type="html"><![CDATA[<p><img src="https://bstatic.djyde.com/DSC02308.JPG?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><p>这次入手 iPad Pro 完全是个意外，原本的计划是入手新款 iPad mini 更新一下我用了三年的 iPad mini 2. 后来想一想，不如用 24 期免息直接入手 iPad Pro. </p><p>之所以想换代，主要是这些原因：</p><ul><li>没有 Touch ID. 尤其是用 1Password 的时候，每次都得重新输入主密码。</li><li>卡顿明显。</li></ul><p>恰逢这周末在深圳出差，我故意不带我的 15 寸 Macbook Pro, 只带了 iPad Pro. 然后又深度体验了一周。</p><h2 id="用-Kindle-App-阅读"><a href="#用-Kindle-App-阅读" class="headerlink" title="用 Kindle App 阅读"></a>用 Kindle App 阅读</h2><p>虽然我也有一台 Kindle Paperwhite, 但是我更倾向于用 iPad 阅读。因为我的眼睛对屏幕不挑剔，使用 iPad 阅读不会像别人说的眼睛不舒服。而 iPad 能提供比 Kindle 大的阅读面积。</p><p>iPad mini 2 相对于 Kindle Paperwhite 来说已经大了不少，而在 iPad Pro 11 寸阅读给我的感受是读书就像是在读报纸。这次出差在飞机上总共读完了两本书，体验完胜 Kindle. </p><p><img src="//bstatic.djyde.com/FullSizeRender.jpg?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><p>即使尺寸大，但握在手上也不会觉得笨重。</p><p><img src="//bstatic.djyde.com/IMG_0025.JPG?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><h2 id="浏览网页、社交网络"><a href="#浏览网页、社交网络" class="headerlink" title="浏览网页、社交网络"></a>浏览网页、社交网络</h2><p>并不是说 iPad mini 2 不能做到，而是 mini 2 的性能让我没有欲望这样做。但是我很愿意在 iPad Pro 上 Google 一翻，刷刷 Twitter / 微博，收发 Email. 一切都很顺畅。</p><p><img src="//bstatic.djyde.com/Snapseed%203.jpg?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><p>周末出差时，我的周报都是在 iPad Pro 上完成的。我用讯飞语音完成周报的文字录入，准确率比想象中高得多。讯飞可以满足大部分的文字录入需求，当然，有些场景不方便使用语音输入。这时有个键盘是更好的选择。迫于贫穷，我没有买 Smart Keyboard, 而是买了只要 178 元的罗技 k380.</p><p><img src="//bstatic.djyde.com/9C93C41D5DB7-1.jpeg?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><p>K380 很适合对便携性有要求的用户，重量轻，支持 3 个设备一键切换。手感就是普通薄膜键盘的手感。唯一的缺点是和 iPad Pro 搭配使用的话，你要额外买一个支架架住 iPad.</p><h2 id="处理照片"><a href="#处理照片" class="headerlink" title="处理照片"></a>处理照片</h2><p>这次到深圳出差顺便逛了一下海边，用 SONY RX100 拍了不少照片。当晚到顺电买了一个 MOMAX 的 Type-C HUB. 插到 iPad Pro 上，会自动打开系统照片 App 的导入页面，可以直接把 SD 卡里的照片导出。然后用 Snapseed 就能处理图片。</p><p><img src="//bstatic.djyde.com/42FE525EA268-1.jpeg?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><p>在没有 Macbook Pro 的情况下可以完成整个从照片导出到照片后期的过程，倒是令我惊喜的。</p><p>这是一张用 iPad Pro 后期的照片。</p><p><img src="//bstatic.djyde.com/413142799.jpg?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><p>因为家里有 NAS, 64GB 倒不会不够用，照片导出和处理完，直接扔到 NAS 就完事了。</p><h2 id="写字"><a href="#写字" class="headerlink" title="写字"></a>写字</h2><p>我本身就很喜欢写字，手写歌词，于是我也入了 Apple Pencil 2 以及笔记 App 「Goodnotes 5」. </p><p>刚开始在屏幕上写字有点不习惯它的手感 —— 太硬了。但是适应了一段时间后慢慢找到了点感觉。</p><p>这是在纸上写的字：</p><p><img src="//bstatic.djyde.com/DSC01772.JPG?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><p>这是在 iPad 上写的同样的字：</p><p><img src="//bstatic.djyde.com/DSC02391.JPG?x-oss-process=image/resize,w_2560/quality,q_80" alt></p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>因为配置高和屏幕大，iPad Pro 可以做的比原本 iPad mini 多得多 —— 处理照片、浏览网页、用 Apple Pencil 做笔记（当然现在新款 iPad mini 也支持 Apple Pencil 一代）。</p><p>作为程序员，在短暂出游时能不能以 iPad Pro 替代 Macbook, 我是持怀疑态度的。在编程领域，iPad Pro 离生产力工具还差得很远。但是 iPad Pro 能满足我除编程以外 99% 的需求。</p><p>另外一个矛盾的地方是，如果我带上键盘去用 iPad Pro, 那么我为什么不直接用 Macbook 呢？有人会说，iPad Pro 11 寸的重量只有 468 克，而我手上的 Macbook Pro 15 寸则有 1830 克，是几乎 5 台 iPad Pro 的重量。但说实话，背在背包里，我根本不介意这 1400 克的差异，所以于我而言，iPad Pro 太尴尬了，它可以做很多，但 Macbook Pro 可以做得更多。</p><p>对于程序员群体，iPad Pro 是一个可有可无的设备。而对于那些主要以文字录入、图片处理、手写笔记为主要任务的群体，那么 iPad Pro 还是很值得入手的。</p><h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><ul><li><a href="https://lutaonan.com/link/ipad-stand" target="_blank" rel="noopener">iPad Pro 支架</a></li><li><a href="https://lutaonan.com/link/logitech-k380" target="_blank" rel="noopener">罗技 k380 蓝牙键盘</a></li></ul>]]></content>
     
     <summary type="html">
     
@@ -176,8 +176,8 @@
   
   <entry>
     <title>人生是不断取舍的过程</title>
-    <link href="http://lutaonan.com/blog/everything-is-about-trade-off/"/>
-    <id>http://lutaonan.com/blog/everything-is-about-trade-off/</id>
+    <link href="/blog/everything-is-about-trade-off/"/>
+    <id>/blog/everything-is-about-trade-off/</id>
     <published>2019-04-03T10:33:05.000Z</published>
     <updated>2019-04-03T10:40:26.872Z</updated>
     
@@ -198,8 +198,8 @@
   
   <entry>
     <title>现代的 React</title>
-    <link href="http://lutaonan.com/blog/modern-react/"/>
-    <id>http://lutaonan.com/blog/modern-react/</id>
+    <link href="/blog/modern-react/"/>
+    <id>/blog/modern-react/</id>
     <published>2019-03-08T02:20:47.000Z</published>
     <updated>2019-03-08T02:34:33.442Z</updated>
     
@@ -219,12 +219,12 @@
   
   <entry>
     <title>健身一年</title>
-    <link href="http://lutaonan.com/blog/one-year-of-bulking/"/>
-    <id>http://lutaonan.com/blog/one-year-of-bulking/</id>
+    <link href="/blog/one-year-of-bulking/"/>
+    <id>/blog/one-year-of-bulking/</id>
     <published>2019-01-14T07:05:37.000Z</published>
     <updated>2019-05-07T11:04:14.887Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>本文不提供训练计划<br>本文不提供饮食计划</p></blockquote><p><img class="small" src="https://s2.ax1x.com/2019/05/07/EsOH9s.jpg"></p><p>我在<a href="/blog/2018-summary">《2018 年终总结》</a>里提到了我健身的成果，在这篇文章里，我将分享我健身的过程，以及身体上、心智上的一些成长。</p><h2 id="接触健身的经历"><a href="#接触健身的经历" class="headerlink" title="接触健身的经历"></a>接触健身的经历</h2><p>说来惭愧，我第一次接触健身是 2015 年。当时刚出来工作，有点闲钱，看到镜子里的那只瘦猴，决定开始去健身房增肌。于是在知乎搜索了很多关于增肌的回答，选了住处附近的一家健身房，就开始瞎练了，没有计划，也不知道怎么做计划。</p><p>那时我身高 165, 体重 46kg. 想做卧推，空杆（20kg）都推不起；想做划船，动作做不好。这时候在健身房确实很大压力，什么都做不好，还怕占着别人地方。</p><p>这样坚持了 2 个月，没什么效果。自然就放弃了。过了一段时间，我决定花钱请一个私教，重新开始我的增肌计划。那时已经是 2016 年了，我买了 10 节私教课。商业健身房私教的惯用套路——先去跑步机热身，然后教我做些动作。</p><p>10 节课下来我没学到什么东西，因为教练只告诉你做什么动作，怎么做，有什么注意的，却没有讲为什么。除了上课，我也在 YouTube 看很多关于健身的视频。坚持了 3 个月左右，没太大的效果，又一次放弃了。</p><p>之后很长一段时间，偶尔 YouTube 会根据我的用户画像给我推荐一些健身类的视频，我每次看到都觉得很羞愧——我无法面对这个坚持不下去的自己。我那里常常想，如果我当初坚持下来了，那么我已经有很大变化了吧。</p><p>虽然我很矮，但是说实话，我很少因为我的身材自卑，除了限制了我追女生的范围以外，我的身高没有给我带来什么不好的事。但是我总是隐约地觉得自己很孱弱，我觉得我不能保护我喜欢的人，不能给人安全感。夏天穿衣服像一个毒友似的。这些倒是我比较在意的。</p><p>导火线是 2017 年年底，我在某个停车场被一个保安言语暴力（过程不表），我十分生气，当时我想：是不是因为我看上去太弱了，所以这个保安敢这么对我说话？如果我强壮一些，或许就不需要和傻x讲道理了。我自己都缺乏安全感，怎么让别人有安全感呢。</p><p>回到家我想了很久，决定认真对待健身这件事。<strong>我问自己一个最重要的问题：我能为健身付出多少时间？</strong>如果我每周训练 4 天，那么我将会大量减少自己业余的代码时间和玩音乐的时间，我是否能接受？</p><p>当然，我最后选择了接受，于是才有了今天的一点点成果。</p><h2 id="关于请教练"><a href="#关于请教练" class="headerlink" title="关于请教练"></a>关于请教练</h2><p>和前两次不同的是，我不再选择商业健身房，而是去找一些更专业些的以授课为主的健身工作室。恰好当时看中的一家工作室在做活动，很优惠，就买了 10 节课，开始了我的第三次健身…</p><blockquote><p>为了避免广告嫌疑，就不说是哪家工作室了。</p></blockquote><p>以我的经历，工作室和商业健身房比，私教的价格没有相差太多，买的课少（10节以内）可能相差 100 左右。买得多一些，差距就明显了。但是我是宁愿多花 100 上 10 节我能学到东西的课，也不想便宜 100 块上 10 节没有意义的课。</p><p>严谨地说，在商业健身房遇到靠谱教练的概率比在工作室要低得多。「靠谱」体现在：</p><ul><li>对健身的热情</li><li>丰富的理论知识</li><li>能和客户建立真正的有效关系</li></ul><p>至于可不可以不请教练，我觉得天下间没有什么是不可以的。很多人一直自己练也练得很好。自己练的风险主要在于，你可能需要花更长的时间去探索正确的动作，也可能出现受伤的情况。所以我觉得请不请教练，是看你愿不愿意花钱规避这些风险罢了。</p><p>我自己主张的是有条件就尽量找教练（前提是靠谱的教练），因为<strong>我分析自己之前放弃的最大的原因就是不相信自己的训练</strong>，我不知道自己的动作到底有没有效。新手最大的问题是没有什么感受度——你根本感受不到自己的背部肌肉，怎么知道自己划船有没有划对呢。有教练的最大好处，就是他知道你有没有做对。这样就就不会怀疑自己是不是做了无用功了。</p><p>应该买多少节课呢。我当时买了 30 节课（做活动买的 10节 + 之后买的20节），后来我觉得 20 节课其实就足够了。我的训练频率是一周 4 练，上到 20 节课的时候，我基本已经可以自己独立训练了，也能感受得到自己的肌肉。最后 10 节课我都是专门让我教练辅助我练习我的弱项深蹲的。</p><p>最后关于跟着教练训练很重要的一点是，根据教练为你制定的训练计划去做没有问题，<strong>但你一定要自己理解这个训练计划</strong>，不要天天无脑地教练说做什么就跟着做，<strong>多问教练为什么要这样安排？这样安排的好处是什么？同样是练这个肌群的动作，这个动作和另外一个动作有什么区别？</strong>时刻提醒自己，这是你自己的训练，教练不是你的秘书（除非你这辈子都一直请教练），想想看，离开教练了以后，你能不能制定适合自己的计划？你从教练身上学到了什么东西？</p><p>我从我的教练身上学到的除了基本的动作模式以外，还学到的是，不要让客观条件限制了你的训练。训练动作不是死的，不是说没有平板凳、没有杆，就不能练胸了。多看看你现在有什么，能不能用现有的东西，去创造一个新的训练方式（即使效果不是最好的）。这是建立在你真正了解你的肌群是怎么工作的基础下才能做到的。所以我自己在业余的时间，也会去了解解剖学方面的知识。</p><p>当你在工作室上完课了，再转到费用更低的商业健身房也不迟。</p><h2 id="关于饮食"><a href="#关于饮食" class="headerlink" title="关于饮食"></a>关于饮食</h2><p>「三分练，七分吃」，这句话都被说滥了。我个人觉得饮食比训练难太多了。特别是我这种所谓的「怎么吃都不胖」的瘦子。</p><p>其实根据观察，很多瘦子说的「怎么吃都吃不胖」，主要的原因还是吃太少，只是<strong>以为自己吃很多</strong>。像我，没健身的时候，对食物是很任性的——想吃就吃，不想吃就算了。我甚至认为人不应该浪费时间去吃饭，因为不吃也不会饿。吃饭的时候，一盘子的饭，我吃半盘就觉得太饱了，觉得自己吃了很多东西。但我后来观察那些稍胖的人吃饭，饭量起码是我的几倍。</p><p>健身以后，每天得强迫自己加餐，鸡蛋、坚果、鸡胸肉等等。刚开始训练的时候，我牛奶是买一升的那种，每天一升。</p><p>我不是专业的营养师，但我可以在这里科普一下，健身的时候应该怎么安排饮食。</p><p>不同的训练目的有不同的饮食方案：</p><ul><li>增肌：维持热量冗余</li><li>减脂：维持热量缺口</li></ul><p>这里所说的热量，指的是一个人正常活动时所消耗的热量（<a href="https://zh.wikipedia.org/zh-hans/%E5%9F%BA%E7%A1%80%E4%BB%A3%E8%B0%A2%E7%8E%87" target="_blank" rel="noopener">BMR</a>）。所以从数学上来看，增肌和减脂都是很简单的——了解自己的 BMR, 然后针对需求调节自己的热量摄入。</p><p>如何控制呢？从控制提供热量的三个元素入手：脂肪、蛋白质、碳水化合物。</p><p>我不打算在这里大开篇幅去讲怎么去计算，因为 Google 一下你马上就知道怎么算了。我想说的是，<strong>一定要计算你的摄入量</strong>。例如增肌，如果你不去估算你自己今天吃有大概多少的热量，那么 99% 你是吃不够的。</p><p>肌肉合成需要蛋白质，所以增肌要保证足够的蛋白质摄入。关于摄入多少，众说纷云。我自己是按照自己体重（kg）乘以 2 换算成克 (g) 为单位的量。例如，体重是 50kg 时，每天至少需要摄入 50 x 2 = 100g 的蛋白质。然后用什么食物去满足这个量，就是你自己的决定了。</p><p>关于更详细的饮食计划，可以看看卓叔的 <a href="https://zhuanlan.zhihu.com/p/21374019" target="_blank" rel="noopener">这篇文章</a>。</p><h3 id="关于蛋白粉"><a href="#关于蛋白粉" class="headerlink" title="关于蛋白粉"></a>关于蛋白粉</h3><p><strong>能不能喝？有没有副作用？</strong></p><p>能。没有（除非你的肾本来就有病变）。</p><p><strong>喝多少？是不是每天都要喝？</strong></p><p>上面已经提到了，你需要计算你每天要摄入多少热量。如果通过三餐或补餐你还是吃不够，那就用蛋白粉（或增肌粉）补够。蛋白粉不是药物，是补剂。这是很简单的数学问题。</p><h2 id="关于训练"><a href="#关于训练" class="headerlink" title="关于训练"></a>关于训练</h2><p>我的训练计划是每周 4 练：腿（+胸）、胸（+背）、背（+胸）、肩。</p><p>我不打算在这里详细列出我正在使用的训练计划，也不会教你怎么制定计划（这应该是你教练的任务），而是分享我一直训练以来的一些小经验。</p><ul><li>深蹲、硬拉、卧推这三大项是必须学习的，无论是健力还是健美，三大项都是基础。我在商业健身房练了这么久，没有亲眼目睹有教练教深蹲的。所以还是那句话，有条件，尽量选择健身工作室。</li><li>如果你是瘦子，没有太大的必要去做有氧。除非你对心肺能力有要求。</li><li>多做自由力量。固定器械除了安全，对新手没有多大的好处。卧推都没学会，就别去夹胸了。</li><li>学习卧推时，瘦子可能（反正我当初是）连空杆（20kg）都推不稳，建议可以找更轻的杆（我们当时工作室有粉红色的 8kg 的杆）去训练，再慢慢地增加重量。</li><li>记住，新手期，大重量不是你的目标，你的目标是熟悉动作模式。</li><li>新手期，没有必要特别去练你的小肌群，例如手臂（肱二头、三头），手臂的力量会随着三大项成绩的提升而慢慢提升。</li><li>刚开始背部没有感觉，可以选择相对简单一点的动作，例如反向划船。也可以选择感受度高一点的动作，对我自己来说，练背最有感受度的动作是哑铃单臂划船、对握引体向上、固定轨迹的高位下拉。</li><li>关注一下你的关节活动度。这是很多人忽略的。可以问问你的教练，对你的关节灵活度做一个测试。活动度如果不足，要做一些针对性的动作解决一下。不然会一定程度影响训练。我的肩关节活动度受限就很影响我的训练。</li><li>健身先健脑，健身是一门复杂的学问（营养学、解剖学、运动生理学），像你做其它事一样，不断地学习，才会越做越好。</li></ul><p>还有很重要的一点是：<strong>一定要对自己的训练做记录。</strong> If you don’t mesure it, how can you improve it? 记录你计划里的所有动作，重量、组数、做完后的感受（这很重要，下一次训练是否增加重量需要参考上一次的感受，比如，如果累的程度是 10，这一次训练完的程度是多少？）。<strong>如果没有训练记录，那么你到健身房可以做的动作只有——闲逛。</strong></p><p>每一次踏入健身房，你的目标就是，能不能比上一次训练推更大的重量。如果不能，分析自己在哪个环节出了问题——吃不够？还是睡不够？然后去修正自己的问题——睡不够，那就早点睡；吃不够，就吃更多。</p><p><strong>我很害怕健身房里其它人的目光，怎么办？</strong></p><p>其实没有什么人在意你。大家的目光一般是在漂亮的女性，或练得很好的人身上的。我自己在健身房里见瘦子，我的脑回路是这样的：</p><ol><li>啊，我以前也是这样的</li><li>很期待看到他坚持下去之后的变化</li><li>他需不需要帮助呢</li></ol><h2 id="怎么选健身房"><a href="#怎么选健身房" class="headerlink" title="怎么选健身房"></a>怎么选健身房</h2><p>一般来说，健身工作室的设备不会有太大的问题。如果你去找商业健身房，要考虑的因素有：</p><ul><li>地理位置。这是最重要的，选一个在你能接受的范围内的。我现在去的健身房，从公司骑车要 10 分钟左右。</li><li>进去先直奔自由力量区：有没有足够的哑铃？有没有足够的杠铃片？最重要的，<strong>有没有自由深蹲架？</strong>没有深蹲架基本可以走了。</li><li>有没有可以让你做硬拉的区域？有的健身房是有一个硬拉区域的（或者在深蹲架里也可以硬拉）。</li></ul><h2 id="关于坚持"><a href="#关于坚持" class="headerlink" title="关于坚持"></a>关于坚持</h2><p>怎么去坚持健身？这是很多人问的问题。</p><p>首先是问自己，为什么开始健身？找到你的源动力。对我自己来说，源动力就是想变得强壮，遇到傻x的时候能自信地面对。</p><p>其次，一定要设立一个目标。而且必须是一个明确的目标。别说什么「我的目标是身体健康」，定一个可以量化的目标。我最初给自己的目标就是：2018 年底至少要体重要达到 60kg (当然我失败了)。如果没有一个可以量化的目标，在你没有爱上健身这个运动之前，你很容易会放弃的。</p><p>然后是不要和别人宣称你在健身，这对你的训练没有任何帮助，甚至会被嘲讽。更加不要傻到在朋友圈打卡——<strong>在你没有取得成果之前，没有人在意你的过程</strong>。打卡的唯一收获只会是更多人把你屏蔽了。</p><p>当你健身了一段时间，在吃、睡、练三件事都做好的基础上，第三个月绝对会有明显的效果，这是新手的福利期。很快会有人问你，咦？你是不是健身了，怎么壮了那么多（这是我健身 4 个月左右的时候听得最多的一句话）。这时你获得了成就感，享受了健身给你带来的改变，使你继续坚持下去。一直到坚持半年了，你会发现，健身渐渐地变成了你生活中的一部份。</p><p><strong>当健身成为了你的一种生活方式时，哪有什么坚持不坚持。</strong></p><p>我很多次洗澡脱光衣服看到自己身体的变化，都很感谢一年前的我坚持下来了。我再也不用对自己说「如果我当时…」</p><p>如果你说，「我很想健身，但是我没时间啊！」</p><p>据我观察，很多人所谓的没有时间，是不愿意花时间在健身上面而已。一天只有 24 个小时，除去上班的时间，我的时间很少，但为了健身，我减少了我写代码和玩音乐的时间，这是我付出的代价。<strong>如果你不愿意留你最多 2 小时的时间给健身，只能说明健身这件事在你的生活里优先级不够高罢了</strong>。</p><p>不愿意把时间花在健身上面并不可耻，这再正常不过了。每个人有每个人的生活方式。如果你用「没有时间」作为借口，那么你相当于在说，我们这些健身的，都是闲得慌的。</p><h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul><li><a href="https://lutaonan.com/link/gainer">我喝的增肌粉</a></li><li><a href="https://lutaonan.com/link/protein">我喝的蛋白粉</a></li><li><a href="https://lutaonan.com/link/belt">我用的腰带</a></li></ul>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>本文不提供训练计划<br>本文不提供饮食计划</p></blockquote><p><img class="small" src="https://s2.ax1x.com/2019/05/07/EsOH9s.jpg"></p><p>我在<a href="/blog/2018-summary">《2018 年终总结》</a>里提到了我健身的成果，在这篇文章里，我将分享我健身的过程，以及身体上、心智上的一些成长。</p><h2 id="接触健身的经历"><a href="#接触健身的经历" class="headerlink" title="接触健身的经历"></a>接触健身的经历</h2><p>说来惭愧，我第一次接触健身是 2015 年。当时刚出来工作，有点闲钱，看到镜子里的那只瘦猴，决定开始去健身房增肌。于是在知乎搜索了很多关于增肌的回答，选了住处附近的一家健身房，就开始瞎练了，没有计划，也不知道怎么做计划。</p><p>那时我身高 165, 体重 46kg. 想做卧推，空杆（20kg）都推不起；想做划船，动作做不好。这时候在健身房确实很大压力，什么都做不好，还怕占着别人地方。</p><p>这样坚持了 2 个月，没什么效果。自然就放弃了。过了一段时间，我决定花钱请一个私教，重新开始我的增肌计划。那时已经是 2016 年了，我买了 10 节私教课。商业健身房私教的惯用套路——先去跑步机热身，然后教我做些动作。</p><p>10 节课下来我没学到什么东西，因为教练只告诉你做什么动作，怎么做，有什么注意的，却没有讲为什么。除了上课，我也在 YouTube 看很多关于健身的视频。坚持了 3 个月左右，没太大的效果，又一次放弃了。</p><p>之后很长一段时间，偶尔 YouTube 会根据我的用户画像给我推荐一些健身类的视频，我每次看到都觉得很羞愧——我无法面对这个坚持不下去的自己。我那里常常想，如果我当初坚持下来了，那么我已经有很大变化了吧。</p><p>虽然我很矮，但是说实话，我很少因为我的身材自卑，除了限制了我追女生的范围以外，我的身高没有给我带来什么不好的事。但是我总是隐约地觉得自己很孱弱，我觉得我不能保护我喜欢的人，不能给人安全感。夏天穿衣服像一个毒友似的。这些倒是我比较在意的。</p><p>导火线是 2017 年年底，我在某个停车场被一个保安言语暴力（过程不表），我十分生气，当时我想：是不是因为我看上去太弱了，所以这个保安敢这么对我说话？如果我强壮一些，或许就不需要和傻x讲道理了。我自己都缺乏安全感，怎么让别人有安全感呢。</p><p>回到家我想了很久，决定认真对待健身这件事。<strong>我问自己一个最重要的问题：我能为健身付出多少时间？</strong>如果我每周训练 4 天，那么我将会大量减少自己业余的代码时间和玩音乐的时间，我是否能接受？</p><p>当然，我最后选择了接受，于是才有了今天的一点点成果。</p><h2 id="关于请教练"><a href="#关于请教练" class="headerlink" title="关于请教练"></a>关于请教练</h2><p>和前两次不同的是，我不再选择商业健身房，而是去找一些更专业些的以授课为主的健身工作室。恰好当时看中的一家工作室在做活动，很优惠，就买了 10 节课，开始了我的第三次健身…</p><blockquote><p>为了避免广告嫌疑，就不说是哪家工作室了。</p></blockquote><p>以我的经历，工作室和商业健身房比，私教的价格没有相差太多，买的课少（10节以内）可能相差 100 左右。买得多一些，差距就明显了。但是我是宁愿多花 100 上 10 节我能学到东西的课，也不想便宜 100 块上 10 节没有意义的课。</p><p>严谨地说，在商业健身房遇到靠谱教练的概率比在工作室要低得多。「靠谱」体现在：</p><ul><li>对健身的热情</li><li>丰富的理论知识</li><li>能和客户建立真正的有效关系</li></ul><p>至于可不可以不请教练，我觉得天下间没有什么是不可以的。很多人一直自己练也练得很好。自己练的风险主要在于，你可能需要花更长的时间去探索正确的动作，也可能出现受伤的情况。所以我觉得请不请教练，是看你愿不愿意花钱规避这些风险罢了。</p><p>我自己主张的是有条件就尽量找教练（前提是靠谱的教练），因为<strong>我分析自己之前放弃的最大的原因就是不相信自己的训练</strong>，我不知道自己的动作到底有没有效。新手最大的问题是没有什么感受度——你根本感受不到自己的背部肌肉，怎么知道自己划船有没有划对呢。有教练的最大好处，就是他知道你有没有做对。这样就就不会怀疑自己是不是做了无用功了。</p><p>应该买多少节课呢。我当时买了 30 节课（做活动买的 10节 + 之后买的20节），后来我觉得 20 节课其实就足够了。我的训练频率是一周 4 练，上到 20 节课的时候，我基本已经可以自己独立训练了，也能感受得到自己的肌肉。最后 10 节课我都是专门让我教练辅助我练习我的弱项深蹲的。</p><p>最后关于跟着教练训练很重要的一点是，根据教练为你制定的训练计划去做没有问题，<strong>但你一定要自己理解这个训练计划</strong>，不要天天无脑地教练说做什么就跟着做，<strong>多问教练为什么要这样安排？这样安排的好处是什么？同样是练这个肌群的动作，这个动作和另外一个动作有什么区别？</strong>时刻提醒自己，这是你自己的训练，教练不是你的秘书（除非你这辈子都一直请教练），想想看，离开教练了以后，你能不能制定适合自己的计划？你从教练身上学到了什么东西？</p><p>我从我的教练身上学到的除了基本的动作模式以外，还学到的是，不要让客观条件限制了你的训练。训练动作不是死的，不是说没有平板凳、没有杆，就不能练胸了。多看看你现在有什么，能不能用现有的东西，去创造一个新的训练方式（即使效果不是最好的）。这是建立在你真正了解你的肌群是怎么工作的基础下才能做到的。所以我自己在业余的时间，也会去了解解剖学方面的知识。</p><p>当你在工作室上完课了，再转到费用更低的商业健身房也不迟。</p><h2 id="关于饮食"><a href="#关于饮食" class="headerlink" title="关于饮食"></a>关于饮食</h2><p>「三分练，七分吃」，这句话都被说滥了。我个人觉得饮食比训练难太多了。特别是我这种所谓的「怎么吃都不胖」的瘦子。</p><p>其实根据观察，很多瘦子说的「怎么吃都吃不胖」，主要的原因还是吃太少，只是<strong>以为自己吃很多</strong>。像我，没健身的时候，对食物是很任性的——想吃就吃，不想吃就算了。我甚至认为人不应该浪费时间去吃饭，因为不吃也不会饿。吃饭的时候，一盘子的饭，我吃半盘就觉得太饱了，觉得自己吃了很多东西。但我后来观察那些稍胖的人吃饭，饭量起码是我的几倍。</p><p>健身以后，每天得强迫自己加餐，鸡蛋、坚果、鸡胸肉等等。刚开始训练的时候，我牛奶是买一升的那种，每天一升。</p><p>我不是专业的营养师，但我可以在这里科普一下，健身的时候应该怎么安排饮食。</p><p>不同的训练目的有不同的饮食方案：</p><ul><li>增肌：维持热量冗余</li><li>减脂：维持热量缺口</li></ul><p>这里所说的热量，指的是一个人正常活动时所消耗的热量（<a href="https://zh.wikipedia.org/zh-hans/%E5%9F%BA%E7%A1%80%E4%BB%A3%E8%B0%A2%E7%8E%87" target="_blank" rel="noopener">BMR</a>）。所以从数学上来看，增肌和减脂都是很简单的——了解自己的 BMR, 然后针对需求调节自己的热量摄入。</p><p>如何控制呢？从控制提供热量的三个元素入手：脂肪、蛋白质、碳水化合物。</p><p>我不打算在这里大开篇幅去讲怎么去计算，因为 Google 一下你马上就知道怎么算了。我想说的是，<strong>一定要计算你的摄入量</strong>。例如增肌，如果你不去估算你自己今天吃有大概多少的热量，那么 99% 你是吃不够的。</p><p>肌肉合成需要蛋白质，所以增肌要保证足够的蛋白质摄入。关于摄入多少，众说纷云。我自己是按照自己体重（kg）乘以 2 换算成克 (g) 为单位的量。例如，体重是 50kg 时，每天至少需要摄入 50 x 2 = 100g 的蛋白质。然后用什么食物去满足这个量，就是你自己的决定了。</p><p>关于更详细的饮食计划，可以看看卓叔的 <a href="https://zhuanlan.zhihu.com/p/21374019" target="_blank" rel="noopener">这篇文章</a>。</p><h3 id="关于蛋白粉"><a href="#关于蛋白粉" class="headerlink" title="关于蛋白粉"></a>关于蛋白粉</h3><p><strong>能不能喝？有没有副作用？</strong></p><p>能。没有（除非你的肾本来就有病变）。</p><p><strong>喝多少？是不是每天都要喝？</strong></p><p>上面已经提到了，你需要计算你每天要摄入多少热量。如果通过三餐或补餐你还是吃不够，那就用蛋白粉（或增肌粉）补够。蛋白粉不是药物，是补剂。这是很简单的数学问题。</p><h2 id="关于训练"><a href="#关于训练" class="headerlink" title="关于训练"></a>关于训练</h2><p>我的训练计划是每周 4 练：腿（+胸）、胸（+背）、背（+胸）、肩。</p><p>我不打算在这里详细列出我正在使用的训练计划，也不会教你怎么制定计划（这应该是你教练的任务），而是分享我一直训练以来的一些小经验。</p><ul><li>深蹲、硬拉、卧推这三大项是必须学习的，无论是健力还是健美，三大项都是基础。我在商业健身房练了这么久，没有亲眼目睹有教练教深蹲的。所以还是那句话，有条件，尽量选择健身工作室。</li><li>如果你是瘦子，没有太大的必要去做有氧。除非你对心肺能力有要求。</li><li>多做自由力量。固定器械除了安全，对新手没有多大的好处。卧推都没学会，就别去夹胸了。</li><li>学习卧推时，瘦子可能（反正我当初是）连空杆（20kg）都推不稳，建议可以找更轻的杆（我们当时工作室有粉红色的 8kg 的杆）去训练，再慢慢地增加重量。</li><li>记住，新手期，大重量不是你的目标，你的目标是熟悉动作模式。</li><li>新手期，没有必要特别去练你的小肌群，例如手臂（肱二头、三头），手臂的力量会随着三大项成绩的提升而慢慢提升。</li><li>刚开始背部没有感觉，可以选择相对简单一点的动作，例如反向划船。也可以选择感受度高一点的动作，对我自己来说，练背最有感受度的动作是哑铃单臂划船、对握引体向上、固定轨迹的高位下拉。</li><li>关注一下你的关节活动度。这是很多人忽略的。可以问问你的教练，对你的关节灵活度做一个测试。活动度如果不足，要做一些针对性的动作解决一下。不然会一定程度影响训练。我的肩关节活动度受限就很影响我的训练。</li><li>健身先健脑，健身是一门复杂的学问（营养学、解剖学、运动生理学），像你做其它事一样，不断地学习，才会越做越好。</li></ul><p>还有很重要的一点是：<strong>一定要对自己的训练做记录。</strong> If you don’t mesure it, how can you improve it? 记录你计划里的所有动作，重量、组数、做完后的感受（这很重要，下一次训练是否增加重量需要参考上一次的感受，比如，如果累的程度是 10，这一次训练完的程度是多少？）。<strong>如果没有训练记录，那么你到健身房可以做的动作只有——闲逛。</strong></p><p>每一次踏入健身房，你的目标就是，能不能比上一次训练推更大的重量。如果不能，分析自己在哪个环节出了问题——吃不够？还是睡不够？然后去修正自己的问题——睡不够，那就早点睡；吃不够，就吃更多。</p><p><strong>我很害怕健身房里其它人的目光，怎么办？</strong></p><p>其实没有什么人在意你。大家的目光一般是在漂亮的女性，或练得很好的人身上的。我自己在健身房里见瘦子，我的脑回路是这样的：</p><ol><li>啊，我以前也是这样的</li><li>很期待看到他坚持下去之后的变化</li><li>他需不需要帮助呢</li></ol><h2 id="怎么选健身房"><a href="#怎么选健身房" class="headerlink" title="怎么选健身房"></a>怎么选健身房</h2><p>一般来说，健身工作室的设备不会有太大的问题。如果你去找商业健身房，要考虑的因素有：</p><ul><li>地理位置。这是最重要的，选一个在你能接受的范围内的。我现在去的健身房，从公司骑车要 10 分钟左右。</li><li>进去先直奔自由力量区：有没有足够的哑铃？有没有足够的杠铃片？最重要的，<strong>有没有自由深蹲架？</strong>没有深蹲架基本可以走了。</li><li>有没有可以让你做硬拉的区域？有的健身房是有一个硬拉区域的（或者在深蹲架里也可以硬拉）。</li></ul><h2 id="关于坚持"><a href="#关于坚持" class="headerlink" title="关于坚持"></a>关于坚持</h2><p>怎么去坚持健身？这是很多人问的问题。</p><p>首先是问自己，为什么开始健身？找到你的源动力。对我自己来说，源动力就是想变得强壮，遇到傻x的时候能自信地面对。</p><p>其次，一定要设立一个目标。而且必须是一个明确的目标。别说什么「我的目标是身体健康」，定一个可以量化的目标。我最初给自己的目标就是：2018 年底至少要体重要达到 60kg (当然我失败了)。如果没有一个可以量化的目标，在你没有爱上健身这个运动之前，你很容易会放弃的。</p><p>然后是不要和别人宣称你在健身，这对你的训练没有任何帮助，甚至会被嘲讽。更加不要傻到在朋友圈打卡——<strong>在你没有取得成果之前，没有人在意你的过程</strong>。打卡的唯一收获只会是更多人把你屏蔽了。</p><p>当你健身了一段时间，在吃、睡、练三件事都做好的基础上，第三个月绝对会有明显的效果，这是新手的福利期。很快会有人问你，咦？你是不是健身了，怎么壮了那么多（这是我健身 4 个月左右的时候听得最多的一句话）。这时你获得了成就感，享受了健身给你带来的改变，使你继续坚持下去。一直到坚持半年了，你会发现，健身渐渐地变成了你生活中的一部份。</p><p><strong>当健身成为了你的一种生活方式时，哪有什么坚持不坚持。</strong></p><p>我很多次洗澡脱光衣服看到自己身体的变化，都很感谢一年前的我坚持下来了。我再也不用对自己说「如果我当时…」</p><p>如果你说，「我很想健身，但是我没时间啊！」</p><p>据我观察，很多人所谓的没有时间，是不愿意花时间在健身上面而已。一天只有 24 个小时，除去上班的时间，我的时间很少，但为了健身，我减少了我写代码和玩音乐的时间，这是我付出的代价。<strong>如果你不愿意留你最多 2 小时的时间给健身，只能说明健身这件事在你的生活里优先级不够高罢了</strong>。</p><p>不愿意把时间花在健身上面并不可耻，这再正常不过了。每个人有每个人的生活方式。如果你用「没有时间」作为借口，那么你相当于在说，我们这些健身的，都是闲得慌的。</p><h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul><li><a href="https://lutaonan.com/link/gainer" target="_blank" rel="noopener">我喝的增肌粉</a></li><li><a href="https://lutaonan.com/link/protein" target="_blank" rel="noopener">我喝的蛋白粉</a></li><li><a href="https://lutaonan.com/link/belt" target="_blank" rel="noopener">我用的腰带</a></li></ul>]]></content>
     
     <summary type="html">
     
@@ -244,8 +244,8 @@
   
   <entry>
     <title>我买过的实体唱片</title>
-    <link href="http://lutaonan.com/blog/show-my-albums/"/>
-    <id>http://lutaonan.com/blog/show-my-albums/</id>
+    <link href="/blog/show-my-albums/"/>
+    <id>/blog/show-my-albums/</id>
     <published>2019-01-13T12:13:11.000Z</published>
     <updated>2019-03-08T02:11:41.092Z</updated>
     
@@ -266,8 +266,8 @@
   
   <entry>
     <title>本博客的赞助渠道</title>
-    <link href="http://lutaonan.com/blog/donation/"/>
-    <id>http://lutaonan.com/blog/donation/</id>
+    <link href="/blog/donation/"/>
+    <id>/blog/donation/</id>
     <published>2019-01-10T02:15:39.000Z</published>
     <updated>2019-04-08T02:10:27.793Z</updated>
     
@@ -289,8 +289,8 @@
   
   <entry>
     <title>2018 年终总结</title>
-    <link href="http://lutaonan.com/blog/2018-summary/"/>
-    <id>http://lutaonan.com/blog/2018-summary/</id>
+    <link href="/blog/2018-summary/"/>
+    <id>/blog/2018-summary/</id>
     <published>2019-01-07T03:12:48.000Z</published>
     <updated>2019-05-15T02:07:37.105Z</updated>
     
@@ -312,8 +312,8 @@
   
   <entry>
     <title>2018 香港流行音乐推介</title>
-    <link href="http://lutaonan.com/blog/2018-cantonpop-list/"/>
-    <id>http://lutaonan.com/blog/2018-cantonpop-list/</id>
+    <link href="/blog/2018-cantonpop-list/"/>
+    <id>/blog/2018-cantonpop-list/</id>
     <published>2018-12-19T03:46:37.000Z</published>
     <updated>2019-03-08T02:11:41.087Z</updated>
     
@@ -330,14 +330,14 @@
     </summary>
     
     
-      <category term="music" scheme="http://lutaonan.com/tags/music/"/>
+      <category term="music" scheme="/tags/music/"/>
     
   </entry>
   
   <entry>
     <title>我在学校学到的东西</title>
-    <link href="http://lutaonan.com/blog/things-i-learnt-at-school/"/>
-    <id>http://lutaonan.com/blog/things-i-learnt-at-school/</id>
+    <link href="/blog/things-i-learnt-at-school/"/>
+    <id>/blog/things-i-learnt-at-school/</id>
     <published>2018-10-04T12:42:17.000Z</published>
     <updated>2019-03-08T02:11:41.093Z</updated>
     
@@ -354,16 +354,16 @@
     </summary>
     
     
-      <category term="exp" scheme="http://lutaonan.com/tags/exp/"/>
+      <category term="exp" scheme="/tags/exp/"/>
     
-      <category term="depth" scheme="http://lutaonan.com/tags/depth/"/>
+      <category term="depth" scheme="/tags/depth/"/>
     
   </entry>
   
   <entry>
     <title>一个阅读源代码的技巧</title>
-    <link href="http://lutaonan.com/blog/trick-for-reading-source-code/"/>
-    <id>http://lutaonan.com/blog/trick-for-reading-source-code/</id>
+    <link href="/blog/trick-for-reading-source-code/"/>
+    <id>/blog/trick-for-reading-source-code/</id>
     <published>2018-09-14T06:14:07.000Z</published>
     <updated>2019-05-15T02:07:37.051Z</updated>
     
@@ -384,8 +384,8 @@
   
   <entry>
     <title>Serlina: 渐进式的 React 服务器渲染框架</title>
-    <link href="http://lutaonan.com/blog/announcing-serlina/"/>
-    <id>http://lutaonan.com/blog/announcing-serlina/</id>
+    <link href="/blog/announcing-serlina/"/>
+    <id>/blog/announcing-serlina/</id>
     <published>2018-08-13T09:44:09.000Z</published>
     <updated>2019-03-08T02:11:41.088Z</updated>
     
@@ -408,8 +408,8 @@
   
   <entry>
     <title>多研究些问题，少谈些框架</title>
-    <link href="http://lutaonan.com/blog/think-deeper/"/>
-    <id>http://lutaonan.com/blog/think-deeper/</id>
+    <link href="/blog/think-deeper/"/>
+    <id>/blog/think-deeper/</id>
     <published>2018-07-16T03:47:35.000Z</published>
     <updated>2019-03-08T02:11:41.093Z</updated>
     
@@ -426,14 +426,14 @@
     </summary>
     
     
-      <category term="tweet" scheme="http://lutaonan.com/tags/tweet/"/>
+      <category term="tweet" scheme="/tags/tweet/"/>
     
   </entry>
   
   <entry>
     <title>2017 年终总结</title>
-    <link href="http://lutaonan.com/blog/2017-summary/"/>
-    <id>http://lutaonan.com/blog/2017-summary/</id>
+    <link href="/blog/2017-summary/"/>
+    <id>/blog/2017-summary/</id>
     <published>2018-01-03T10:47:44.000Z</published>
     <updated>2019-05-15T02:07:37.106Z</updated>
     
@@ -454,8 +454,8 @@
   
   <entry>
     <title>我的地下刊物</title>
-    <link href="http://lutaonan.com/blog/my-underground-publication/"/>
-    <id>http://lutaonan.com/blog/my-underground-publication/</id>
+    <link href="/blog/my-underground-publication/"/>
+    <id>/blog/my-underground-publication/</id>
     <published>2017-08-25T13:04:17.000Z</published>
     <updated>2019-05-15T02:07:37.051Z</updated>
     
