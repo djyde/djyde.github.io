@@ -6,7 +6,7 @@
   <link href="/rss.xml" rel="self"/>
   
   <link href="http://lutaonan.com/"/>
-  <updated>2019-06-17T11:53:32.371Z</updated>
+  <updated>2019-07-18T12:14:32.384Z</updated>
   <id>http://lutaonan.com/</id>
   
   <author>
@@ -15,6 +15,51 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>未来属于声明式编程</title>
+    <link href="http://lutaonan.com/blog/declarative-programming-is-the-future/"/>
+    <id>http://lutaonan.com/blog/declarative-programming-is-the-future/</id>
+    <published>2019-07-18T12:11:30.000Z</published>
+    <updated>2019-07-18T12:14:32.384Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://zh.wikipedia.org/zh-cn/%E5%AE%A3%E5%91%8A%E5%BC%8F%E7%B7%A8%E7%A8%8B?oldformat=true" target="_blank" rel="noopener">声明式编程</a> （Declarative Programming）是一种编程范式。现实世界中，我们大部分编码都是命令式的。</p><p>举个最常见的例子，对于用 JavaScript 来构建 UI, React 是声明式的。</p><pre><code class="js">// 普通的 DOM API 构建 UIconst div = document.createElement(&#39;div&#39;)const p = document.createElement(&#39;p&#39;)p.textContent = &#39;hello world&#39;const UI = div.append(p)</code></pre><pre><code class="js">// React 构建 UIconst h = React.craeteElementconst UI = h(&#39;div&#39;, null, h(&#39;p&#39;, null, &#39;hello world&#39;))</code></pre><p>所有的 DSL (HTML, XML, SQL) 都是声明式的，你写出一条 SQL 语句，只是为了告诉数据库你要什么，然后数据库就会给你对应的数据，而不是通过数据库的 API 去取。</p><pre><code class="sql">SELECT * FROM Products WHERE name=&#39;Alipay&#39;</code></pre><p>Apple 在今年 (2019 年) 也推出了 Swift UI, 在 WWDC 的 Swift UI 相关的 Session 里也<a href="https://developer.apple.com/videos/play/wwdc2019/216/" target="_blank" rel="noopener">多次提到声明式 UI 开发的威力</a>。</p><p>声明式编程的潜力在于：</p><p><strong>解放人力成本，你只要「声明」你要做什么，具体怎么做，由运行时解决。</strong></p><p>函数式编程就是声明式编程的一种，在函数式编程里的<a href="https://zh.wikipedia.org/zh-hans/%E5%B0%BE%E8%B0%83%E7%94%A8?oldformat=true" target="_blank" rel="noopener">尾递归</a>性能，就取决于运行时，而不是靠程序员去手动优化。React 里你只要描述你的 UI, 接下来状态变化后 UI 如何更新，是 React 在运行时帮你处理的，而不是靠程序员优化 diff 算法。</p><p>我们可以认为 Serverless (尤其是函数计算) 在运维领域获得了声明式的好处 —— 我们定义好了函数，我们只要告诉平台我们需要调用这个函数，那么如何进行计算资源分配、如何对代码做分布式部署，都不需要程序员考虑。</p><p>运行时帮你完成工作，除了可以节省人力成本外，还降低了程序员出错的概率 —— 因为写的代码越少，出错的概率就越小。人是最不可靠的，我们应该尽量把工作交给计算机。</p><p><strong>「声明」是「描述」而不是真正「执行」</strong></p><p>在纯函数式编程语言里面，一切都是声明式的，是纯 (Pure) 的，没有副作用（Side Effect）的。</p><p>Haskell 是一个纯函数式的语言，像在控制台输出文本这种方法（<code>putStrLn</code>）就是一种副作用。在 Haskell 里 <code>putStrLn &quot;Hello World&quot;</code> 本身不会真正地输出 “Hello World“, 而是返回一个 IO 类型，来说明他是一个副作用。但它如何被执行，取决于运行时。</p><p><a href="https://elm-lang.org" target="_blank" rel="noopener">Elm</a> 和 Haskell 一样，副作用也只是返回一种类似 Haskell 中的 IO 类型。在 Elm 中叫做 Cmd. </p><p><img src="https://gbstatic.djyde.com/F5AF0D75-30A2-46DD-B66F-9FDEFFC10B27.png?x-oss-process=style/80" alt></p><p>以上说的这些，可能太过抽象。所以我用前端的同学们应该都知道的 redux-saga 对此作更具象的解释。也可以解答为什么我虽然不喜欢 Redux, 但认为 redux-saga 是一个的很不错的库。因为他利用 redux 的 middleware 机制和 generator 巧妙地实现了类似 Haskell 的 IO. </p><p>下面我将用 <a href="https://redux-saga.js.org/docs/basics/DeclarativeEffects.html" target="_blank" rel="noopener">官方文档的例子</a> 做解释。</p><p>比如，以下是一个有副作用的函数:</p><pre><code class="js">import { call } from &#39;redux-saga/effects&#39;function* fetchProducts() {  const products = yield call(Api.fetch, &#39;/products&#39;)  // ...}</code></pre><p>显然，<code>Api.fetch()</code> 是副作用，它会发送网络请求。但是，在 redux-saga 里面，你不应该直接执行这个函数，而是使用 <code>call</code> 告诉 redux-saga —— 你要执行 <code>Api.fetch</code> , 参数为 <code>/products</code>. </p><p>所以，事实上这个函数没有被命令式地被执行，而是由 redux-saga 决定如何执行。</p><p>如果你在外部直接调用 <code>fetchProducts()</code>, 你会得到一个 Generator Iterator. 然后通过 <code>next()</code> 得到你 yield 的值。所以你可以这样去测试你的程序：</p><pre><code class="js">const iterator = fetchProducts()// expects a call instructionassert.deepEqual(  iterator.next().value,  call(Api.fetch, &#39;/products&#39;),  &quot;fetchProducts should yield an Effect call(Api.fetch, &#39;./products&#39;)&quot;)</code></pre><p>也就是说，你要测试的是「你有没有告诉程序你要执行的副作用，以及执行的参数是什么」。和命令式编程不同，因为命令式的程序在你执行函数时会真实地执行这个 <code>Api.fetch</code>，你必须用测试框架里类似 <code>mockFn</code> 的手段去 mock 这个函数进行测试。</p><p><code>fetchProducts()</code> 只有在 Redux 环境里，才会真正地执行副作用（在这里就是 Api.fetch 发送的网络请求）。</p><p>所以，<strong>声明式的编程是非常易于测试的</strong>。</p><p><strong>可视化编程是一种声明式编程</strong></p><p>我们探索可视化编程，是因为我们一直期望通过拖拽就能完成开发，其实就是期望我们完成任务仅仅需要通过声明，而不是写命令式的代码。当然这是一种理想的状态。</p><p>DSL 是最常见的声明式编程形式。我一直在布道 GraphQL, 因为它把网络请求变得声明式了：</p><pre><code class="gql">query {    posts {        id, title, content  }}</code></pre><p>把网络请求变成声明式的好处有很多，其中一个就是它可以被放到各种各样的环境被执行。想象一下，我们可以打造一个可视化的应用搭建工具，在命令式编程的场景下，我们如果要做出如「点击按钮发送请求，得到响应后触发另一个 UI 更新」，就需要编写命令式的代码：</p><pre><code class="js">async function onClickButton() {    // 手动发送请求    const result = await fetch(&#39;/api&#39;)    // 手动更新 UI  table.dataSource = result}</code></pre><p>如果是 GraphQL, 我们可以把每一条 GraphQL 语句单独看作一个对象，他可以被任何组件触发，它的结果也可以被任何组件订阅。这样一来，在可视化的搭建工具里，程序员要做的是：</p><ol><li>（声明式地）编写 GraphQL 查询语句 </li><li>（声明式地）为组件（比如某个按钮）绑定 onClick 事件为触发某条查询语句</li><li>（声明式地）为组件（比如某个表格）绑定某条查询语句的响应值对应哪些组件的属性值</li></ol><p>当然现实世界的应用不是那么简单，但已经是跨出了很大一步。</p><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>未来为什么属于声明式编程，因为我们在不断地努力提高开发效率，声明式编程显然是提效的最佳手段。React, Flutter, SwiftUI, GraphQL 的出现是最好的证明。最近听到内网太多人在提 Serverless, 我想说，<strong>提升开发效率，我们应该去想如何尽量让开发者声明式地编写代码，而不是只去想我们在 Serverless 上能做什么。</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/zh-cn/%E5%AE%A3%E5%91%8A%E5%BC%8F%E7%B7%A8%E7%A8%8B?oldformat=true&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;声明式编
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>软件开发的品味</title>
+    <link href="http://lutaonan.com/blog/taste-of-software-design/"/>
+    <id>http://lutaonan.com/blog/taste-of-software-design/</id>
+    <published>2019-07-10T06:13:47.000Z</published>
+    <updated>2019-07-17T08:57:03.761Z</updated>
+    
+    <content type="html"><![CDATA[<p>编写一个框架或开源库和做产品一样，用户体验很重要，可惜很多开发人员没有注意到这一点。</p><p>这首先体现在文档的编写，很多开发人员懒于编写软件手册（或 README），或觉得这不重要。</p><p>面向开发人员的软件设计的品味主要体现在：</p><h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><p>文档很重要，a</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;编写一个框架或开源库和做产品一样，用户体验很重要，可惜很多开发人员没有注意到这一点。&lt;/p&gt;
+&lt;p&gt;这首先体现在文档的编写，很多开发人员懒于编写软件手册（或 README），或觉得这不重要。&lt;/p&gt;
+&lt;p&gt;面向开发人员的软件设计的品味主要体现在：&lt;/p&gt;
+&lt;h3 id=&quot;文
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>井底之蛙的一片天空</title>
@@ -425,55 +470,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>养猫随想</title>
-    <link href="http://lutaonan.com/blog/cat-capriccio/"/>
-    <id>http://lutaonan.com/blog/cat-capriccio/</id>
-    <published>2017-08-20T14:51:55.000Z</published>
-    <updated>2019-06-13T13:15:40.585Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="//bstatic.djyde.com/assets/006tNc79gy1fiql3pxyssj31kw11x0w8.jpg" alt></p><p>我是个很怕负责任并且不感性的人，养一只猫对我来说，是一种很大的责任。</p><p>传闻说猫的智商相当于 2～3 岁的小孩，所以我会把养她当作是在养我的小孩，每个月要花钱换猫砂，去超市要顺便买些罐头，偶尔也想去宠物店看看有什么好玩的玩具。养猫和养小孩的区别，我想大概就在于前者的过程中不需要担负教育的责任。教育很难。</p><p>我外甥女今年刚好是 3 岁，有时候我也觉得和猫很像：见到什么都要摸摸看，甚至打翻。</p><p><img src="//bstatic.djyde.com/assets/006tNc79gy1fiql519bi7j31kw16owiy.jpg" alt></p><p>对于猫打翻东西，一般来说，主人都会生气。但是我想，3 岁的小孩打翻了东西，其实是监护人的责任。既然家里多了这个不懂事的小孩，易打翻的东西就不该让她碰到。出现事故，自己要先反思。</p><p>她不会完全信任我，她吃东西，我路过，她有时还是会立刻跑开。帮她滴清耳液的时候，她看到我拿着瓶子也会跑开。但有时候我觉得她也很信任我，每次回家，不管她的时候她都要一直叫，非要爬过来腿上让我摸才停。养猫有趣的地方就是这里，你要向一种时刻保持警惕的生物身上获得信任。</p><p><img src="//bstatic.djyde.com/assets/006tNc79gy1fiqjq2lx3rj30qo0zk458.jpg" alt="来我家第二天，对我的第一次试探"></p><p>第一次带她去医院打疫苗，在医院里我和几个素味谋面的猫主人狗主人竟然可以自然地打成一片，互相交流育宠经验，然后让自己的宠物见一见对方的宠物。大家都像妈妈们互相交流育儿经验似的。</p><p><img src="//bstatic.djyde.com/assets/006tNc79gy1fiql61x2ukj31kw23vtdy.jpg" alt></p><p><img src="//bstatic.djyde.com/assets/006tNc79gy1fiql69t9fxj31kw23vgyo.jpg" alt></p><p>有时候在路上看到走过的流浪猫，会想要不要把它养了，让她有个伴。但是想想，我确实还没有做好二胎的准备。</p><p>前段时间发烧，在搞保险报销的时候，我想如果可以给宠物也买保险，我也会给她买一份。</p><p>养一只猫不容易，何况养一个人。所以养猫之后，有时我会留意街上怀孕的路人，想她们是不是做好了准备，去承担这份责任呢。这需要一份勇气和担当，还有深思熟虑。</p><p>鲁迅在《热风》里谈到孩子，他说，「中国的孩子，只要生，不管他好不好，只要多，不管他才不才。生他的人，不负教他的责任。虽然“人口众多”这一句话，很可以闭了眼睛自负，然而这许多人口，便只在尘土中辗转，小的时候，不把他当人，大了以后，也做不了人。」</p><p>因此我很怕，我没有准备好，没有想好要怎么做教育。我要先把猫照顾好，才有信心去养一个人。</p><p>以上。</p><p><img src="//bstatic.djyde.com/assets/006tNc79gy1fiql4208ayj31kw11xtcw.jpg" alt></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;//bstatic.djyde.com/assets/006tNc79gy1fiql3pxyssj31kw11x0w8.jpg&quot; alt&gt;&lt;/p&gt;
-&lt;p&gt;我是个很怕负责任并且不感性的人，养一只猫对我来说，是一种很大的责任。&lt;/p&gt;
-&lt;p&gt;传闻说猫的智商相
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>群晖 DS216j 半年体验报告</title>
-    <link href="http://lutaonan.com/blog/synology-ds216j-exp/"/>
-    <id>http://lutaonan.com/blog/synology-ds216j-exp/</id>
-    <published>2017-07-11T03:11:47.000Z</published>
-    <updated>2019-03-08T02:11:41.093Z</updated>
-    
-    <content type="html"><![CDATA[<p>今年（2017年）2月份入手了 Synology DS216j，不知不觉已经过去了半年。</p><p>当初考虑使用 NAS，是因为使用了小米盒子后，开始追求离线下载的体验。我平时追美剧，理想中的场景是，每到美剧资源更新的时候，就可以下载到家里的硬盘中，再通过小米盒子观看硬盘中的视频。这样就能实现上班后到家打开电视直接看剧的需求。</p><p>半年以来，这台 NAS 成了我的数据中心，影视、照片、音乐、TimeMachine 都存放在两块 2TB 西数红盘上。</p><p><img src="//cdn.sspai.com/2017/07/11/718b2a59d0a9c09a724b866c22f927ff.jpg" alt="两块 2TB 红盘"></p><p>DS216j 有两个盘位。起初我在犹豫到底做 RAID0 还是 RAID1, 后来想想，我的硬盘里大部分是影音，做 RAID1 未免太浪费，倒不如做 RAID0, 然后定期把最重要的数据同步到另一块移动硬盘里。</p><p>在首次安装、启动、配置后，我把它放在家中的一个角落，之后就再也没有管它了，它就角落里安静地服役。即使它摆在你的房间，你也完全不会感受到他的存在。当然，如果你嫌 LED 灯太刺眼，可以在设置里关闭它。</p><p><img src="//cdn.sspai.com/2017/07/11/2097819a07c1aad10400a8fbfc7c154a.jpg" alt></p><p>NAS 的本质只是一台低功率、持续运行的计算机。理论上自己也可以 DIY 一台 NAS，有很多人也这么做。但是为什么很多人还会选择购买群晖的解决方案，一个很重要的原因是群晖的软件生态——DSM.</p><h3 id="DSM"><a href="#DSM" class="headerlink" title="DSM"></a>DSM</h3><p>DSM 是群晖 NAS 中运行的「操作系统」。这个打引号的「操作系统」指的不是我们常说的操作系统，而是一个用于组织管理 NAS 上的文件的程序。DSM 提供了一个 Web 界面，一切操作都可以在这个界面中进行。</p><p><img src="//cdn.sspai.com/2017/07/11/f1518ab10158b3896054f6b4988efa2b.png" alt="DSM"></p><p>除了 Web 界面，群晖在移动平台提供一系列的 APP，读取和操作不同类型的资源。</p><p><img src="//cdn.sspai.com/2017/07/11/39a1ff21af22b1abfc4d7e207d20bdb8.jpg" alt="DS APP"></p><p>在 Web 界面中，我一般会通过 File Station 管理我的文件，类似于 Finder. </p><p><img src="//cdn.sspai.com/2017/07/11/aa4e91c84fd832971b1626106b418995.png" alt="File Station"></p><p>DSM 的生态在于套件中心，但实际上在我半年里的使用来看，我真正用到的套件只有那么几个。</p><p><img src="//cdn.sspai.com/2017/07/11/a13809eae2cfd8a7d8d4353bc9b1b86a.png" alt="套件中心"></p><h3 id="多媒体中心"><a href="#多媒体中心" class="headerlink" title="多媒体中心"></a>多媒体中心</h3><p>作为多媒体中心，有两个最重要的要素，分别是下载资源的体验，和观看资源的体验。</p><p>先说下载资源的体验。DSM 本身提供 Download Station 这个套件，可以在上面添加管理下载任务，也提供电驴和迅雷离线下载的入口。</p><p><img src="//cdn.sspai.com/2017/07/11/066fdd60d15505861f33d025ff1205d4.png" alt="Download Station"></p><p>但是使用多次后，我毅然放弃了 Download Station, 原因有几个：</p><ol><li><strong>响应速度非常慢</strong>。这是绕不过去的坎。由于我家使用的移动宽带给我分配的是内网 IP, 我无法通过 DDNS 在外网访问我的 NAS, 所以只能使用 DSM 提供的 Quick Connect，在群晖的服务器做一个中转。访问速度可想而知。从进入 DSM，到获取下载列表任务，再到添加任务，花费的时间非常长。</li><li><strong>迅雷离线下载入口，只是看上去很美</strong>。拉取离线下载任务列表相当耗时，添加任务还不一定成功。总的来说，我没有一次在 Download Station 里成功地通过迅雷下载。</li></ol><p>Download Station 唯一比较有用的功能是提供从 RSS Feed 中下载资源的功能，比如我只要提供一个持续更新资源地址的美剧 RSS，通过过滤器，可以自动的根据正则表达式进行对应的行为。例如当 RSS 更新有「闪电侠」三个关键字的时候自动下载。</p><p><img src="//cdn.sspai.com/2017/07/11/07317e02fe3ee6bda6e749da3c9c2b08.png" alt="RSS Feed"></p><p>但是影响下载速度和稳定性的因素是资源的质量，如果单纯使用 http 下载，有些资源恐怕从我上班到下班回家都不一定下载完。所以需要放弃 Download Station, 另辟蹊径。</p><h4 id="Aria2"><a href="#Aria2" class="headerlink" title="Aria2"></a>Aria2</h4><p>通过 ssh，我在 NAS 里跑了 Aria2, 配合像 BaiduExporter (百度盘导出任务到 Aria2) 这种插件，可以畅快地建立下载任务，临睡前把下载任务开始，一晚上能下载很多资源。</p><p><img src="//cdn.sspai.com/2017/07/11/46fb4bdfc890218014b9a2bda50d100c.png" alt="Aria2 下载队列"></p><p>但是因为没有外网 IP 的原因，在外面我就无法直接访问 Aria2 的 Web UI 添加任务，所以我需要另一种下载方式进行互补。</p><h4 id="迅雷远程下载"><a href="#迅雷远程下载" class="headerlink" title="迅雷远程下载"></a>迅雷远程下载</h4><p>我在 NAS 又跑了一个 Xware, 通过 Xware 可以关联迅雷远程下载和 NAS. 这样既能够在外面管理下载任务，又能享受迅雷的高速通道和离线下载资源。</p><p><img src="//cdn.sspai.com/2017/07/11/011b6bca34b7b92d19bd42c2845e9e64.png" alt="迅雷远程下载"></p><p>至于观看，DSM 的 Video Station 会对文件夹中的视频进行分析，自动从多个影视 API 获取相关信息，然后整理。</p><p><img src="//cdn.sspai.com/2017/07/11/db02e0732a1a85cec28c109c44dafcf6.jpg" alt="Video Station"></p><p><img src="//cdn.sspai.com/2017/07/11/af7f299d971a58aea7c2a02a970bd934.jpg" alt></p><p>然而我只会在使用移动设备进行观看的时候才会使用 Video Station. 因为 Web 版的 Video Station 用的是普通的 <code>&lt;video&gt;</code> 标签，支持的视频格式不多（DS216j 也没有转码功能），所以我一般是通过 Finder 连接 NAS，之后用本地的播放器进行播放。</p><p><img src="//cdn.sspai.com/2017/07/11/e7b32a4d8fd721e9eee963b05dd73f99.png" alt="通过 Finder 连接 NAS"></p><p>因为我有一台小米电视，所以主要的影视播放都在电视上。我一般会通过两种方式在电视上播放 NAS 的视频。</p><p>第一种，通过小米电视自带的「高清播放器」应用，可以连接远程的服务器，只要填写 NAS 的地址和用户名密码，就能访问里面的文件夹。</p><p><img src="//cdn.sspai.com/2017/07/11/7929682c92c56547522a1ac4a2be06fc.jpg" alt></p><p><img src="//cdn.sspai.com/2017/07/11/c459b3916a9b4bd6cba78591b9b4b779.jpg" alt></p><p><img src="//cdn.sspai.com/2017/07/11/69962b830439de599948bbdb13be5bb5.png" alt="流畅播放 1080P"></p><p>我一般是从文件夹里找到我要看的视频。小米电视也会自动识别出文件的影视信息，但是识别不是特别准确。</p><p>第二种是通过 Airplay/DLNA，移动设备上用 DS Video 选好要看的视频，然后直接 Airplay 到电视上。</p><p><img src="//cdn.sspai.com/2017/07/11/7a1f36feb76767d9064b41ed563216d3.jpg" alt="串流"></p><p>至于管理音乐的 Audio Station，对我这个音乐发烧友来说也显得尴尬。因为听音乐我更倾向于串流服务，比如 Spotify 和 网易云音乐，很少存放音乐文件，一般存放音乐文件到本地只是为了满足我对音乐的收藏欲。</p><p>Photo Station 做得很好，在买了 Dji Spark 以后，对图片视频存放的需求也就有所增多，因为 TF 卡的容量也有限。手机上我会常用 DS Photo 同步我比较喜欢比较重要的照片到 NAS 上。但是我没有使用增量同步的功能，因为我订阅了 iCloud 50GB 的空间，目前手机 7000 多张照片，只占用了 iCloud 26GB 多一些。</p><p><img src="//cdn.sspai.com/2017/07/11/fe1982be000622aaffd0dd79f67e76c9.png" alt="Photo Station"></p><h4 id="TimeMachine"><a href="#TimeMachine" class="headerlink" title="TimeMachine"></a>TimeMachine</h4><p>macOS 的 TimeMachine 原生支持网络设备，所以只要在 TimeMachine 里把备份位置设定到 NAS 的文件夹后，每当我回家插上电源，就会自动备份到 NAS 上。</p><p><img src="//cdn.sspai.com/2017/07/11/acee003483973ff4d44a6bf3379589da.png" alt="TimeMachine"></p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>NAS 极大的改善了我观看影视的体验，同时还成为了我的数据中心。以往 TimeMachine 要定期插一个移动硬盘进行备份，现在只要接上电源，无需操心。</p><p>DS216j 的价格很适合作为 NAS 的入门之选。然而入门 NAS 的花费不仅在于机器本身，还有硬盘的花费。同时你可能还需要把你的百兆路由扔掉，重新买一个千兆路由。</p><p>然而 DS216j 的配置十分尴尬，32 位的 CPU 导致你无法使用 docker 这个利器。 我安装 Aria2 和 xware 的时候，只能费尽力气找对应的编译好的包来安装的。所以如果有充足的预算，建议直接买 DS216 II+ 吧。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;今年（2017年）2月份入手了 Synology DS216j，不知不觉已经过去了半年。&lt;/p&gt;
-&lt;p&gt;当初考虑使用 NAS，是因为使用了小米盒子后，开始追求离线下载的体验。我平时追美剧，理想中的场景是，每到美剧资源更新的时候，就可以下载到家里的硬盘中，再通过小米盒子观看硬
-      
-    
-    </summary>
-    
-    
-      <category term="evaluation" scheme="http://lutaonan.com/tags/evaluation/"/>
-    
-      <category term="digitle" scheme="http://lutaonan.com/tags/digitle/"/>
     
   </entry>
   
