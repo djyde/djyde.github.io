@@ -6,7 +6,7 @@
   <link href="/rss.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2019-09-17T02:49:00.068Z</updated>
+  <updated>2019-09-27T13:46:19.503Z</updated>
   <id>/</id>
   
   <author>
@@ -15,6 +15,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我在 UC 做的前端工程化探索</title>
+    <link href="/blog/what-i-have-done-at-UC/"/>
+    <id>/blog/what-i-have-done-at-UC/</id>
+    <published>2019-09-27T13:38:06.000Z</published>
+    <updated>2019-09-27T13:46:19.503Z</updated>
+    
+    <content type="html"><![CDATA[<p>我在 2016 年初加入 UC 的国际业务部，负责为 UC News 搭建运营后台。随着前端团队人数越来越多，我开始推动团队的前端技术栈统一以及前端工程化，开发了一个叫 Cans 用于快速搭建中后台前端应用的框架。直到了 2019 年我离开 UC, Cans 仍然服务于 UC 的国际业务。</p><p>本文主要记录了我如何从 UC News 运营后台孵化出这个内部框架，以及其背后的设计理念。虽然 Cans 没有开放源代码。但我认为相比这些工具的源码，那些我在开发这些工具背后的理念、思考，更有被分享的价值。也算作是对我在 UC 工作的一个总结。遂有此文。</p><hr><p>我们在做 UC News 运营后台的时候，面临的最大问题是：当有新的业务需要我们团队支撑开发一个新运营后台的时候，我们应该怎么做？</p><p>这种情况在不断地发生。2017 年我们的 UC News 运营后台趋于成熟，业务需求响应的速度在不断提高。越来越多业务方问我们同一个问题：「我们 xxx 业务想有一个运营后台，我们可以快速接入吗？」</p><p>如何让 UC News 运营后台的开发经验可以被快速地复制出去，帮助更多业务？在回答这个问题之前，我想先说说我是怎么设计 UC News 运营后台的前端工程以提高需求响应速度的。</p><p>第一点是保证业务开发尽量不被构建环节干扰，只须关注业务逻辑本身。这一点很好保证，因为构建配置基本是不需要更改的。</p><p>第二点是降低新页面接入的成本。所谓的成本指的是：</p><ul><li>页面绑定对应的路由</li><li>在左侧菜单栏添加菜单项并指向对应的路由</li></ul><p><img src="https://gbstatic.djyde.com/blog/what-i-have-done-at-uc/IMG_185.JPG?x-oss-process=style/80" alt></p><p><img src="https://gbstatic.djyde.com/blog/what-i-have-done-at-uc/IMG_186.JPG?x-oss-process=style/80" alt></p><p>我把这两点变成配置项，可以直接在项目里的 routes 文件配置。这样新页面接入只需配置菜单项的标题和路由，以及对应的页面组件即可。</p><p><img src="https://gbstatic.djyde.com/blog/what-i-have-done-at-uc/IMG_E5C7A707793A-1.jpeg?x-oss-process=style/80" alt></p><p>第三点是规范项目目录结构。这一点我在 <a href="https://eggjs.org" target="_blank" rel="noopener">Egg</a> 上受到很大的启发。在内部，我们的 Node.js 系统都使用 Egg. 我借鉴 Egg 把项目配置、路由配置、应用启动代码等作了规范：</p><p><img src="https://gbstatic.djyde.com/blog/what-i-have-done-at-uc/IMG_15A76FD02171-1.jpeg?x-oss-process=style/80" alt></p><p>要用这一套模式赋能更多不断冒出的新业务，首先要做的是统一。</p><p>在社区上做开源软件和做公司内部的软件不同，前者通常需要考虑兼容性。处理兼容性的代价是越来越复杂的配置项。但做内部软件，则可以通过「统一」简化配置（甚至无需配置）。例如，两个业务如果分别使用 less 和 sass, 那么在新建项目时，两个业务都要各自配置。相反，如果早已约定所有业务都使用 less, 那么 less 的配置可以固化到统一的工具里，两个业务都不需配置。</p><p>首先是技术栈的统一：</p><ul><li>React</li><li>组件库：Ant.Design</li><li>构建工具：Webpack</li><li>语言：TypeScript</li><li>css 预编译：Less</li></ul><p>技术栈的选型背后没有什么高深的思量，不过是这一套在 UC News 运营后台经过了考验：Ant.Design 的组建覆盖了 90% 的需求；纯 EcmaScript 写运营后台这种复杂应用是灾难，尤其在新人接手的时候；</p><p><strong>技术栈的统一带来的是构建配置可以全部收敛</strong>，当然除了技术相关的工具，还有业务层面的工具可以统一收敛：</p><ul><li>构建产物发布到 cdn</li><li>打点、错误监控的封装</li><li>网络请求库统一</li><li>i18n 方案统一</li></ul><p>做好了这些统一的准备，我开始开发一个叫 Cans 的前端解决方案，它的宗旨是快速搭建中后台类的项目。</p><h2 id="框架设计"><a href="#框架设计" class="headerlink" title="框架设计"></a>框架设计</h2><p>「开箱即用，没有多余的东西」是我从 zeit.co 领会到的软件设计哲学。<strong>如果说一个框架设计得美，那么其实是说它用最简单且符合直觉的接口封装了最复杂的逻辑</strong>。</p><p>和 next.js 一样，我希望开发者只要用 <code>cans start</code> 这一条命令，就能开始开发一个页面。</p><p><img src="https://gbstatic.djyde.com/blog/what-i-have-done-at-uc/IMG_5861AF8C8CB1-1.jpeg?x-oss-process=style/80" alt></p><p>在最基本的应用，<code>cans start</code> 的背后会做这样的工作：</p><p><img src="https://gbstatic.djyde.com/blog/what-i-have-done-at-uc/IMG_366CDF4D0EEB-1.jpeg?x-oss-process=style/80" alt></p><p>也就是收集所有运行时将要用到的数据，然后生成一个入口 js 文件。</p><p>另外，在构建中还引入了 tree shaking, code splitting (with react-loadable) 等等优化手段。</p><p>构建时分析的应用数据，可以在运行时、页面中通过 import app 实例来获取：</p><p><img src="https://gbstatic.djyde.com/blog/what-i-have-done-at-uc/IMG_4F51DBF1C4FE-1.jpeg?x-oss-process=style/80" alt></p><p>这种注入机制是为了提供扩展性，为了通过这种扩展性建立「生态」，Cans 引入了 addon 机制，以一个打点 addon 为例：</p><p><img src="https://gbstatic.djyde.com/blog/what-i-have-done-at-uc/IMG_F7A689CCF2ED-1.jpeg?x-oss-process=style/80" alt></p><p>开发者可以在 npm 发布以 <code>cans-addon-</code> 为前缀的库贡献生态。</p><p>Cans 自带了一些业务常用的 addon:</p><ul><li>cans-addon-cookies<ul><li>通过<code>app.cookies.get</code> 和 <code>app.cookies.set</code> 读写 cookies</li></ul></li><li>cans-addon-storage<ul><li>通过<code>app.storage</code> 做离线数据持久化（如本地数据缓存）</li></ul></li><li>cans-addon-http<ul><li>http 请求方法封闭</li></ul></li></ul><p>虽然中后台的布局千篇一律，但为了尽量覆盖所有定制化的需求，Cans 也开放了 theme, 开发者可以定制自己的主题，用 <code>app.theme()</code> 引入。也可以在 npm 上贡献主题。像我们最常用的运营后台 theme：</p><p><img src="https://gbstatic.djyde.com/blog/what-i-have-done-at-uc/0653a32a-c51b-4a14-9bb3-a3298c151d87.png?x-oss-process=style/80" alt></p><p><img src="https://gbstatic.djyde.com/blog/what-i-have-done-at-uc/IMG_44DD0DC7FA9F-1.jpeg?x-oss-process=style/80" alt></p><p>而在业务层，尽可能将可复用的业务组件封装出去，让更多业务可以使用。如 <a href="[Commits · NewbeeFE/antd-data-table · GitHub](https://github.com/NewbeeFE/antd-data-table">antd-data-table</a> 这个业务组件，就是从 UC News 运营后台独立出来的。</p><p><img src="https://gbstatic.djyde.com/blog/what-i-have-done-at-uc/IMG_3BCAB3A24856-1.jpeg?x-oss-process=style/80" alt></p><p>以上是 Cans 这个框架的大概模样, 或有其它细节，但不是本文的重点。</p><p>在设计这个框架的时候，我无时无刻在考虑的是如何使开发者要写的代码越来越少，同时开放的接口是要符合开发者直觉的。就像「建立一个页面就是创建一个页面文件然后运行 <code>cans start</code> 一样简单。</p><p>几年前我读了《乔布斯传》，使我对用户体验有了极致的追求，也把这种追求带到了软件开发。这种体验不是一句 Simple is better 就可以说明的。你在同时面对一堆电路板和一台 Macintosh 的时候可能才会体会到所谓的「科技与人文的十字路口」，但，软件设计同样有这样的十字路口，它可能出现在一份完整、漂亮的文档（像 Vue）, 可能出现在一个屏蔽了所有复杂细节 (and it just works!) 的命令（像 next.js）, 可能出现在它的小而美，可以接入到任何地方。</p><p>后来蚂蚁金服发布了 Umi, 比 Cans 做得更全面，但两者的核心都如出一辙。我想这证明了这套模式背后的价值所在。最近看到<a href="[https://www.yuque.com/preview/yuque/0/2019/pdf/84184/1569318486837-37eeba0d-ebc1-452a-9f6a-a6a02cd27726.pdf">《Umi 架构、生态和未来》</a> ，让我更确信当初的想法和 Umi 在做的是契合的。推荐各位在下一个项目可以试试 Umi.</p><p>记得有一次面试的时候，我提到我主要是做一些前端基建的工作，面试官问我，觉得什么样的前端基建是做得好的基建？我回答说，<strong>如果我做的基建可以让同事少加班，那么我做的基建就是好的</strong>。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;我在 2016 年初加入 UC 的国际业务部，负责为 UC News 搭建运营后台。随着前端团队人数越来越多，我开始推动团队的前端技术栈统一以及前端工程化，开发了一个叫 Cans 用于快速搭建中后台前端应用的框架。直到了 2019 年我离开 UC, Cans 仍然服务于 U
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>回顾了一些读者来信</title>
+    <link href="/blog/letters-from-reader/"/>
+    <id>/blog/letters-from-reader/</id>
+    <published>2019-09-21T08:16:11.000Z</published>
+    <updated>2019-09-27T13:37:25.593Z</updated>
+    
+    <content type="html"><![CDATA[<p>从 2014 年开始写博客以来，因为不设评论区，我收到不少读者的 Email 来信。透过 Email, 来信的人比评论区直接评论要更严谨一些。来信中的大部分是请教问题，其它则是一些感谢的话。</p><p>几天前我购买了一块软木板挂在自己的房间，想到可以把一些有意思的读者来信打印出来钉到软木板上。于是在收件箱整理了 2014 年至今 5 年来收到的所有读者来信。</p><p><img src="//gbstatic.djyde.com/blog/Snapseed%208.jpg?x-oss-process=style/80" alt></p><p>其中我发现一封 2015 年的已经被我淡忘的邮件：</p><p><img src="//gbstatic.djyde.com/blog/DSC02677.JPG?x-oss-process=style/80" alt></p><p><img src="//gbstatic.djyde.com/blog/DSC02676.JPG?x-oss-process=style/80" alt></p><p>这是一位在国外当老师的妈妈，特意来信想为她的儿子寻问关于编程的问题。当时我回信尽可能地写了很多相关浅薄的意见和经验分享，后来就再没有通信。这位母亲让我感动。</p><p>时隔几年再看来往的信件，无论是提到的这位母亲，还是其它特意发来感谢的读者，他们让我收获到的是，我写的文字确实帮助了一些人；五年来我坚持写独立博客是有意义的；这些来信让我意识到我活在世上还是有一点微不足道的贡献。所以我最开心的是看到来信里面提到的，我对读者的影响是什么。</p><p>对我来说，有没有活下去的勇气，取决于我在世界上有没有创造价值。</p><blockquote><p>所以这些人呢，不管是什么借口，最终选择了去做恶心的成年人社会中的一个恶心的人，最可气的是他们之后还产生了幻觉，说这就是“成熟”。于是又过来毒害年轻人，跟他们说，你看，我年轻的时候也像你这样，现在我这叫成熟，你这叫幼稚。</p><p>我现在看到很多我的同龄人变成这样，很多人都是我小时候的好朋友，也曾经充满了理想，充满了美好的这些东西，然后相信自己可以改变世界，最后却变成了这种恶心的人。 </p><p>我回家吃饭心情好就敷衍一下，有时候心情不好就忍不住当场戳穿他们。我说：“你看你们这帮兔崽子，年轻时候我们在一块儿聊，都说要改变世界，现在你，你改变个屁了。”然后他们就有点不好意思，说：“哎呀，行了，老罗，咱们那时候不是幼稚吗？谁能改变世界？谁也改变不了世界。”我就跟他们说：“你别客气了，你已经改变这个世界了，因为你变成了一个恶心的人，这个世界多了一个恶心的人，因此它变得恶心了一点点。” </p><p>每一个生命来到世间，都注定改变世界，这是你的宿命，你别无选择。你要么把世界变得好一点，要么把世界变得坏一点。</p><p>你如果走进社会，为了生存或是为了什么不要脸的理由， 变成了一个恶心的成年人社会中的一员，那你就把这个世界变得恶心了一点点。 如果你一生耿直，刚正不阿，没做任何恶心的事情，没有做任何对别人造成伤害的事情，一辈子拼了老命勉强把老婆、孩子、老娘，把身边的这些人照顾好了，没有成名，没有发财，没有成就伟大的事业，一生正直，最后梗着脖子到了七八十岁死掉了，你这一生是不是没有改变世界？你还是改变世界了，你把这个世界变得美好了一点点。因为你，这个世界又多了一个好人。</p><p>—— 罗永浩</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;从 2014 年开始写博客以来，因为不设评论区，我收到不少读者的 Email 来信。透过 Email, 来信的人比评论区直接评论要更严谨一些。来信中的大部分是请教问题，其它则是一些感谢的话。&lt;/p&gt;
+&lt;p&gt;几天前我购买了一块软木板挂在自己的房间，想到可以把一些有意思的读者来
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>爱情是愿意为你放弃寻新鲜</title>
@@ -420,52 +463,6 @@
 &lt;p&gt;副标题: 《可能是最适合 Egg 的 React Serverside-rendering 方案》&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;上一周周末我花了些时间来完成了一个 React serverside-rendering 框架——&lt;a h
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>多研究些问题，少谈些框架</title>
-    <link href="/blog/think-deeper/"/>
-    <id>/blog/think-deeper/</id>
-    <published>2018-07-16T03:47:35.000Z</published>
-    <updated>2019-03-08T02:11:41.093Z</updated>
-    
-    <content type="html"><![CDATA[<p>当我问应聘者「你有什么问题想问」的时候，大多数应聘者会问我前端应该怎么学。我每次都会很真诚地按照面试过程对他们的了解尝试给他们一些建议。从多次的交流当中，我倒是慢慢地了解到了前端领域里很多普遍的问题。</p><p>前端有很多不同的框架和库。 我上大一的时候，有一门课叫网页设计，前几个课时教 HTML, 又教一个课时 CSS, 再教一个课时 JavaScript. 然后是 jQuery. 当时我很气愤，学生连 DOM 是什么都还没搞清楚，就要他们用 jQuery，这不是误人子弟吗。我后来想明白，学校大概已经把 jQuery 看作是饭碗了。</p><p>把库和框架看作饭碗是无可厚非的， 我们不能苛刻地要求所有程序员都对软件开发抱有发自内心的热爱。但是急功近利地学习框架，绝对是举步维艰的。胡适说「多研究些问题，少谈些主义」，在编程上，我认为需要多研究些问题，少谈些框架。</p><p>框架是我们达到目的的便捷手段，我们使用 React, 更要知道为什么使用它？<a href="/blog/react-and-the-way-building-web-ui/">它的本质是什么</a>？它解决了什么问题？所谓「格物致知」，不「格物」，如何「致知」呢？</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;当我问应聘者「你有什么问题想问」的时候，大多数应聘者会问我前端应该怎么学。我每次都会很真诚地按照面试过程对他们的了解尝试给他们一些建议。从多次的交流当中，我倒是慢慢地了解到了前端领域里很多普遍的问题。&lt;/p&gt;
-&lt;p&gt;前端有很多不同的框架和库。 我上大一的时候，有一门课叫网页
-      
-    
-    </summary>
-    
-    
-      <category term="tweet" scheme="/tags/tweet/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2017 年终总结</title>
-    <link href="/blog/2017-summary/"/>
-    <id>/blog/2017-summary/</id>
-    <published>2018-01-03T10:47:44.000Z</published>
-    <updated>2019-05-15T02:07:37.106Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h2><p>我的 2017 过得很平淡，可能是因为出来工作已经是第二年了。</p><p>今年比较特别的是身边的朋友都大四了，参加了一些毕业拍照。大家都陆陆续续地开始找工作，面试。偶尔在朋友圈看到朋友拿到 offer, 也会替他们感到开心。</p><p>有很多朋友开始请教我一些出来工作的经验，面试的技巧、offer 怎么选择、租房的经验等等。被问到这些问题的时候我也会很开心。因为以前上学的时候，学业成绩不好，我在班上除了搞搞笑，对身边的同学来说并没有多大的「用处」。</p><p>4 月份的时候上台拿了 16 年的优秀新人奖，但是 17 年整一年没有做出很出色的成绩。慢慢失落地发现在很多事情上，技术并不是那么重要，它只不过是一种手段而已。</p><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn3migpdnvj30tx0txaf6.jpg" alt></p><p>在年底，和 @EGOIST 一起创办了 <a href="https://stickeroverflow.org" target="_blank" rel="noopener">StickerOverflow</a>. 成功地让国内的开发者能买到高质量的技术贴纸。</p><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn3n2vutcoj30u00u0nah.jpg" alt></p><p>今年想得比较多的是应该如何用自己的能力去帮助更多的人。想过去做培训，想过回大学给以前班的人开个交流会，想过写书。最后都搁置了，因为我后来发现，「助人」有时是一件很一厢情愿的事。</p><p>除了技术外，这一年有很多新的尝试，上台唱歌纪念张国荣，参加了唱歌的比赛，做了一期<a href="http://music.163.com/#/djradio?id=350672104" target="_blank" rel="noopener">音乐电台节目</a>。在新的一年，还想尝试去经营一个音乐博客，让更多人发现被忽略的优秀粤语流行音乐和歌手。</p><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn3mgojgc1j30qo0xcafi.jpg" alt></p><h2 id="博客成绩"><a href="#博客成绩" class="headerlink" title="博客成绩"></a>博客成绩</h2><p>今年博客的 PV 和 UV 都小幅度降低了，原因是今年下半年文章写得很少。因为花了不少时间在比写文章更有趣的事情上。</p><p>博客没有广告，但还是会有人因为读文章而受到启发给我赞赏，今年一共收到 ￥136 的赞赏。更开心的是收到了一些真诚的交流邮件。</p><h3 id="PV-UV"><a href="#PV-UV" class="headerlink" title="PV/UV"></a>PV/UV</h3><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn2ebqiqbhj31kw0jvn2k.jpg" alt></p><p>PV: <strong>33,247</strong> (去年 <strong>49,406</strong>), UV: 12,172 (去年 <strong>15,800</strong>)</p><h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn2ec5tdhoj31f00hedhz.jpg" alt></p><h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn2ehoxfhzj316y0ks771.jpg" alt></p><h3 id="用户访问的时段"><a href="#用户访问的时段" class="headerlink" title="用户访问的时段"></a>用户访问的时段</h3><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn2ek8wd91j30j60v43zv.jpg" alt></p><h3 id="设备"><a href="#设备" class="headerlink" title="设备"></a>设备</h3><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn2ekpdlnwj30iu0v4q4x.jpg" alt></p><h2 id="消费"><a href="#消费" class="headerlink" title="消费"></a>消费</h2><h3 id="电子产品"><a href="#电子产品" class="headerlink" title="电子产品"></a>电子产品</h3><h4 id="iPhone-8"><a href="#iPhone-8" class="headerlink" title="iPhone 8"></a>iPhone 8</h4><p>把很喜欢的 iPhone SE 退役了，因为跑 iOS11 耗电快，性能不够。</p><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn3mzigtncj31ja17uaqe.jpg" alt></p><h4 id="SONY-黑卡-1"><a href="#SONY-黑卡-1" class="headerlink" title="SONY 黑卡 1"></a>SONY 黑卡 1</h4><p>为了方便写数码产品评测，入手了黑卡 1 代。</p><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn3n6gqyzaj30u00u0gqv.jpg" alt></p><h4 id="DS216j-DS218"><a href="#DS216j-DS218" class="headerlink" title="DS216j/DS218+"></a>DS216j/DS218+</h4><p>上半年用 DS216j，因为性能满足不了，年底换成了 DS218+. 关于 NAS 的使用，可以参考<a href="/blog/synology-ds216j-exp/">这篇文章</a>.</p><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn3n2gyl48j31kw16o19e.jpg" alt></p><h4 id="Yamaha-P115-Yamaha-NP12"><a href="#Yamaha-P115-Yamaha-NP12" class="headerlink" title="Yamaha P115 / Yamaha NP12"></a>Yamaha P115 / Yamaha NP12</h4><p>因为要学习 Keyboard，入手了 Yamaha P115 电钢来入门。P115 是全配重的，手感很好，但是重量大，不便携。为了可以携带出去户外表演，于是又入了轻一半重量的 61 键的 NP12。</p><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn3mz45nepj31kw16oqew.jpg" alt></p><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn3mym8w5vj30u00u2481.jpg" alt></p><h4 id="Nintendo-Switch"><a href="#Nintendo-Switch" class="headerlink" title="Nintendo Switch"></a>Nintendo Switch</h4><p>买了 Switch, 圆了掌机梦，玩了《塞尔达传说》和《奥德赛》。因为便携，吃灰率要比 PS4 低。</p><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn3n20mksej31kw16mu07.jpg" alt></p><h4 id="DJI-Spark"><a href="#DJI-Spark" class="headerlink" title="DJI Spark"></a>DJI Spark</h4><p><img src="//bstatic.djyde.com/assets/006tKfTcgy1fn3n6wgqt5j31d81d8ndh.jpg" alt></p><h2 id="新年计划"><a href="#新年计划" class="headerlink" title="新年计划"></a>新年计划</h2><p>2018 年的计划是多写写代码，多玩玩音乐，读更多书，换一间大些的房子，买一辆车。</p><p>有次和朋友聊天，她说，你知道自己想要做什么，又能把它做到，还能靠它养活自己。你千万不能变得世俗啊，如果你也变得世俗，我会觉得这个世界，真的就是那样了。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;Preface&quot;&gt;&lt;a href=&quot;#Preface&quot; class=&quot;headerlink&quot; title=&quot;Preface&quot;&gt;&lt;/a&gt;Preface&lt;/h2&gt;&lt;p&gt;我的 2017 过得很平淡，可能是因为出来工作已经是第二年了。&lt;/p&gt;
-&lt;p&gt;今年比较特别的是身边的
       
     
     </summary>
