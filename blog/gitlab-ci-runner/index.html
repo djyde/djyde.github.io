@@ -15,7 +15,7 @@
   <body>
     <header>
   <div class="description">
-    <div style="background-image: url(//bstatic.djyde.com/assets/006tKfTcgy1fkuuijv4pwj30ku0na3zq.jpg); width: 128px; height: 128px; background-size: cover; border-radius: 50%; margin: 0 auto;">
+    <div style="background-image: url(//gbstatic.djyde.com/assets/006tKfTcgy1fkuuijv4pwj30ku0na3zq.jpg); width: 128px; height: 128px; background-size: cover; border-radius: 50%; margin: 0 auto;">
     </div>
     <p class="name">Randy Lu</p>
     <p class="desc">Software Engineer. Blogging about life, tech and music.</p>
@@ -65,7 +65,7 @@
 <h2 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h2><p>这篇文章将介绍如何使用自己的机器来搭建用于 Gitlab CI 的 runner.  在搭建自己的 CI Runner 之前，需要先明确一些概念：</p>
 <h3 id="CI-Continuous-Integration"><a href="#CI-Continuous-Integration" class="headerlink" title="CI (Continuous Integration)"></a>CI (Continuous Integration)</h3><p>CI 的全称是 Continuous Integration (持续集成)，是 extreme programming (极限编程) 的一部分。我们常用 CI 来做一些自动化工作，这种自动化工作会运行在一台集中的机器上，比如程序的打包，单元测试，部署等。这种构建方式避免了了打包环境差异引动的错误，并且通过 Gitlab 的 hook, 在代码提交的各个环节自动地完成一系列的构建工作。</p>
 <h3 id="CI-Runner"><a href="#CI-Runner" class="headerlink" title="CI Runner"></a>CI Runner</h3><p>和第三方的 Travis CI, CircleCI 不同，<strong>Gitlab 本身并不提供机器</strong>，只提供一个注册机器的接口。这些机器用于运行构建逻辑，在 Gitlab 中被称为 Runner.</p>
-<p><img src="//bstatic.djyde.com/assets/006tNc79gy1fet5ffxwglj31ac0y2wj8.jpg" alt="runners"></p>
+<p><img src="//gbstatic.djyde.com/assets/006tNc79gy1fet5ffxwglj31ac0y2wj8.jpg" alt="runners"></p>
 <h2 id="Gitlab-Runner-环境"><a href="#Gitlab-Runner-环境" class="headerlink" title="Gitlab Runner 环境"></a>Gitlab Runner 环境</h2><p>在这里直接使用 Gitlab Runner 的官方 docker image:</p>
 <h3 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h3><pre><code class="bash">curl -sSL https://get.daocloud.io/docker | sh
 </code></pre>
@@ -108,7 +108,7 @@ docker build -t IMAGE_NAME .
 <pre><code class="bash">sudo docker exec -it gitlab-runner gitlab-ci-multi-runner register
 </code></pre>
 <p>程序会要求你填写相关的信息，这些信息可以从 Gitlab 项目的 <code>Settings -&gt; Runners</code> 页面中找到：</p>
-<p><img src="//bstatic.djyde.com/assets/006tNc79gy1fetavn7r0lj319u0os78u.jpg" alt="Gitlab runner info"></p>
+<p><img src="//gbstatic.djyde.com/assets/006tNc79gy1fetavn7r0lj319u0os78u.jpg" alt="Gitlab runner info"></p>
 <pre><code class="bash">Please enter the gitlab-ci coordinator URL:
 # http://gitlab.alibaba-inc.com/ci
 
@@ -131,7 +131,7 @@ Please enter the default Docker image (e.g. ruby:2.1):
 # 填入构建 Docker image 时填写的 image 名称
 </code></pre>
 <p>这时 runner 就会出现在 <code>runners</code> 页面：</p>
-<p><img src="//bstatic.djyde.com/assets/006tNc79gy1fetbnh1e12j310008qdgs.jpg" alt></p>
+<p><img src="//gbstatic.djyde.com/assets/006tNc79gy1fetbnh1e12j310008qdgs.jpg" alt></p>
 <h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><h3 id="CI-运行时出现-ERROR-Job-failed-API-error-404-repository-xxx-not-found-does-not-exist-or-no-pull-access"><a href="#CI-运行时出现-ERROR-Job-failed-API-error-404-repository-xxx-not-found-does-not-exist-or-no-pull-access" class="headerlink" title="CI 运行时出现 ERROR: Job failed: API error (404): repository xxx not found: does not exist or no pull access"></a>CI 运行时出现 <code>ERROR: Job failed: API error (404): repository xxx not found: does not exist or no pull access</code></h3><p>这是由于 Gitlab 会默认从远程拉取 image，而我们的 image 是在本地构建的，所以需要对 gitlab-runner 进行配置，把 <code>pull_policy</code> 设置为 <code>if-not-present</code> 或 <code>never</code>.</p>
 <pre><code class="bash"># 进入 gitlab-runner 的 bash 环境
 sudo docker exec -it gitlab-runner bash
@@ -162,7 +162,7 @@ nano /etc/gitlab-runner/config.toml
 </ul>
 
   </div>
-  <center><img class="signature" width="128px" src="//bstatic.djyde.com/sign_square_white.png"></center>
+  <center><img class="signature" width="128px" src="//gbstatic.djyde.com/sign_square_white.png"></center>
   <div class="post-footer">
   <hr>
   <p>讨论请发邮件到 randypriv@gmail.com</p>
@@ -171,7 +171,7 @@ nano /etc/gitlab-runner/config.toml
   <p>或通过订阅我的<a href="/blog/my-zsxq/">知识星球</a>支持本博客</p>
   <br>
   <p>
-    <img class="bmc" src="//bstatic.djyde.com/assets/006tKfTcgy1fkuufy2cadj30w00w0tb2.jpg">
+    <img class="bmc" src="//gbstatic.djyde.com/assets/006tKfTcgy1fkuufy2cadj30w00w0tb2.jpg">
   </p>
 </div>
 
