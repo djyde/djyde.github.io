@@ -1,139 +1,31 @@
-<html>
-  <head><meta name="generator" content="Hexo 3.8.0">
-  <title>现代的 React - Randy's Blog</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/styles/rexo.css">
-  <link href="//cdn.bootcss.com/highlight.js/9.11.0/styles/zenburn.min.css" rel="stylesheet">
-  <link href="//ppp.djyde.com/css?family=Noto+Serif+SC" rel="stylesheet">
-  <script src="//cdn.bootcss.com/highlight.js/9.9.0/highlight.min.js"></script>
-  <script src="//cdn.bootcss.com/highlight.js/9.8.0/languages/javascript.min.js"></script>
-  <script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/typescript.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-</head>
-
-  <body>
-    <header>
-  <div class="description">
-    <div style="background-image: url(//gbstatic.djyde.com/assets/006tKfTcgy1fkuuijv4pwj30ku0na3zq.jpg); width: 128px; height: 128px; background-size: cover; border-radius: 50%; margin: 0 auto;">
-    </div>
-    <p class="name">Randy Lu</p>
-    <p class="desc">Software Engineer. Blogging about life, tech and music.</p>
-  </div>
-  <nav>
-    <ul class="nav">
-      
-        <li class="nav-item">
-          <a href="/">Blog</a>
-        </li>
-      
-        <li class="nav-item">
-          <a href="/timeline">Timeline</a>
-        </li>
-      
-        <li class="nav-item">
-          <a href="/music">Music</a>
-        </li>
-      
-        <li class="nav-item">
-          <a href="/rss.xml">RSS</a>
-        </li>
-      
-        <li class="nav-item">
-          <a href="/about">About</a>
-        </li>
-      
-        <li class="nav-item">
-          <a href="/blog/donation">Donate</a>
-        </li>
-      
-        <li class="nav-item">
-          <a href="http://stickeroverflow.xyz">购买贴纸</a>
-        </li>
-      
-    </ul>
-  </nav>
-</header>
-    <div>
-      <div class="post-body">
-  <h1 class="title">现代的 React</h1>
-  <p class="date">08, Mar, 2019</p>
-  <div class="post-content">
-    <p>我一直很想写一本关于 React 的小书，因为我看到很多刚入门前端或刚开始使用 React 的开发者，对 React 有一些误解。也许是因为 JSX, 让很多人误以为 React 是一种黑魔法 —— 竟然能在 JS 文件里写 HTML! 还有很多围绕 React 的问题，像「状态管理」，就让很多人焦头烂额了。也正是因为 JSX, 让很多人依然用模板的思维去写 React.</p>
-<p>但实际上，如果你理解 React 解决问题的方式的本质，你会发现 React 没有那么难。我写这本小书的主要目的，就是想让还觉得 React 难用的开发者们知道，React 很简单。</p>
-<p>React 是一种构建 UI 的思想，关于 <a href="https://github.com/reactjs/react-basic" target="_blank" rel="noopener">React 的思想</a>，我觉得已经是老生常谈了。在所有从本质层面讲解 React 的文章或书里，总不免提到这样的公式：</p>
-<pre><code>UI = f(state)
-</code></pre><p>意思就是，UI 是基于状态的一个函数返回值。这也是 Sebastian (React 设计者) 设想的理想状态。直到当我们真正拿 React 来写 UI 的时候，却发现我们很难遵循这个公式——组件的内部状态需要依靠 Class. 而写 Class 是导致 React 使用者困惑的重要原因。</p>
-<p>用 Class 实现内部状态同时也带来了另一个问题——我们怎么复用这些逻辑？常见的做法就是使用 <a href="https://medium.com/merrickchristensen/function-as-child-components-5f3920a9ace9" target="_blank" rel="noopener">Function as Child Component</a>.</p>
-<p>先不说 Function as Child Component 容不容易被初学者理解, 光是它带来的嵌套问题，就已经足够我们烦恼了——可以想像我们只能用 callback 写 JavaScript 的时代。</p>
-<pre><code class="js">const MyForm = () =&gt; (
-  &lt;DataFetcher&gt;
-    {data =&gt; (
-      &lt;Actions&gt;
-        {actions =&gt; (
-          &lt;Translations&gt;
-            {translations =&gt; (
-              &lt;Styles&gt;
-                {styles =&gt; (
-                  &lt;form styles={styles}&gt;
-                    &lt;input type=&quot;text&quot; value={data.value} /&gt;
-                    &lt;button onClick={actions.submit}&gt;
-                      {translations.submitText}
-                    &lt;/button&gt;
-                  &lt;/form&gt;
-                )}
-              &lt;/Styles&gt;
-            )}
-          &lt;/Translations&gt;
-        )}
-      &lt;/Actions&gt;
-    )}
-  &lt;/DataFetcher&gt;
-)
-</code></pre>
-<p>还有，我们应该怎么解决组件之间的状态共享问题？Redux? MobX? 还是其它状态管理工具？</p>
-<p>React 应该是简单直接的，但越来越多人「谈 React 色变」，正是由于以上的（或者以上没有提到的）问题，认为 React 复杂，难学。很多关于 React 的文章和书都花了不少篇幅来介绍这些解决问题的「设计模式」。</p>
-<p>但随着 React 的不断迭代，有了 Context API, 有了 Hooks API, 一切都变得简单了。我们可以抛开种种「模式」，真正用「函数式」的思维去构建 UI. 这也是标题想表达的意思 —— 我们应该使用「现代」的 React, 去避免不必要的学习成本。</p>
-<p>和著名的《设计模式》一样，很多「设计模式」是为了弥补面向对象的缺陷而出现的。React 通过自身 API 的完善，使我们能少写更多不必要的代码，少学习很多不必要的「模式」。</p>
-<p>我的目的不是在教你怎么用各种 React 相关的库，而是想让读者知道，我们在解决什么样的问题？我们解决问题的方法是什么？别人的库是怎么解决的？</p>
-<p>这个专栏会陆续发布循序渐进的文章。如果你完全没有接触过 React, 那么读完这个专栏后，你就完全能驾驭了 React 了，而且是用优雅的方式去驾驭他。你会发现，<strong>写 React 就是写函数那么简单，只不过这个函数的返回值是 Virtual DOM 罢了</strong>。</p>
-<p>初学者们，请不必因为不懂所谓的「模式」而感到惭愧，尽情享受技术发展带来的红利吧。</p>
-<hr>
-<p>这是我在小专栏付费连载的<a href="https://xiaozhuanlan.com/modern-react" target="_blank" rel="noopener">《Modern React》</a>的前言，目前正在限时打折，有兴趣的朋友可以订阅。</p>
-<p>之所以选择连载的方式，是因为我想要通过读者的反馈去决定我接下来连载的内容。欢迎读者们积极地来信反馈。</p>
-
-  </div>
-  <center><img class="signature" width="128px" src="//gbstatic.djyde.com/sign_square_white.png"></center>
-  <div class="post-footer">
-  <hr>
-  <p>讨论请发邮件到 randypriv@gmail.com</p>
-  <p>未经授权，禁止转载</p>
-  <p>通过支付宝 djyde520@gmail.com 或赞赏码赞助此文</p>
-  <p>或通过订阅我的<a href="/blog/my-zsxq/">知识星球</a>支持本博客</p>
-  <br>
-  <p>
-    <img class="bmc" src="//gbstatic.djyde.com/assets/006tKfTcgy1fkuufy2cadj30w00w0tb2.jpg">
-  </p>
-</div>
-
-</div>
-    </div>
-    <div id="footer">
-  <p>
-  <img width="256px" src="//s2.ax1x.com/2019/04/04/A2V9YT.png">
-  </p>
-  <p>2014-2019 <a href="/">Randy's Blog</a></p>
-
-</div>
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-72147868-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
-  </body>
-</html>
+<!DOCTYPE html><html data-saber-ssr><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta http-equiv="X-UA-Compatible" content="ie=edge" /><meta data-saber-head="ssr" name="generator" content="Saber v0.10.3"> <title>现代的 React - Randy&#x27;s Blog</title> <link data-saber-head="ssr" rel="stylesheet" href="//ppp.djyde.com/css?family=Noto+Serif+SC"><style data-vue-ssr-id="1baa226e:0 4c8acc66:0 e37f2252:0">/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{-webkit-box-sizing:content-box;box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:rgba(0,0,0,0)}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{-webkit-box-sizing:border-box;box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{-webkit-box-sizing:border-box;box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden],template{display:none}body{font-family:"Noto Serif SC",Lusitana,serif;line-height:1.4rem}blockquote{margin:0;padding:0 0 0 1.5rem;border-left:.5rem solid #ccc}a{color:#333;-webkit-transition:all .2s;transition:all .2s;text-decoration:none}a:hover{color:#000}a.big{padding-left:.25rem;padding-right:.25rem;border-bottom:.25rem solid #1a1a1a}a.big:hover{background-color:#000;color:#fff}.twitter{color:#0c9df2}.zhihu{color:#0767c8}.weibo{color:#e80025}.github{color:#333}.medium{color:#00ab6b}.email{color:#4285f4}.telegram{color:#179cde}.hr{height:0;font-size:1rem;line-height:0;text-transform:uppercase;text-align:center;border-bottom:1px solid #ccc;margin-top:2rem;margin-bottom:2rem;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.hr span{background-color:#fff;padding-left:.5em;padding-right:.5em;color:#ccc}li{margin-bottom:.5rem}h1,h2,h3,h4,h5,h6{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang SC,Hiragino Sans GB,Microsoft Yahei,sans-serif}#footer{margin-top:2em;padding:1em;background-color:#fafafa;text-align:center}#footer,#footer a{color:#c0c5ce}
+code[class*=language-][data-v-c316f882],pre[class*=language-][data-v-c316f882]{color:#f8f8f2;background:none;text-shadow:0 1px rgba(0,0,0,.3);font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-][data-v-c316f882]{padding:1em;margin:.5em 0;overflow:auto;border-radius:.3em}:not(pre)>code[class*=language-][data-v-c316f882],pre[class*=language-][data-v-c316f882]{background:#282a36}:not(pre)>code[class*=language-][data-v-c316f882]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata[data-v-c316f882],.token.comment[data-v-c316f882],.token.doctype[data-v-c316f882],.token.prolog[data-v-c316f882]{color:#6272a4}.token.punctuation[data-v-c316f882]{color:#f8f8f2}.namespace[data-v-c316f882]{opacity:.7}.token.constant[data-v-c316f882],.token.deleted[data-v-c316f882],.token.property[data-v-c316f882],.token.symbol[data-v-c316f882],.token.tag[data-v-c316f882]{color:#ff79c6}.token.boolean[data-v-c316f882],.token.number[data-v-c316f882]{color:#bd93f9}.token.attr-name[data-v-c316f882],.token.builtin[data-v-c316f882],.token.char[data-v-c316f882],.token.inserted[data-v-c316f882],.token.selector[data-v-c316f882],.token.string[data-v-c316f882]{color:#50fa7b}.language-css .token.string[data-v-c316f882],.style .token.string[data-v-c316f882],.token.entity[data-v-c316f882],.token.operator[data-v-c316f882],.token.url[data-v-c316f882],.token.variable[data-v-c316f882]{color:#f8f8f2}.token.atrule[data-v-c316f882],.token.attr-value[data-v-c316f882],.token.class-name[data-v-c316f882],.token.function[data-v-c316f882]{color:#f1fa8c}.token.keyword[data-v-c316f882]{color:#8be9fd}.token.important[data-v-c316f882],.token.regex[data-v-c316f882]{color:#ffb86c}.token.bold[data-v-c316f882],.token.important[data-v-c316f882]{font-weight:700}.token.italic[data-v-c316f882]{font-style:italic}.token.entity[data-v-c316f882]{cursor:help}.saber-highlight code[data-v-c316f882]{font-size:.5rem}.post-footer[data-v-c316f882]{padding-top:2rem;text-align:center;color:#65737e}.post-footer p[data-v-c316f882]{margin-top:.5em;margin-bottom:.5em}.bmc[data-v-c316f882]{max-width:30%!important}@media (min-width:320px) and (max-width:479px){.bmc[data-v-c316f882]{max-width:100%!important}}.cover[data-v-c316f882]{padding-bottom:40%}@media (min-width:320px) and (max-width:479px){.cover[data-v-c316f882]{padding-bottom:75%}}.cover[data-v-c316f882]{background-size:cover;background-position:50%}.post[data-v-c316f882]{margin-top:4rem}.post h1[data-v-c316f882],.post h2[data-v-c316f882],.post h3[data-v-c316f882],.post h4[data-v-c316f882],.post h5[data-v-c316f882],.post h6[data-v-c316f882]{margin:4rem 0 0}.post strong[data-v-c316f882]{background-color:#e6e6e6;color:#000;padding-left:.25rem;padding-right:.25rem}.post .title[data-v-c316f882]{margin-bottom:1rem}.post .date[data-v-c316f882]{color:grey}@media (min-width:1025px){.post[data-v-c316f882]{width:960px;margin:0 auto}}@media (min-width:320px) and (max-width:479px){.post[data-v-c316f882]{padding-left:5%;padding-right:5%}.post img[data-v-c316f882]{width:100%}}@media (min-width:481px) and (max-width:1024px){.post[data-v-c316f882]{padding-left:5%;padding-right:5%}}.post .content img[data-v-c316f882]{max-width:100%;display:block;margin:0 auto}@media (min-width:481px) and (max-width:1024px){.post .content img[data-v-c316f882]{width:100%}}@media (min-width:320px) and (max-width:479px){.post .content img[data-v-c316f882]{width:100%}}.post .content p[data-v-c316f882]{line-height:1.8rem}.post .content a[data-v-c316f882]{padding-left:.25rem;padding-right:.25rem;border-bottom:.25rem solid #1a1a1a}.post .content a[data-v-c316f882]:hover{background-color:#000;color:#fff}.footer[data-v-c316f882]{text-align:center}
+nav[data-v-634644b4]{background-color:#000}nav .logo[data-v-634644b4]{padding-left:1rem;margin-right:2rem;display:inline-block}nav .logo a[data-v-634644b4]{font-weight:700;color:#fff}nav .nav-item[data-v-634644b4]{display:inline-block}nav .nav-item a[data-v-634644b4]{display:block;color:#fff;padding:.5rem}nav .nav-item a[data-v-634644b4]:hover{color:#000;background-color:#fff}</style>  </head><body><div id="_saber" data-server-rendered="true"><div><div data-v-c316f882><nav data-v-634644b4 data-v-c316f882><div class="logo" data-v-634644b4><a href="/" class="router-link-active" data-v-634644b4>Randy's Blog</a></div> <div class="nav-item" data-v-634644b4><a href="/readings" data-v-634644b4>Readings</a></div></nav> <!----> <div class="post" data-v-c316f882><h1 class="title" data-v-c316f882>现代的 React</h1> <div class="date" data-v-c316f882>March 08, 2019</div> <div class="content" data-v-c316f882><p data-v-c316f882>我一直很想写一本关于 React 的小书，因为我看到很多刚入门前端或刚开始使用 React 的开发者，对 React 有一些误解。也许是因为 JSX, 让很多人误以为 React 是一种黑魔法 —— 竟然能在 JS 文件里写 HTML! 还有很多围绕 React 的问题，像「状态管理」，就让很多人焦头烂额了。也正是因为 JSX, 让很多人依然用模板的思维去写 React.</p> <p data-v-c316f882>但实际上，如果你理解 React 解决问题的方式的本质，你会发现 React 没有那么难。我写这本小书的主要目的，就是想让还觉得 React 难用的开发者们知道，React 很简单。</p> <p data-v-c316f882>React 是一种构建 UI 的思想，关于 <a rel="noopener noreferrer" target="_blank" href="https://github.com/reactjs/react-basic" data-v-c316f882>React 的思想</a>，我觉得已经是老生常谈了。在所有从本质层面讲解 React 的文章或书里，总不免提到这样的公式：</p> <div class="saber-highlight" data-lang="" data-v-c316f882><pre class="saber-highlight-code language-text" data-v-c316f882><code class="language-text" data-v-c316f882>UI = f(state)</code></pre></div><p data-v-c316f882>意思就是，UI 是基于状态的一个函数返回值。这也是 Sebastian (React 设计者) 设想的理想状态。直到当我们真正拿 React 来写 UI 的时候，却发现我们很难遵循这个公式——组件的内部状态需要依靠 Class. 而写 Class 是导致 React 使用者困惑的重要原因。</p> <p data-v-c316f882>用 Class 实现内部状态同时也带来了另一个问题——我们怎么复用这些逻辑？常见的做法就是使用 <a rel="noopener noreferrer" target="_blank" href="https://medium.com/merrickchristensen/function-as-child-components-5f3920a9ace9" data-v-c316f882>Function as Child Component</a>.</p> <p data-v-c316f882>先不说 Function as Child Component 容不容易被初学者理解, 光是它带来的嵌套问题，就已经足够我们烦恼了——可以想像我们只能用 callback 写 JavaScript 的时代。</p> <div class="saber-highlight" data-lang="js" data-v-c316f882><pre class="saber-highlight-code language-js" data-v-c316f882><code class="language-js" data-v-c316f882><span class="token keyword" data-v-c316f882>const</span> <span class="token function-variable function" data-v-c316f882>MyForm</span> <span class="token operator" data-v-c316f882>=</span> <span class="token punctuation" data-v-c316f882>(</span><span class="token punctuation" data-v-c316f882>)</span> <span class="token operator" data-v-c316f882>=&gt;</span> <span class="token punctuation" data-v-c316f882>(</span>
+  <span class="token operator" data-v-c316f882>&lt;</span>DataFetcher<span class="token operator" data-v-c316f882>&gt;</span>
+    <span class="token punctuation" data-v-c316f882>{</span><span class="token parameter" data-v-c316f882>data</span> <span class="token operator" data-v-c316f882>=&gt;</span> <span class="token punctuation" data-v-c316f882>(</span>
+      <span class="token operator" data-v-c316f882>&lt;</span>Actions<span class="token operator" data-v-c316f882>&gt;</span>
+        <span class="token punctuation" data-v-c316f882>{</span><span class="token parameter" data-v-c316f882>actions</span> <span class="token operator" data-v-c316f882>=&gt;</span> <span class="token punctuation" data-v-c316f882>(</span>
+          <span class="token operator" data-v-c316f882>&lt;</span>Translations<span class="token operator" data-v-c316f882>&gt;</span>
+            <span class="token punctuation" data-v-c316f882>{</span><span class="token parameter" data-v-c316f882>translations</span> <span class="token operator" data-v-c316f882>=&gt;</span> <span class="token punctuation" data-v-c316f882>(</span>
+              <span class="token operator" data-v-c316f882>&lt;</span>Styles<span class="token operator" data-v-c316f882>&gt;</span>
+                <span class="token punctuation" data-v-c316f882>{</span><span class="token parameter" data-v-c316f882>styles</span> <span class="token operator" data-v-c316f882>=&gt;</span> <span class="token punctuation" data-v-c316f882>(</span>
+                  <span class="token operator" data-v-c316f882>&lt;</span>form styles<span class="token operator" data-v-c316f882>=</span><span class="token punctuation" data-v-c316f882>{</span>styles<span class="token punctuation" data-v-c316f882>}</span><span class="token operator" data-v-c316f882>&gt;</span>
+                    <span class="token operator" data-v-c316f882>&lt;</span>input type<span class="token operator" data-v-c316f882>=</span><span class="token string" data-v-c316f882>&quot;text&quot;</span> value<span class="token operator" data-v-c316f882>=</span><span class="token punctuation" data-v-c316f882>{</span>data<span class="token punctuation" data-v-c316f882>.</span>value<span class="token punctuation" data-v-c316f882>}</span> <span class="token operator" data-v-c316f882>/</span><span class="token operator" data-v-c316f882>&gt;</span>
+                    <span class="token operator" data-v-c316f882>&lt;</span>button onClick<span class="token operator" data-v-c316f882>=</span><span class="token punctuation" data-v-c316f882>{</span>actions<span class="token punctuation" data-v-c316f882>.</span>submit<span class="token punctuation" data-v-c316f882>}</span><span class="token operator" data-v-c316f882>&gt;</span>
+                      <span class="token punctuation" data-v-c316f882>{</span>translations<span class="token punctuation" data-v-c316f882>.</span>submitText<span class="token punctuation" data-v-c316f882>}</span>
+                    <span class="token operator" data-v-c316f882>&lt;</span><span class="token operator" data-v-c316f882>/</span>button<span class="token operator" data-v-c316f882>&gt;</span>
+                  <span class="token operator" data-v-c316f882>&lt;</span><span class="token operator" data-v-c316f882>/</span>form<span class="token operator" data-v-c316f882>&gt;</span>
+                <span class="token punctuation" data-v-c316f882>)</span><span class="token punctuation" data-v-c316f882>}</span>
+              <span class="token operator" data-v-c316f882>&lt;</span><span class="token operator" data-v-c316f882>/</span>Styles<span class="token operator" data-v-c316f882>&gt;</span>
+            <span class="token punctuation" data-v-c316f882>)</span><span class="token punctuation" data-v-c316f882>}</span>
+          <span class="token operator" data-v-c316f882>&lt;</span><span class="token operator" data-v-c316f882>/</span>Translations<span class="token operator" data-v-c316f882>&gt;</span>
+        <span class="token punctuation" data-v-c316f882>)</span><span class="token punctuation" data-v-c316f882>}</span>
+      <span class="token operator" data-v-c316f882>&lt;</span><span class="token operator" data-v-c316f882>/</span>Actions<span class="token operator" data-v-c316f882>&gt;</span>
+    <span class="token punctuation" data-v-c316f882>)</span><span class="token punctuation" data-v-c316f882>}</span>
+  <span class="token operator" data-v-c316f882>&lt;</span><span class="token operator" data-v-c316f882>/</span>DataFetcher<span class="token operator" data-v-c316f882>&gt;</span>
+<span class="token punctuation" data-v-c316f882>)</span></code></pre></div><p data-v-c316f882>还有，我们应该怎么解决组件之间的状态共享问题？Redux? MobX? 还是其它状态管理工具？</p> <p data-v-c316f882>React 应该是简单直接的，但越来越多人「谈 React 色变」，正是由于以上的（或者以上没有提到的）问题，认为 React 复杂，难学。很多关于 React 的文章和书都花了不少篇幅来介绍这些解决问题的「设计模式」。</p> <p data-v-c316f882>但随着 React 的不断迭代，有了 Context API, 有了 Hooks API, 一切都变得简单了。我们可以抛开种种「模式」，真正用「函数式」的思维去构建 UI. 这也是标题想表达的意思 —— 我们应该使用「现代」的 React, 去避免不必要的学习成本。</p> <p data-v-c316f882>和著名的《设计模式》一样，很多「设计模式」是为了弥补面向对象的缺陷而出现的。React 通过自身 API 的完善，使我们能少写更多不必要的代码，少学习很多不必要的「模式」。</p> <p data-v-c316f882>我的目的不是在教你怎么用各种 React 相关的库，而是想让读者知道，我们在解决什么样的问题？我们解决问题的方法是什么？别人的库是怎么解决的？</p> <p data-v-c316f882>这个专栏会陆续发布循序渐进的文章。如果你完全没有接触过 React, 那么读完这个专栏后，你就完全能驾驭了 React 了，而且是用优雅的方式去驾驭他。你会发现，<strong data-v-c316f882>写 React 就是写函数那么简单，只不过这个函数的返回值是 Virtual DOM 罢了</strong>。</p> <p data-v-c316f882>初学者们，请不必因为不懂所谓的「模式」而感到惭愧，尽情享受技术发展带来的红利吧。</p> <hr data-v-c316f882> <p data-v-c316f882>这是我在小专栏付费连载的<a rel="noopener noreferrer" target="_blank" href="https://xiaozhuanlan.com/modern-react" data-v-c316f882>《Modern React》</a>的前言，目前正在限时打折，有兴趣的朋友可以订阅。</p> <p data-v-c316f882>之所以选择连载的方式，是因为我想要通过读者的反馈去决定我接下来连载的内容。欢迎读者们积极地来信反馈。</p></div> <div class="post-footer" data-v-c316f882><hr data-v-c316f882> <p data-v-c316f882>讨论请发邮件到 randypriv@gmail.com</p> <p data-v-c316f882>未经授权，禁止转载</p> <p data-v-c316f882>通过支付宝 djyde520@gmail.com 或赞赏码赞助此文</p> <p data-v-c316f882>
+        或通过订阅我的
+        <a href="/blog/my-zsxq/" data-v-c316f882>知识星球</a>支持本博客
+      </p> <br data-v-c316f882> <p data-v-c316f882><img src="//gbstatic.djyde.com/assets/006tKfTcgy1fkuufy2cadj30w00w0tb2.jpg" class="bmc" data-v-c316f882></p></div></div></div> <div id="footer"><p><img width="256px" src="//s2.ax1x.com/2019/04/04/A2V9YT.png"></p> <p>
+      2014-2019
+      <a href="/" class="router-link-active">Randy's Blog</a></p></div></div></div><script src="/_saber/js/client.9ebc42c9.js" defer></script><script src="/_saber/js/page--_posts-modern-react-md.30d06f8c.js" defer></script></body></html>

@@ -1,89 +1,19 @@
-<html>
-  <head><meta name="generator" content="Hexo 3.8.0">
-  <title>Vue.js 和 Webpack - Randy's Blog</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/styles/rexo.css">
-  <link href="//cdn.bootcss.com/highlight.js/9.11.0/styles/zenburn.min.css" rel="stylesheet">
-  <link href="//ppp.djyde.com/css?family=Noto+Serif+SC" rel="stylesheet">
-  <script src="//cdn.bootcss.com/highlight.js/9.9.0/highlight.min.js"></script>
-  <script src="//cdn.bootcss.com/highlight.js/9.8.0/languages/javascript.min.js"></script>
-  <script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/typescript.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-</head>
-
-  <body>
-    <header>
-  <div class="description">
-    <div style="background-image: url(//gbstatic.djyde.com/assets/006tKfTcgy1fkuuijv4pwj30ku0na3zq.jpg); width: 128px; height: 128px; background-size: cover; border-radius: 50%; margin: 0 auto;">
-    </div>
-    <p class="name">Randy Lu</p>
-    <p class="desc">Software Engineer. Blogging about life, tech and music.</p>
-  </div>
-  <nav>
-    <ul class="nav">
-      
-        <li class="nav-item">
-          <a href="/">Blog</a>
-        </li>
-      
-        <li class="nav-item">
-          <a href="/timeline">Timeline</a>
-        </li>
-      
-        <li class="nav-item">
-          <a href="/music">Music</a>
-        </li>
-      
-        <li class="nav-item">
-          <a href="/rss.xml">RSS</a>
-        </li>
-      
-        <li class="nav-item">
-          <a href="/about">About</a>
-        </li>
-      
-        <li class="nav-item">
-          <a href="/blog/donation">Donate</a>
-        </li>
-      
-        <li class="nav-item">
-          <a href="http://stickeroverflow.xyz">购买贴纸</a>
-        </li>
-      
-    </ul>
-  </nav>
-</header>
-    <div>
-      <div class="post-body">
-  <h1 class="title">Vue.js 和 Webpack</h1>
-  <p class="date">29, Aug, 2015</p>
-  <div class="post-content">
-    <p><strong>转载前请务必先联系邮箱</strong></p>
-<p>最近在把 SISE Game（我们学校的校内游戏直播网站） 从原本的 Ruby on Rails 彻底用 Node.js 重写，  经过一些考虑，决定用 Vue.js 和 Express.js 实现前后端分离的架构，在这几天的重写过程中，积累了对 Webpack 和 Vue.js 的一些新的看法。</p>
-<h2 id="About-Vue-js"><a href="#About-Vue-js" class="headerlink" title="About Vue.js"></a>About Vue.js</h2><p>Vue 是个很年轻的 MVVM Library，常常有很多人用 Angular 和 Vue 比较，因为两者都是 MVVM，但实际上，前者是 Framework，而后者是 Library。前者有很陡峭的学习曲线，后者可以很快地掌握运用到项目中去。</p>
-<p>Vue 的官方是用 <strong>a library for building modern web interfaces</strong> 来描述自己的。Vue 适合和 React 对比，因为在使用 Vue 的 Components System 开发比较大型的 Single Page Application 的时候，我发现它和 React 有一些相似的地方。如果你赞同 React 的思想，但又不想写 JSX，那么，你就可能需要试试 Vue 了。</p>
-<p>一个用 Vue 实现 Data binding 的 Demo：</p>
-<pre><code class="html">&lt;!-- index.html --&gt;
-&lt;div id=&quot;#app&quot;&gt;
-  &lt;input v-model=&quot;msg&quot; /&gt;
-  &lt;p&gt;{{ msg }}&lt;/p&gt;
-&lt;/div&gt;
-&lt;script&gt;
-  var app = new Vue({
-    el: &#39;#app&#39;,
-    data: {
-      msg: &#39;hello Vue.js&#39;
-    }
-  })
-&lt;/script&gt;
-</code></pre>
-<h2 id="Why-Vue-js"><a href="#Why-Vue-js" class="headerlink" title="Why Vue.js"></a>Why Vue.js</h2><p>前端开发发展到现在，我们做过的很多努力，都是在尝试把开发者从繁琐的 DOM  操作和管理 DOM state 中解放出去，我们希望只需要通过描述数据和行为，DOM 自己就可以发生对应的变化，React 在 View 这一层实现了这一目标，而 MVVM 则是通过 ViewModel 的 Data Binding。React 宣称自己是 View，那么在我看来， Vue 则是 View + ViewModel，并且 Vue 更加 lightweight 和 flexible。</p>
-<p>Vue 最让我喜欢的是它的 Components System，利用它可以构建组件化的中大型应用。React 当然也是组件化的，但是 Virtual DOM (JSX) 在一些场景让我很不满意。比如有一次，我用一个使用 React 的项目中，想要在一 <code>&lt;video&gt;</code> 里使用 <code>webkit-playsinline</code> 这个 attribute，但是 React 不支持，渲染的时候直接被 ignored，我必须手动地操作 DOM 给 <code>&lt;video&gt;</code> setAttribute。相反，Vue 的 Components System 当中，写的是真正的 DOM，不需要担心不支持不兼容的各种情况。</p>
-<p>容易被用作对比的是 Angular。我第一次听说 Vue 的时候，也是把它当作一个 lightweight 的 Angular alternative. 但是当真正实践使用 Vue 的时候，才发现它和 Angular 有着很大的不同。Angular 是一个 Framework，一旦你使用它，就必须按照它的一套去组织你的项目。以前写 Angular 项目的过程和经历对我个人来说都不太愉快，我更加倾向于 Vue 这种更灵活的方案。</p>
-<p>关于 Vue 和其它库和框架的对比，官方也有作者更详细的 <a href="http://vuejs.org/guide/faq.html" target="_blank" rel="noopener">解答</a>（<a href="http://cn.vuejs.org/guide/faq.html" target="_blank" rel="noopener">中文版本</a>）</p>
-<p>##Using Vue.js<br>SISE Game 并不算一个大型的 Web APP，但也规范地使用组件化的开发，整个项目的结构大致如下：</p>
-<pre><code class="text">├── app
+<!DOCTYPE html><html data-saber-ssr><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta http-equiv="X-UA-Compatible" content="ie=edge" /><meta data-saber-head="ssr" name="generator" content="Saber v0.10.3"> <title>Vue.js 和 Webpack - Randy&#x27;s Blog</title> <link data-saber-head="ssr" rel="stylesheet" href="//ppp.djyde.com/css?family=Noto+Serif+SC"><style data-vue-ssr-id="1baa226e:0 4c8acc66:0 e37f2252:0">/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{-webkit-box-sizing:content-box;box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:rgba(0,0,0,0)}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{-webkit-box-sizing:border-box;box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{-webkit-box-sizing:border-box;box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden],template{display:none}body{font-family:"Noto Serif SC",Lusitana,serif;line-height:1.4rem}blockquote{margin:0;padding:0 0 0 1.5rem;border-left:.5rem solid #ccc}a{color:#333;-webkit-transition:all .2s;transition:all .2s;text-decoration:none}a:hover{color:#000}a.big{padding-left:.25rem;padding-right:.25rem;border-bottom:.25rem solid #1a1a1a}a.big:hover{background-color:#000;color:#fff}.twitter{color:#0c9df2}.zhihu{color:#0767c8}.weibo{color:#e80025}.github{color:#333}.medium{color:#00ab6b}.email{color:#4285f4}.telegram{color:#179cde}.hr{height:0;font-size:1rem;line-height:0;text-transform:uppercase;text-align:center;border-bottom:1px solid #ccc;margin-top:2rem;margin-bottom:2rem;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.hr span{background-color:#fff;padding-left:.5em;padding-right:.5em;color:#ccc}li{margin-bottom:.5rem}h1,h2,h3,h4,h5,h6{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang SC,Hiragino Sans GB,Microsoft Yahei,sans-serif}#footer{margin-top:2em;padding:1em;background-color:#fafafa;text-align:center}#footer,#footer a{color:#c0c5ce}
+code[class*=language-][data-v-c316f882],pre[class*=language-][data-v-c316f882]{color:#f8f8f2;background:none;text-shadow:0 1px rgba(0,0,0,.3);font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-][data-v-c316f882]{padding:1em;margin:.5em 0;overflow:auto;border-radius:.3em}:not(pre)>code[class*=language-][data-v-c316f882],pre[class*=language-][data-v-c316f882]{background:#282a36}:not(pre)>code[class*=language-][data-v-c316f882]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata[data-v-c316f882],.token.comment[data-v-c316f882],.token.doctype[data-v-c316f882],.token.prolog[data-v-c316f882]{color:#6272a4}.token.punctuation[data-v-c316f882]{color:#f8f8f2}.namespace[data-v-c316f882]{opacity:.7}.token.constant[data-v-c316f882],.token.deleted[data-v-c316f882],.token.property[data-v-c316f882],.token.symbol[data-v-c316f882],.token.tag[data-v-c316f882]{color:#ff79c6}.token.boolean[data-v-c316f882],.token.number[data-v-c316f882]{color:#bd93f9}.token.attr-name[data-v-c316f882],.token.builtin[data-v-c316f882],.token.char[data-v-c316f882],.token.inserted[data-v-c316f882],.token.selector[data-v-c316f882],.token.string[data-v-c316f882]{color:#50fa7b}.language-css .token.string[data-v-c316f882],.style .token.string[data-v-c316f882],.token.entity[data-v-c316f882],.token.operator[data-v-c316f882],.token.url[data-v-c316f882],.token.variable[data-v-c316f882]{color:#f8f8f2}.token.atrule[data-v-c316f882],.token.attr-value[data-v-c316f882],.token.class-name[data-v-c316f882],.token.function[data-v-c316f882]{color:#f1fa8c}.token.keyword[data-v-c316f882]{color:#8be9fd}.token.important[data-v-c316f882],.token.regex[data-v-c316f882]{color:#ffb86c}.token.bold[data-v-c316f882],.token.important[data-v-c316f882]{font-weight:700}.token.italic[data-v-c316f882]{font-style:italic}.token.entity[data-v-c316f882]{cursor:help}.saber-highlight code[data-v-c316f882]{font-size:.5rem}.post-footer[data-v-c316f882]{padding-top:2rem;text-align:center;color:#65737e}.post-footer p[data-v-c316f882]{margin-top:.5em;margin-bottom:.5em}.bmc[data-v-c316f882]{max-width:30%!important}@media (min-width:320px) and (max-width:479px){.bmc[data-v-c316f882]{max-width:100%!important}}.cover[data-v-c316f882]{padding-bottom:40%}@media (min-width:320px) and (max-width:479px){.cover[data-v-c316f882]{padding-bottom:75%}}.cover[data-v-c316f882]{background-size:cover;background-position:50%}.post[data-v-c316f882]{margin-top:4rem}.post h1[data-v-c316f882],.post h2[data-v-c316f882],.post h3[data-v-c316f882],.post h4[data-v-c316f882],.post h5[data-v-c316f882],.post h6[data-v-c316f882]{margin:4rem 0 0}.post strong[data-v-c316f882]{background-color:#e6e6e6;color:#000;padding-left:.25rem;padding-right:.25rem}.post .title[data-v-c316f882]{margin-bottom:1rem}.post .date[data-v-c316f882]{color:grey}@media (min-width:1025px){.post[data-v-c316f882]{width:960px;margin:0 auto}}@media (min-width:320px) and (max-width:479px){.post[data-v-c316f882]{padding-left:5%;padding-right:5%}.post img[data-v-c316f882]{width:100%}}@media (min-width:481px) and (max-width:1024px){.post[data-v-c316f882]{padding-left:5%;padding-right:5%}}.post .content img[data-v-c316f882]{max-width:100%;display:block;margin:0 auto}@media (min-width:481px) and (max-width:1024px){.post .content img[data-v-c316f882]{width:100%}}@media (min-width:320px) and (max-width:479px){.post .content img[data-v-c316f882]{width:100%}}.post .content p[data-v-c316f882]{line-height:1.8rem}.post .content a[data-v-c316f882]{padding-left:.25rem;padding-right:.25rem;border-bottom:.25rem solid #1a1a1a}.post .content a[data-v-c316f882]:hover{background-color:#000;color:#fff}.footer[data-v-c316f882]{text-align:center}
+nav[data-v-634644b4]{background-color:#000}nav .logo[data-v-634644b4]{padding-left:1rem;margin-right:2rem;display:inline-block}nav .logo a[data-v-634644b4]{font-weight:700;color:#fff}nav .nav-item[data-v-634644b4]{display:inline-block}nav .nav-item a[data-v-634644b4]{display:block;color:#fff;padding:.5rem}nav .nav-item a[data-v-634644b4]:hover{color:#000;background-color:#fff}</style>  </head><body><div id="_saber" data-server-rendered="true"><div><div data-v-c316f882><nav data-v-634644b4 data-v-c316f882><div class="logo" data-v-634644b4><a href="/" class="router-link-active" data-v-634644b4>Randy's Blog</a></div> <div class="nav-item" data-v-634644b4><a href="/readings" data-v-634644b4>Readings</a></div></nav> <!----> <div class="post" data-v-c316f882><h1 class="title" data-v-c316f882>Vue.js 和 Webpack</h1> <div class="date" data-v-c316f882>August 29, 2015</div> <div class="content" data-v-c316f882><p data-v-c316f882><strong data-v-c316f882>转载前请务必先联系邮箱</strong></p> <p data-v-c316f882>最近在把 SISE Game（我们学校的校内游戏直播网站） 从原本的 Ruby on Rails 彻底用 Node.js 重写，  经过一些考虑，决定用 Vue.js 和 Express.js 实现前后端分离的架构，在这几天的重写过程中，积累了对 Webpack 和 Vue.js 的一些新的看法。</p> <h2 id="about-vue-js" data-v-c316f882>About Vue.js</h2> <p data-v-c316f882>Vue 是个很年轻的 MVVM Library，常常有很多人用 Angular 和 Vue 比较，因为两者都是 MVVM，但实际上，前者是 Framework，而后者是 Library。前者有很陡峭的学习曲线，后者可以很快地掌握运用到项目中去。</p> <p data-v-c316f882>Vue 的官方是用 <strong data-v-c316f882>a library for building modern web interfaces</strong> 来描述自己的。Vue 适合和 React 对比，因为在使用 Vue 的 Components System 开发比较大型的 Single Page Application 的时候，我发现它和 React 有一些相似的地方。如果你赞同 React 的思想，但又不想写 JSX，那么，你就可能需要试试 Vue 了。</p> <p data-v-c316f882>一个用 Vue 实现 Data binding 的 Demo：</p> <div class="saber-highlight" data-lang="html" data-v-c316f882><pre class="saber-highlight-code language-html" data-v-c316f882><code class="language-html" data-v-c316f882><span class="token comment" data-v-c316f882>&lt;!-- index.html --&gt;</span>
+<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>div</span> <span class="token attr-name" data-v-c316f882>id</span><span class="token attr-value" data-v-c316f882><span class="token punctuation" data-v-c316f882>=</span><span class="token punctuation" data-v-c316f882>&quot;</span>#app<span class="token punctuation" data-v-c316f882>&quot;</span></span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
+  <span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>input</span> <span class="token attr-name" data-v-c316f882>v-model</span><span class="token attr-value" data-v-c316f882><span class="token punctuation" data-v-c316f882>=</span><span class="token punctuation" data-v-c316f882>&quot;</span>msg<span class="token punctuation" data-v-c316f882>&quot;</span></span> <span class="token punctuation" data-v-c316f882>/&gt;</span></span>
+  <span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>p</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>{{ msg }}<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>p</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
+<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>div</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
+<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>script</span><span class="token punctuation" data-v-c316f882>&gt;</span></span><span class="token script" data-v-c316f882><span class="token language-javascript" data-v-c316f882>
+  <span class="token keyword" data-v-c316f882>var</span> app <span class="token operator" data-v-c316f882>=</span> <span class="token keyword" data-v-c316f882>new</span> <span class="token class-name" data-v-c316f882>Vue</span><span class="token punctuation" data-v-c316f882>(</span><span class="token punctuation" data-v-c316f882>{</span>
+    el<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'#app'</span><span class="token punctuation" data-v-c316f882>,</span>
+    data<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+      msg<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'hello Vue.js'</span>
+    <span class="token punctuation" data-v-c316f882>}</span>
+  <span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>)</span>
+</span></span><span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>script</span><span class="token punctuation" data-v-c316f882>&gt;</span></span></code></pre></div><h2 id="why-vue-js" data-v-c316f882>Why Vue.js</h2> <p data-v-c316f882>前端开发发展到现在，我们做过的很多努力，都是在尝试把开发者从繁琐的 DOM  操作和管理 DOM state 中解放出去，我们希望只需要通过描述数据和行为，DOM 自己就可以发生对应的变化，React 在 View 这一层实现了这一目标，而 MVVM 则是通过 ViewModel 的 Data Binding。React 宣称自己是 View，那么在我看来， Vue 则是 View + ViewModel，并且 Vue 更加 lightweight 和 flexible。</p> <p data-v-c316f882>Vue 最让我喜欢的是它的 Components System，利用它可以构建组件化的中大型应用。React 当然也是组件化的，但是 Virtual DOM (JSX) 在一些场景让我很不满意。比如有一次，我用一个使用 React 的项目中，想要在一 <code data-v-c316f882>&lt;video&gt;</code> 里使用 <code data-v-c316f882>webkit-playsinline</code> 这个 attribute，但是 React 不支持，渲染的时候直接被 ignored，我必须手动地操作 DOM 给 <code data-v-c316f882>&lt;video&gt;</code> setAttribute。相反，Vue 的 Components System 当中，写的是真正的 DOM，不需要担心不支持不兼容的各种情况。</p> <p data-v-c316f882>容易被用作对比的是 Angular。我第一次听说 Vue 的时候，也是把它当作一个 lightweight 的 Angular alternative. 但是当真正实践使用 Vue 的时候，才发现它和 Angular 有着很大的不同。Angular 是一个 Framework，一旦你使用它，就必须按照它的一套去组织你的项目。以前写 Angular 项目的过程和经历对我个人来说都不太愉快，我更加倾向于 Vue 这种更灵活的方案。</p> <p data-v-c316f882>关于 Vue 和其它库和框架的对比，官方也有作者更详细的 <a rel="noopener noreferrer" target="_blank" href="http://vuejs.org/guide/faq.html" data-v-c316f882>解答</a>（<a rel="noopener noreferrer" target="_blank" href="http://cn.vuejs.org/guide/faq.html" data-v-c316f882>中文版本</a>）</p> <p data-v-c316f882>##Using Vue.js
+SISE Game 并不算一个大型的 Web APP，但也规范地使用组件化的开发，整个项目的结构大致如下：</p> <div class="saber-highlight" data-lang="text" data-v-c316f882><pre class="saber-highlight-code language-text" data-v-c316f882><code class="language-text" data-v-c316f882>├── app
 │   ├── app.js #entry
 │   ├── app.vue
 │   ├── config.js 
@@ -107,160 +37,111 @@
 │   ├── images
 │   ├── styles
 │   └── swfs
-└── webpack.config.js
-</code></pre>
-<h3 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h3><p>Vue 通过自己的 <code>.vue</code> 文件来定义 components，<code>.vue</code> 文件里包含组件的模板、逻辑和样式，从而实现组件和组件之间的<strong>分治</strong>，非常易于维护。</p>
-<pre><code class="html">&lt;!-- components/user.vue --&gt;
-&lt;template&gt;
-  &lt;p&gt;Hello {{ name }}&lt;/p&gt;
-  &lt;button v-on=&quot;click: alertName()&quot;&gt;alert!&lt;/button&gt;
-&lt;/template&gt;
+└── webpack.config.js</code></pre></div><h3 id="组件化" data-v-c316f882>组件化</h3> <p data-v-c316f882>Vue 通过自己的 <code data-v-c316f882>.vue</code> 文件来定义 components，<code data-v-c316f882>.vue</code> 文件里包含组件的模板、逻辑和样式，从而实现组件和组件之间的<strong data-v-c316f882>分治</strong>，非常易于维护。</p> <div class="saber-highlight" data-lang="html" data-v-c316f882><pre class="saber-highlight-code language-html" data-v-c316f882><code class="language-html" data-v-c316f882><span class="token comment" data-v-c316f882>&lt;!-- components/user.vue --&gt;</span>
+<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>template</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
+  <span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>p</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>Hello {{ name }}<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>p</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
+  <span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>button</span> <span class="token attr-name" data-v-c316f882>v-on</span><span class="token attr-value" data-v-c316f882><span class="token punctuation" data-v-c316f882>=</span><span class="token punctuation" data-v-c316f882>&quot;</span>click: alertName()<span class="token punctuation" data-v-c316f882>&quot;</span></span><span class="token punctuation" data-v-c316f882>&gt;</span></span>alert!<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>button</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
+<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>template</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
 
-&lt;script&gt;
-  module.exports = {
-    data: function(){
-      return {
-        name: &#39;Randy&#39;
-      }
-    },
-    methods: {
-      alertName: function(){
-        alert(this.name);
-      }
-    }
-  }
-&lt;/script&gt;
+<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>script</span><span class="token punctuation" data-v-c316f882>&gt;</span></span><span class="token script" data-v-c316f882><span class="token language-javascript" data-v-c316f882>
+  module<span class="token punctuation" data-v-c316f882>.</span>exports <span class="token operator" data-v-c316f882>=</span> <span class="token punctuation" data-v-c316f882>{</span>
+    <span class="token function-variable function" data-v-c316f882>data</span><span class="token punctuation" data-v-c316f882>:</span> <span class="token keyword" data-v-c316f882>function</span><span class="token punctuation" data-v-c316f882>(</span><span class="token punctuation" data-v-c316f882>)</span><span class="token punctuation" data-v-c316f882>{</span>
+      <span class="token keyword" data-v-c316f882>return</span> <span class="token punctuation" data-v-c316f882>{</span>
+        name<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'Randy'</span>
+      <span class="token punctuation" data-v-c316f882>}</span>
+    <span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>,</span>
+    methods<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+      <span class="token function-variable function" data-v-c316f882>alertName</span><span class="token punctuation" data-v-c316f882>:</span> <span class="token keyword" data-v-c316f882>function</span><span class="token punctuation" data-v-c316f882>(</span><span class="token punctuation" data-v-c316f882>)</span><span class="token punctuation" data-v-c316f882>{</span>
+        <span class="token function" data-v-c316f882>alert</span><span class="token punctuation" data-v-c316f882>(</span><span class="token keyword" data-v-c316f882>this</span><span class="token punctuation" data-v-c316f882>.</span>name<span class="token punctuation" data-v-c316f882>)</span><span class="token punctuation" data-v-c316f882>;</span>
+      <span class="token punctuation" data-v-c316f882>}</span>
+    <span class="token punctuation" data-v-c316f882>}</span>
+  <span class="token punctuation" data-v-c316f882>}</span>
+</span></span><span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>script</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
 
-&lt;style&gt;
-  p{
-    color: #69C;
-  }
-&lt;/style&gt;
-</code></pre>
-<p>以上就是一个简单的 component 实现，借助 webpack，甚至可以直接在 component 里写 es6、scss 和 jade。</p>
-<p>###路由<br>路由对于 Single Page Application 来说应该算是不可少的东西，Vue 作为一个 Library，它本身并不提供这些组件。目前官方的 vue-router 仍处于 technical preview 的状态，官方也建议可以使用 component 和 Director.js 实现路由，比如：</p>
-<pre><code class="html">&lt;div id=&quot;app&quot;&gt;
-  &lt;component is=&quot;{{ currentView }}&quot;&gt;&lt;/component&gt;
-&lt;/div&gt;
-</code></pre>
-<pre><code class="javascript">Vue.component(&#39;home&#39;, { /* ... */ })
-Vue.component(&#39;page1&#39;, { /* ... */ })
-var app = new Vue({
-  el: &#39;#app&#39;,
-  data: {
-    currentView: &#39;home&#39;
-  }
-})
-// Switching pages in your route handler:
-app.currentView = &#39;page1&#39;
-</code></pre>
-<p>这样你只需要操作 <code>app.currentView</code> 的值就可以实现视图的切换，这一步通常会配合 Director.js 这类的 hash router.</p>
-<h2 id="About-Webpack"><a href="#About-Webpack" class="headerlink" title="About Webpack"></a>About Webpack</h2><p>与其费周章说明 Webpack 是什么东西，倒不如先说说不用 Webpack 以前的一些现实。</p>
-<p>我们在写前端 JavaScript 的时候，通常是写在多个 <code>.js</code> 文件里，通过闭包避免全局变量污染，然后一股脑地用 <code>&lt;script&gt;</code> 引入。</p>
-<pre><code class="html">&lt;body&gt;
+<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>style</span><span class="token punctuation" data-v-c316f882>&gt;</span></span><span class="token style" data-v-c316f882><span class="token language-css" data-v-c316f882>
+  <span class="token selector" data-v-c316f882>p</span><span class="token punctuation" data-v-c316f882>{</span>
+    <span class="token property" data-v-c316f882>color</span><span class="token punctuation" data-v-c316f882>:</span> #69C<span class="token punctuation" data-v-c316f882>;</span>
+  <span class="token punctuation" data-v-c316f882>}</span>
+</span></span><span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>style</span><span class="token punctuation" data-v-c316f882>&gt;</span></span></code></pre></div><p data-v-c316f882>以上就是一个简单的 component 实现，借助 webpack，甚至可以直接在 component 里写 es6、scss 和 jade。</p> <h3 id="路由" data-v-c316f882>路由</h3> <p data-v-c316f882>路由对于 Single Page Application 来说应该算是不可少的东西，Vue 作为一个 Library，它本身并不提供这些组件。目前官方的 vue-router 仍处于 technical preview 的状态，官方也建议可以使用 component 和 Director.js 实现路由，比如：</p> <div class="saber-highlight" data-lang="html" data-v-c316f882><pre class="saber-highlight-code language-html" data-v-c316f882><code class="language-html" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>div</span> <span class="token attr-name" data-v-c316f882>id</span><span class="token attr-value" data-v-c316f882><span class="token punctuation" data-v-c316f882>=</span><span class="token punctuation" data-v-c316f882>&quot;</span>app<span class="token punctuation" data-v-c316f882>&quot;</span></span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
+  <span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>component</span> <span class="token attr-name" data-v-c316f882>is</span><span class="token attr-value" data-v-c316f882><span class="token punctuation" data-v-c316f882>=</span><span class="token punctuation" data-v-c316f882>&quot;</span>{{ currentView }}<span class="token punctuation" data-v-c316f882>&quot;</span></span><span class="token punctuation" data-v-c316f882>&gt;</span></span><span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>component</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
+<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>div</span><span class="token punctuation" data-v-c316f882>&gt;</span></span></code></pre></div><div class="saber-highlight" data-lang="javascript" data-v-c316f882><pre class="saber-highlight-code language-javascript" data-v-c316f882><code class="language-javascript" data-v-c316f882>Vue<span class="token punctuation" data-v-c316f882>.</span><span class="token function" data-v-c316f882>component</span><span class="token punctuation" data-v-c316f882>(</span><span class="token string" data-v-c316f882>'home'</span><span class="token punctuation" data-v-c316f882>,</span> <span class="token punctuation" data-v-c316f882>{</span> <span class="token comment" data-v-c316f882>/* ... */</span> <span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>)</span>
+Vue<span class="token punctuation" data-v-c316f882>.</span><span class="token function" data-v-c316f882>component</span><span class="token punctuation" data-v-c316f882>(</span><span class="token string" data-v-c316f882>'page1'</span><span class="token punctuation" data-v-c316f882>,</span> <span class="token punctuation" data-v-c316f882>{</span> <span class="token comment" data-v-c316f882>/* ... */</span> <span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>)</span>
+<span class="token keyword" data-v-c316f882>var</span> app <span class="token operator" data-v-c316f882>=</span> <span class="token keyword" data-v-c316f882>new</span> <span class="token class-name" data-v-c316f882>Vue</span><span class="token punctuation" data-v-c316f882>(</span><span class="token punctuation" data-v-c316f882>{</span>
+  el<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'#app'</span><span class="token punctuation" data-v-c316f882>,</span>
+  data<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+    currentView<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'home'</span>
+  <span class="token punctuation" data-v-c316f882>}</span>
+<span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>)</span>
+<span class="token comment" data-v-c316f882>// Switching pages in your route handler:</span>
+app<span class="token punctuation" data-v-c316f882>.</span>currentView <span class="token operator" data-v-c316f882>=</span> <span class="token string" data-v-c316f882>'page1'</span></code></pre></div><p data-v-c316f882>这样你只需要操作 <code data-v-c316f882>app.currentView</code> 的值就可以实现视图的切换，这一步通常会配合 Director.js 这类的 hash router.</p> <h2 id="about-webpack" data-v-c316f882>About Webpack</h2> <p data-v-c316f882>与其费周章说明 Webpack 是什么东西，倒不如先说说不用 Webpack 以前的一些现实。</p> <p data-v-c316f882>我们在写前端 JavaScript 的时候，通常是写在多个 <code data-v-c316f882>.js</code> 文件里，通过闭包避免全局变量污染，然后一股脑地用 <code data-v-c316f882>&lt;script&gt;</code> 引入。</p> <div class="saber-highlight" data-lang="html" data-v-c316f882><pre class="saber-highlight-code language-html" data-v-c316f882><code class="language-html" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>body</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
   ...
-  &lt;script src=&quot;a.js&quot;&gt;&lt;/script&gt;
-  &lt;script src=&quot;b.js&quot;&gt;&lt;/script&gt;
-  &lt;script src=&quot;c.js&quot;&gt;&lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
-<p>出于性能上的追求，我们会应该把 <code>a.js</code> <code>b.js</code> <code>c.js</code> 合并为同一个文件 <code>bundle.js</code> 来减少请求数量，变成：</p>
-<pre><code class="html">&lt;body&gt;
+  <span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>script</span> <span class="token attr-name" data-v-c316f882>src</span><span class="token attr-value" data-v-c316f882><span class="token punctuation" data-v-c316f882>=</span><span class="token punctuation" data-v-c316f882>&quot;</span>a.js<span class="token punctuation" data-v-c316f882>&quot;</span></span><span class="token punctuation" data-v-c316f882>&gt;</span></span><span class="token script" data-v-c316f882></span><span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>script</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
+  <span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>script</span> <span class="token attr-name" data-v-c316f882>src</span><span class="token attr-value" data-v-c316f882><span class="token punctuation" data-v-c316f882>=</span><span class="token punctuation" data-v-c316f882>&quot;</span>b.js<span class="token punctuation" data-v-c316f882>&quot;</span></span><span class="token punctuation" data-v-c316f882>&gt;</span></span><span class="token script" data-v-c316f882></span><span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>script</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
+  <span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>script</span> <span class="token attr-name" data-v-c316f882>src</span><span class="token attr-value" data-v-c316f882><span class="token punctuation" data-v-c316f882>=</span><span class="token punctuation" data-v-c316f882>&quot;</span>c.js<span class="token punctuation" data-v-c316f882>&quot;</span></span><span class="token punctuation" data-v-c316f882>&gt;</span></span><span class="token script" data-v-c316f882></span><span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>script</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
+<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>body</span><span class="token punctuation" data-v-c316f882>&gt;</span></span></code></pre></div><p data-v-c316f882>出于性能上的追求，我们会应该把 <code data-v-c316f882>a.js</code> <code data-v-c316f882>b.js</code> <code data-v-c316f882>c.js</code> 合并为同一个文件 <code data-v-c316f882>bundle.js</code> 来减少请求数量，变成：</p> <div class="saber-highlight" data-lang="html" data-v-c316f882><pre class="saber-highlight-code language-html" data-v-c316f882><code class="language-html" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>body</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
   ...
-  &lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;
-&lt;/body&gt;
-</code></pre>
-<p>使用 Gulp/Grunt 等自动化构建工具很容易可以实现这样的 concat，但是很快我们就会发现，单纯的 concat 并不是一个好的方案，因为代码文件之间的依赖关系不明确，这样一来，有时不得不花一些时间去组织 concat 的顺序。我们很希望像写 Node 一样模块化地去写前端 JavaScript。</p>
-<p>又有些时候，在两个不同的页面当中我们常常会共用一些代码，单纯的 concat 会增加很多不必要的体积。</p>
-<p>所以  ，我们理想的情况是，可以在前端优雅地写符合模块规范（AMD, UMD, CommonJS）的代码并且自动打包，最好还能自动把重用的文件分离出来。</p>
-<p>嘿，Webpack 就很擅长做这种事。</p>
-<h2 id="Using-Webpack"><a href="#Using-Webpack" class="headerlink" title="Using Webpack"></a>Using Webpack</h2><p>Webpack 兼容所有模块规范（如果你不知道到底用哪一种，就用 CommonJS）。</p>
-<p>配置 webpack 比较简单，你需要定义入口文件和 bundle 输出的目录：</p>
-<pre><code class="javascript">// webpack.config.js
-module.exports = {
-  entry: &#39;./app.js&#39;,
-  output: {
-    path: &#39;./build&#39;,
-    filename: &#39;bundle.js&#39;
-  }
-}
-</code></pre>
-<p>这样，你就能在前端这样去写 JavaScript：</p>
-<pre><code class="javascript">// /app.js
-var Vue = require(&#39;vue&#39;);
-var app = new Vue({/*...*/})
-</code></pre>
-<p>这是 CommonJS 的写法，如果你写过 Node.js，应该对这种写法相当熟悉。这时运行 <code>$ webpack</code> ，webpack 会自动根据入口文件 <code>app.js</code> 中的依赖关系来打包成单个 js 文件，输出到配置文件中指定的 output path 中。</p>
-<p>webpack 也可以通过 plugin 自动分析重用的模块并且打包成单独的文件：</p>
-<pre><code class="javascript">// webpack.config.js
-var webpack = require(&#39;webpack&#39;),
-  CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
+  <span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>script</span> <span class="token attr-name" data-v-c316f882>src</span><span class="token attr-value" data-v-c316f882><span class="token punctuation" data-v-c316f882>=</span><span class="token punctuation" data-v-c316f882>&quot;</span>bundle.js<span class="token punctuation" data-v-c316f882>&quot;</span></span><span class="token punctuation" data-v-c316f882>&gt;</span></span><span class="token script" data-v-c316f882></span><span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>script</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
+<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>body</span><span class="token punctuation" data-v-c316f882>&gt;</span></span></code></pre></div><p data-v-c316f882>使用 Gulp/Grunt 等自动化构建工具很容易可以实现这样的 concat，但是很快我们就会发现，单纯的 concat 并不是一个好的方案，因为代码文件之间的依赖关系不明确，这样一来，有时不得不花一些时间去组织 concat 的顺序。我们很希望像写 Node 一样模块化地去写前端 JavaScript。</p> <p data-v-c316f882>又有些时候，在两个不同的页面当中我们常常会共用一些代码，单纯的 concat 会增加很多不必要的体积。</p> <p data-v-c316f882>所以  ，我们理想的情况是，可以在前端优雅地写符合模块规范（AMD, UMD, CommonJS）的代码并且自动打包，最好还能自动把重用的文件分离出来。</p> <p data-v-c316f882>嘿，Webpack 就很擅长做这种事。</p> <h2 id="using-webpack" data-v-c316f882>Using Webpack</h2> <p data-v-c316f882>Webpack 兼容所有模块规范（如果你不知道到底用哪一种，就用 CommonJS）。</p> <p data-v-c316f882>配置 webpack 比较简单，你需要定义入口文件和 bundle 输出的目录：</p> <div class="saber-highlight" data-lang="javascript" data-v-c316f882><pre class="saber-highlight-code language-javascript" data-v-c316f882><code class="language-javascript" data-v-c316f882><span class="token comment" data-v-c316f882>// webpack.config.js</span>
+module<span class="token punctuation" data-v-c316f882>.</span>exports <span class="token operator" data-v-c316f882>=</span> <span class="token punctuation" data-v-c316f882>{</span>
+  entry<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'./app.js'</span><span class="token punctuation" data-v-c316f882>,</span>
+  output<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+    path<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'./build'</span><span class="token punctuation" data-v-c316f882>,</span>
+    filename<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'bundle.js'</span>
+  <span class="token punctuation" data-v-c316f882>}</span>
+<span class="token punctuation" data-v-c316f882>}</span></code></pre></div><p data-v-c316f882>这样，你就能在前端这样去写 JavaScript：</p> <div class="saber-highlight" data-lang="javascript" data-v-c316f882><pre class="saber-highlight-code language-javascript" data-v-c316f882><code class="language-javascript" data-v-c316f882><span class="token comment" data-v-c316f882>// /app.js</span>
+<span class="token keyword" data-v-c316f882>var</span> Vue <span class="token operator" data-v-c316f882>=</span> <span class="token function" data-v-c316f882>require</span><span class="token punctuation" data-v-c316f882>(</span><span class="token string" data-v-c316f882>'vue'</span><span class="token punctuation" data-v-c316f882>)</span><span class="token punctuation" data-v-c316f882>;</span>
+<span class="token keyword" data-v-c316f882>var</span> app <span class="token operator" data-v-c316f882>=</span> <span class="token keyword" data-v-c316f882>new</span> <span class="token class-name" data-v-c316f882>Vue</span><span class="token punctuation" data-v-c316f882>(</span><span class="token punctuation" data-v-c316f882>{</span><span class="token comment" data-v-c316f882>/*...*/</span><span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>)</span></code></pre></div><p data-v-c316f882>这是 CommonJS 的写法，如果你写过 Node.js，应该对这种写法相当熟悉。这时运行 <code data-v-c316f882>$ webpack</code> ，webpack 会自动根据入口文件 <code data-v-c316f882>app.js</code> 中的依赖关系来打包成单个 js 文件，输出到配置文件中指定的 output path 中。</p> <p data-v-c316f882>webpack 也可以通过 plugin 自动分析重用的模块并且打包成单独的文件：</p> <div class="saber-highlight" data-lang="javascript" data-v-c316f882><pre class="saber-highlight-code language-javascript" data-v-c316f882><code class="language-javascript" data-v-c316f882><span class="token comment" data-v-c316f882>// webpack.config.js</span>
+<span class="token keyword" data-v-c316f882>var</span> webpack <span class="token operator" data-v-c316f882>=</span> <span class="token function" data-v-c316f882>require</span><span class="token punctuation" data-v-c316f882>(</span><span class="token string" data-v-c316f882>'webpack'</span><span class="token punctuation" data-v-c316f882>)</span><span class="token punctuation" data-v-c316f882>,</span>
+  CommonsChunkPlugin <span class="token operator" data-v-c316f882>=</span> webpack<span class="token punctuation" data-v-c316f882>.</span>optimize<span class="token punctuation" data-v-c316f882>.</span>CommonsChunkPlugin
 
-module.exports = {
-  entry: &#39;./app.js&#39;,
-  output: {
-    path: &#39;./build&#39;,
-    filename: &#39;bundle.js&#39;
-  },
-  plugins: [
-    new CommonsChunkPlugin(&#39;vendor.js&#39;)
-  ]
-}
-</code></pre>
-<h3 id="多入口文件"><a href="#多入口文件" class="headerlink" title="多入口文件"></a>多入口文件</h3><p>webpack 的一个特色是可以指定多个入口文件，最后打包成多个 bundle。比如说 Timeline page 和 Profile page 是不同的页面，我们不希望两个页面的 js 被打包在一起，这时我们就可以为 timeline 和 profile 两个页面定义不同的入口：</p>
-<pre><code class="javascript">// webpack.config.js
-module.exports = {
-  entry: {
-    timeline: &#39;./timeline.js&#39;,
-    profile: &#39;./profile.js&#39;
-  },
-  output: {
-    path: &#39;./build&#39;,
-    filename: &#39;[name].bundle.js&#39;
-  },
-  plugins: [
-    new CommonsChunkPlugin(&#39;vendor.js&#39;)
-  ]
-}
-</code></pre>
-<p>最后会被分别打包成 <code>timeline.bundle.js</code> 和 <code>profile.bundle.js</code>。</p>
-<h3 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h3><p>webpack 神奇的地方在于，任何的文件都能被 <code>require()</code>。依靠各种 loader，使你可以直接 <code>require()</code> 样式、图片等静态文件。这些静态文件最后都会被处理（比如 scss pre-process 和图片的压缩）和打包在配置好的 output path 中。</p>
-<pre><code class="scss">#container{
-  background-image: url(require(&#39;./images/background.png&#39;));
-  p{
-    color: #69C;
-  }
-}
-</code></pre>
-<pre><code class="javascript">// app.js
-require(&#39;./styles/app.scss&#39;)
-// blablabla....
-</code></pre>
-<p>你可以像上面这样在 JavaScript 中引入 scss （和在样式中引入图片），只要你配置好处理 scss 的 loader：</p>
-<pre><code class="javascript">module.exports = {
-  entry: &#39;./app.js&#39;,
-  output: {
-    path: &#39;./build&#39;,
-    filename: &#39;bundle.js&#39;
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.(css|scss)$/,
-        loader: ExtractTextPlugin.extract(&#39;style&#39;,&#39;css!sass&#39;)
-      },
-      {
-        test: /\.(png|jpg)$/,
-        loader: &#39;url?limit=8192&#39; // 图片低于 8MB 时转换成 inline base64，非常神奇！
-      }
-    ]
-  }
-}
-</code></pre>
-<p>css 默认被编译到 JavaScript 中成为字符串后再被插入到 <code>&lt;style&gt;</code> 中，我个人建议使用 <code>ExtractTextPlugin</code> 这个插件把 css 分离出去。</p>
-<h2 id="Why-Vue-js-Webpack"><a href="#Why-Vue-js-Webpack" class="headerlink" title="Why Vue.js + Webpack"></a>Why Vue.js + Webpack</h2><p>在以往的一些小型的前端项目中，我习惯把逻辑（<code>scripts</code>）、视图（<code>views</code>）和样式（<code>styles</code>）分开在独立的目录当中，保证三者不耦合在一起。但是随着项目越来越大，这样的结构会让开发越来越痛苦，比如要增加或修改某个 <code>view</code> 的时候，就要在 <code>scripts</code> 和 <code>sytles</code> 里找到对应这个 <code>view</code> 的逻辑和样式进行修改。</p>
-<p>为了避免这样随着项目增大带来的难于维护，我开始尝试<strong>前端组件化</strong>，把 <code>views</code> 拆分成不同的组件（component），为单个组件编写对应的逻辑和样式：</p>
-<pre><code>app/components
+module<span class="token punctuation" data-v-c316f882>.</span>exports <span class="token operator" data-v-c316f882>=</span> <span class="token punctuation" data-v-c316f882>{</span>
+  entry<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'./app.js'</span><span class="token punctuation" data-v-c316f882>,</span>
+  output<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+    path<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'./build'</span><span class="token punctuation" data-v-c316f882>,</span>
+    filename<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'bundle.js'</span>
+  <span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>,</span>
+  plugins<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>[</span>
+    <span class="token keyword" data-v-c316f882>new</span> <span class="token class-name" data-v-c316f882>CommonsChunkPlugin</span><span class="token punctuation" data-v-c316f882>(</span><span class="token string" data-v-c316f882>'vendor.js'</span><span class="token punctuation" data-v-c316f882>)</span>
+  <span class="token punctuation" data-v-c316f882>]</span>
+<span class="token punctuation" data-v-c316f882>}</span></code></pre></div><h3 id="多入口文件" data-v-c316f882>多入口文件</h3> <p data-v-c316f882>webpack 的一个特色是可以指定多个入口文件，最后打包成多个 bundle。比如说 Timeline page 和 Profile page 是不同的页面，我们不希望两个页面的 js 被打包在一起，这时我们就可以为 timeline 和 profile 两个页面定义不同的入口：</p> <div class="saber-highlight" data-lang="javascript" data-v-c316f882><pre class="saber-highlight-code language-javascript" data-v-c316f882><code class="language-javascript" data-v-c316f882><span class="token comment" data-v-c316f882>// webpack.config.js</span>
+module<span class="token punctuation" data-v-c316f882>.</span>exports <span class="token operator" data-v-c316f882>=</span> <span class="token punctuation" data-v-c316f882>{</span>
+  entry<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+    timeline<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'./timeline.js'</span><span class="token punctuation" data-v-c316f882>,</span>
+    profile<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'./profile.js'</span>
+  <span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>,</span>
+  output<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+    path<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'./build'</span><span class="token punctuation" data-v-c316f882>,</span>
+    filename<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'[name].bundle.js'</span>
+  <span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>,</span>
+  plugins<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>[</span>
+    <span class="token keyword" data-v-c316f882>new</span> <span class="token class-name" data-v-c316f882>CommonsChunkPlugin</span><span class="token punctuation" data-v-c316f882>(</span><span class="token string" data-v-c316f882>'vendor.js'</span><span class="token punctuation" data-v-c316f882>)</span>
+  <span class="token punctuation" data-v-c316f882>]</span>
+<span class="token punctuation" data-v-c316f882>}</span></code></pre></div><p data-v-c316f882>最后会被分别打包成 <code data-v-c316f882>timeline.bundle.js</code> 和 <code data-v-c316f882>profile.bundle.js</code>。</p> <h3 id="loader" data-v-c316f882>loader</h3> <p data-v-c316f882>webpack 神奇的地方在于，任何的文件都能被 <code data-v-c316f882>require()</code>。依靠各种 loader，使你可以直接 <code data-v-c316f882>require()</code> 样式、图片等静态文件。这些静态文件最后都会被处理（比如 scss pre-process 和图片的压缩）和打包在配置好的 output path 中。</p> <div class="saber-highlight" data-lang="scss" data-v-c316f882><pre class="saber-highlight-code language-scss" data-v-c316f882><code class="language-scss" data-v-c316f882><span class="token selector" data-v-c316f882>#container</span><span class="token punctuation" data-v-c316f882>{</span>
+  <span class="token property" data-v-c316f882>background-image</span><span class="token punctuation" data-v-c316f882>:</span> <span class="token url" data-v-c316f882>url</span><span class="token punctuation" data-v-c316f882>(</span><span class="token function" data-v-c316f882>require</span><span class="token punctuation" data-v-c316f882>(</span><span class="token string" data-v-c316f882>'.https://gbstatic.djyde.com/blog/background.png'</span><span class="token punctuation" data-v-c316f882>)</span><span class="token punctuation" data-v-c316f882>)</span><span class="token punctuation" data-v-c316f882>;</span>
+  <span class="token selector" data-v-c316f882>p</span><span class="token punctuation" data-v-c316f882>{</span>
+    <span class="token property" data-v-c316f882>color</span><span class="token punctuation" data-v-c316f882>:</span> #69C<span class="token punctuation" data-v-c316f882>;</span>
+  <span class="token punctuation" data-v-c316f882>}</span>
+<span class="token punctuation" data-v-c316f882>}</span></code></pre></div><div class="saber-highlight" data-lang="javascript" data-v-c316f882><pre class="saber-highlight-code language-javascript" data-v-c316f882><code class="language-javascript" data-v-c316f882><span class="token comment" data-v-c316f882>// app.js</span>
+<span class="token function" data-v-c316f882>require</span><span class="token punctuation" data-v-c316f882>(</span><span class="token string" data-v-c316f882>'./styles/app.scss'</span><span class="token punctuation" data-v-c316f882>)</span>
+<span class="token comment" data-v-c316f882>// blablabla....</span></code></pre></div><p data-v-c316f882>你可以像上面这样在 JavaScript 中引入 scss （和在样式中引入图片），只要你配置好处理 scss 的 loader：</p> <div class="saber-highlight" data-lang="javascript" data-v-c316f882><pre class="saber-highlight-code language-javascript" data-v-c316f882><code class="language-javascript" data-v-c316f882>module<span class="token punctuation" data-v-c316f882>.</span>exports <span class="token operator" data-v-c316f882>=</span> <span class="token punctuation" data-v-c316f882>{</span>
+  entry<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'./app.js'</span><span class="token punctuation" data-v-c316f882>,</span>
+  output<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+    path<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'./build'</span><span class="token punctuation" data-v-c316f882>,</span>
+    filename<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'bundle.js'</span>
+  <span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>,</span>
+  module<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+    loaders<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>[</span>
+      <span class="token punctuation" data-v-c316f882>{</span>
+        test<span class="token punctuation" data-v-c316f882>:</span> <span class="token regex" data-v-c316f882>/\.(css|scss)$/</span><span class="token punctuation" data-v-c316f882>,</span>
+        loader<span class="token punctuation" data-v-c316f882>:</span> ExtractTextPlugin<span class="token punctuation" data-v-c316f882>.</span><span class="token function" data-v-c316f882>extract</span><span class="token punctuation" data-v-c316f882>(</span><span class="token string" data-v-c316f882>'style'</span><span class="token punctuation" data-v-c316f882>,</span><span class="token string" data-v-c316f882>'css!sass'</span><span class="token punctuation" data-v-c316f882>)</span>
+      <span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>,</span>
+      <span class="token punctuation" data-v-c316f882>{</span>
+        test<span class="token punctuation" data-v-c316f882>:</span> <span class="token regex" data-v-c316f882>/\.(png|jpg)$/</span><span class="token punctuation" data-v-c316f882>,</span>
+        loader<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'url?limit=8192'</span> <span class="token comment" data-v-c316f882>// 图片低于 8MB 时转换成 inline base64，非常神奇！</span>
+      <span class="token punctuation" data-v-c316f882>}</span>
+    <span class="token punctuation" data-v-c316f882>]</span>
+  <span class="token punctuation" data-v-c316f882>}</span>
+<span class="token punctuation" data-v-c316f882>}</span></code></pre></div><p data-v-c316f882>css 默认被编译到 JavaScript 中成为字符串后再被插入到 <code data-v-c316f882>&lt;style&gt;</code> 中，我个人建议使用 <code data-v-c316f882>ExtractTextPlugin</code> 这个插件把 css 分离出去。</p> <h2 id="why-vue-js--webpack" data-v-c316f882>Why Vue.js + Webpack</h2> <p data-v-c316f882>在以往的一些小型的前端项目中，我习惯把逻辑（<code data-v-c316f882>scripts</code>）、视图（<code data-v-c316f882>views</code>）和样式（<code data-v-c316f882>styles</code>）分开在独立的目录当中，保证三者不耦合在一起。但是随着项目越来越大，这样的结构会让开发越来越痛苦，比如要增加或修改某个 <code data-v-c316f882>view</code> 的时候，就要在 <code data-v-c316f882>scripts</code> 和 <code data-v-c316f882>sytles</code> 里找到对应这个 <code data-v-c316f882>view</code> 的逻辑和样式进行修改。</p> <p data-v-c316f882>为了避免这样随着项目增大带来的难于维护，我开始尝试<strong data-v-c316f882>前端组件化</strong>，把 <code data-v-c316f882>views</code> 拆分成不同的组件（component），为单个组件编写对应的逻辑和样式：</p> <div class="saber-highlight" data-lang="" data-v-c316f882><pre class="saber-highlight-code language-text" data-v-c316f882><code class="language-text" data-v-c316f882>app/components
 ├── Chat
 │   ├── Chat.jade
 │   ├── Chat.js
@@ -268,133 +149,74 @@ require(&#39;./styles/app.scss&#39;)
 └── Video
     ├── Video.jade
     ├── Video.js
-    └── Video.scss
-</code></pre><p>这样的开发模式，不仅提高代码的可维护性和可重用性，还有利于团队之间的协作，一个组件由一个人去维护，更好地实现<strong>分治</strong>。幸运的是，随着 React 越来越火，组件化的开发模式也就越来越被接受。</p>
-<h2 id="Using-Vue-js-Webpack"><a href="#Using-Vue-js-Webpack" class="headerlink" title="Using Vue.js + Webpack"></a>Using Vue.js + Webpack</h2><p>在 Vue 中，可以利用一个 <code>.vue</code> 文件实现组件化，而不需要对每个组件分别建立 style, scripts 和 view。这样做的好处是使组件能更加直观，而坏处是目前有些 editor 对 <code>.vue</code> 的语法支持还是不太好。我用 Atom 写 <code>.vue</code> 的时候，<code>&lt;style&gt;</code> 的那一块并不能自动补全。不过我个人不依赖 css 的补全，所以没有太大的影响。如果你比较依赖这个，建议你还是把这些代码分离出来。</p>
-<p>一个简单的 Vue Component：</p>
-<pre><code class="html">&lt;!-- components/sample.vue --&gt;
+    └── Video.scss</code></pre></div><p data-v-c316f882>这样的开发模式，不仅提高代码的可维护性和可重用性，还有利于团队之间的协作，一个组件由一个人去维护，更好地实现<strong data-v-c316f882>分治</strong>。幸运的是，随着 React 越来越火，组件化的开发模式也就越来越被接受。</p> <h2 id="using-vue-js--webpack" data-v-c316f882>Using Vue.js + Webpack</h2> <p data-v-c316f882>在 Vue 中，可以利用一个 <code data-v-c316f882>.vue</code> 文件实现组件化，而不需要对每个组件分别建立 style, scripts 和 view。这样做的好处是使组件能更加直观，而坏处是目前有些 editor 对 <code data-v-c316f882>.vue</code> 的语法支持还是不太好。我用 Atom 写 <code data-v-c316f882>.vue</code> 的时候，<code data-v-c316f882>&lt;style&gt;</code> 的那一块并不能自动补全。不过我个人不依赖 css 的补全，所以没有太大的影响。如果你比较依赖这个，建议你还是把这些代码分离出来。</p> <p data-v-c316f882>一个简单的 Vue Component：</p> <div class="saber-highlight" data-lang="html" data-v-c316f882><pre class="saber-highlight-code language-html" data-v-c316f882><code class="language-html" data-v-c316f882><span class="token comment" data-v-c316f882>&lt;!-- components/sample.vue --&gt;</span>
 
-&lt;template lang=&quot;jade&quot;&gt;
+<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>template</span> <span class="token attr-name" data-v-c316f882>lang</span><span class="token attr-value" data-v-c316f882><span class="token punctuation" data-v-c316f882>=</span><span class="token punctuation" data-v-c316f882>&quot;</span>jade<span class="token punctuation" data-v-c316f882>&quot;</span></span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
   .test
     h1 hello {{msg}}
-&lt;/template&gt;
+<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>template</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
 
-&lt;script&gt;
-module.exports = {
-  el: &#39;#app&#39;,
-  data: {
-    msg: &#39;world&#39;
-  }
-}
-&lt;/script&gt;
+<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>script</span><span class="token punctuation" data-v-c316f882>&gt;</span></span><span class="token script" data-v-c316f882><span class="token language-javascript" data-v-c316f882>
+module<span class="token punctuation" data-v-c316f882>.</span>exports <span class="token operator" data-v-c316f882>=</span> <span class="token punctuation" data-v-c316f882>{</span>
+  el<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'#app'</span><span class="token punctuation" data-v-c316f882>,</span>
+  data<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+    msg<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'world'</span>
+  <span class="token punctuation" data-v-c316f882>}</span>
+<span class="token punctuation" data-v-c316f882>}</span>
+</span></span><span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>script</span><span class="token punctuation" data-v-c316f882>&gt;</span></span>
 
-&lt;style lang=&quot;sass&quot;&gt;
-  .test{
-    h1{
-      text-align: center;
-    }
-  }
-&lt;/style&gt;
-</code></pre>
-<p>我们使用 Webpack 就可以自动将 <code>.vue</code> 文件编译成正常的 JavaScript 代码，只需要在 Webpack 中配置好 <code>vue-loader</code> 即可：</p>
-<pre><code class="javascript">// webpack.config.js
+<span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;</span>style</span> <span class="token attr-name" data-v-c316f882>lang</span><span class="token attr-value" data-v-c316f882><span class="token punctuation" data-v-c316f882>=</span><span class="token punctuation" data-v-c316f882>&quot;</span>sass<span class="token punctuation" data-v-c316f882>&quot;</span></span><span class="token punctuation" data-v-c316f882>&gt;</span></span><span class="token style" data-v-c316f882><span class="token language-css" data-v-c316f882>
+  <span class="token selector" data-v-c316f882>.test</span><span class="token punctuation" data-v-c316f882>{</span>
+    <span class="token selector" data-v-c316f882>h1</span><span class="token punctuation" data-v-c316f882>{</span>
+      <span class="token property" data-v-c316f882>text-align</span><span class="token punctuation" data-v-c316f882>:</span> center<span class="token punctuation" data-v-c316f882>;</span>
+    <span class="token punctuation" data-v-c316f882>}</span>
+  <span class="token punctuation" data-v-c316f882>}</span>
+</span></span><span class="token tag" data-v-c316f882><span class="token tag" data-v-c316f882><span class="token punctuation" data-v-c316f882>&lt;/</span>style</span><span class="token punctuation" data-v-c316f882>&gt;</span></span></code></pre></div><p data-v-c316f882>我们使用 Webpack 就可以自动将 <code data-v-c316f882>.vue</code> 文件编译成正常的 JavaScript 代码，只需要在 Webpack 中配置好 <code data-v-c316f882>vue-loader</code> 即可：</p> <div class="saber-highlight" data-lang="javascript" data-v-c316f882><pre class="saber-highlight-code language-javascript" data-v-c316f882><code class="language-javascript" data-v-c316f882><span class="token comment" data-v-c316f882>// webpack.config.js</span>
 
-module.exports = {
-  entry: &#39;./app.js&#39;,
-  output: {
-    path: &#39;./build&#39;,
-    filename: &#39;app.js&#39;
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.vue$/, loader: &#39;vue-loader&#39;
-      }
-    ]
-  }
-}
-</code></pre>
-<p>这样，就可以正常地在文件中 <code>require()</code> 所有 <code>.vue</code> 文件：</p>
-<pre><code class="javascript">module.exports = {
-    el: &#39;#app&#39;,
-    data: {/* ... */},
-    components: {
-      &#39;sample&#39;: require(&#39;./components/sample.vue&#39;)
-    }
-  }
-</code></pre>
-<h3 id="css-分离"><a href="#css-分离" class="headerlink" title="css 分离"></a>css 分离</h3><p><code>vue-loader</code> 使用 <code>style-loader</code> 把 component 当中的样式编译成字符串后插入到 <code>&lt;head&gt;</code> 中去。但我们希望把 css 文件独立出去，那么可以使用上一篇文章提到的 <code>ExtractTextPlugin</code> 插件，配合 <code>vue-loader</code> 的 <code>withLoaders()</code> 方法实现生成独立样式文件：</p>
-<pre><code class="javascript">// webpack.config.js
-var vue = require(&#39;vue-loader&#39;)
-  , ExtractTextPlugin = require(&quot;extract-text-webpack-plugin&quot;);
+module<span class="token punctuation" data-v-c316f882>.</span>exports <span class="token operator" data-v-c316f882>=</span> <span class="token punctuation" data-v-c316f882>{</span>
+  entry<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'./app.js'</span><span class="token punctuation" data-v-c316f882>,</span>
+  output<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+    path<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'./build'</span><span class="token punctuation" data-v-c316f882>,</span>
+    filename<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'app.js'</span>
+  <span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>,</span>
+  module<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+    loaders<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>[</span>
+      <span class="token punctuation" data-v-c316f882>{</span>
+        test<span class="token punctuation" data-v-c316f882>:</span> <span class="token regex" data-v-c316f882>/\.vue$/</span><span class="token punctuation" data-v-c316f882>,</span> loader<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'vue-loader'</span>
+      <span class="token punctuation" data-v-c316f882>}</span>
+    <span class="token punctuation" data-v-c316f882>]</span>
+  <span class="token punctuation" data-v-c316f882>}</span>
+<span class="token punctuation" data-v-c316f882>}</span></code></pre></div><p data-v-c316f882>这样，就可以正常地在文件中 <code data-v-c316f882>require()</code> 所有 <code data-v-c316f882>.vue</code> 文件：</p> <div class="saber-highlight" data-lang="javascript" data-v-c316f882><pre class="saber-highlight-code language-javascript" data-v-c316f882><code class="language-javascript" data-v-c316f882>module<span class="token punctuation" data-v-c316f882>.</span>exports <span class="token operator" data-v-c316f882>=</span> <span class="token punctuation" data-v-c316f882>{</span>
+    el<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'#app'</span><span class="token punctuation" data-v-c316f882>,</span>
+    data<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span><span class="token comment" data-v-c316f882>/* ... */</span><span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>,</span>
+    components<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+      <span class="token string" data-v-c316f882>'sample'</span><span class="token punctuation" data-v-c316f882>:</span> <span class="token function" data-v-c316f882>require</span><span class="token punctuation" data-v-c316f882>(</span><span class="token string" data-v-c316f882>'./components/sample.vue'</span><span class="token punctuation" data-v-c316f882>)</span>
+    <span class="token punctuation" data-v-c316f882>}</span>
+  <span class="token punctuation" data-v-c316f882>}</span></code></pre></div><h3 id="css-分离" data-v-c316f882>css 分离</h3> <p data-v-c316f882><code data-v-c316f882>vue-loader</code> 使用 <code data-v-c316f882>style-loader</code> 把 component 当中的样式编译成字符串后插入到 <code data-v-c316f882>&lt;head&gt;</code> 中去。但我们希望把 css 文件独立出去，那么可以使用上一篇文章提到的 <code data-v-c316f882>ExtractTextPlugin</code> 插件，配合 <code data-v-c316f882>vue-loader</code> 的 <code data-v-c316f882>withLoaders()</code> 方法实现生成独立样式文件：</p> <div class="saber-highlight" data-lang="javascript" data-v-c316f882><pre class="saber-highlight-code language-javascript" data-v-c316f882><code class="language-javascript" data-v-c316f882><span class="token comment" data-v-c316f882>// webpack.config.js</span>
+<span class="token keyword" data-v-c316f882>var</span> vue <span class="token operator" data-v-c316f882>=</span> <span class="token function" data-v-c316f882>require</span><span class="token punctuation" data-v-c316f882>(</span><span class="token string" data-v-c316f882>'vue-loader'</span><span class="token punctuation" data-v-c316f882>)</span>
+  <span class="token punctuation" data-v-c316f882>,</span> ExtractTextPlugin <span class="token operator" data-v-c316f882>=</span> <span class="token function" data-v-c316f882>require</span><span class="token punctuation" data-v-c316f882>(</span><span class="token string" data-v-c316f882>&quot;extract-text-webpack-plugin&quot;</span><span class="token punctuation" data-v-c316f882>)</span><span class="token punctuation" data-v-c316f882>;</span>
 
-module.exports = {
-  entry: &#39;./app.js&#39;,
-  output: {
-    path: &#39;./build&#39;,
-    filename: &#39;app.js&#39;
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.vue$/, loader: vue.withLoaders({
-          sass: ExtractTextPlugin.extract(&quot;css!sass&quot;) // 编译 Sass
-        })
-      }
-    ]
-  },
-  plugins: [
-    new ExtractTextPlugin(&#39;app.css&#39;) // 输出到 output path 下的 app.css 文件
-  ]
-}
-</code></pre>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>webpack 是一个十分好用的模块打包工具，使用它更加利于实现前端开发工程化。</p>
-<p>很多人认为 webpack 可以取代 Gulp/Grunt 等构建工具，其实不然。Webpack 仅仅是<strong>顺便</strong>替构建工具分担了一些预编译预处理的工作，而构建工作不仅仅只有预编译啊。</p>
-<p>Vue.js 和 Webpack 的结合使用方法写到这里就已经算是写完了，当然，还有很多其它的实践方法，都要靠读者自己去摸索了，这个系列仅仅是想给没有使用过 Vue.js 或者 Webpack 的读者一个大概的认识。</p>
-<p>最后趁这个机会感慨一下，前端开发是让人感到兴奋的，我以前也写很多有关前端的东西，但从来不愿意称自己为『前端开发者』，是由于自己对前端开发的各种浅见，认为前端开发低端、repetitive、不能成大事。但是经过更加深入的实践，才慢慢发现前端也是工程化的、有学问的、有活力的。我很高兴可以作为一名『前端开发者』，在这里感受日新月异的氛围的技术浪潮。</p>
-<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><ul>
-<li><a href="https://github.com/fouber/blog/issues/10" target="_blank" rel="noopener">前端工程——基础篇</a></li>
-<li><a href="http://webpack.github.io/docs/tutorials/getting-started/" target="_blank" rel="noopener">Webpack Getting Started</a></li>
-<li><a href="http://segmentfault.com/a/1190000002551952" target="_blank" rel="noopener">Webpack 入门指迷</a></li>
-<li><a href="https://www.youtube.com/watch?v=VkTCL6Nqm6Y" target="_blank" rel="noopener">How Instagram.com Works</a></li>
-<li><a href="http://vuejs.org/guide/components.html" target="_blank" rel="noopener">Vue.js - Component System</a></li>
-<li><a href="http://vuejs.org/guide/application.html" target="_blank" rel="noopener">Vue.js - Building Larger Apps</a></li>
-<li><a href="https://github.com/vuejs/vue-router" target="_blank" rel="noopener">vue-router</a></li>
-<li><a href="http://teahour.fm/2015/08/16/vuejs-creator-evan-you.html" target="_blank" rel="noopener">和 Vue.js 框架的作者聊聊前端框架开发背后的故事</a></li>
-</ul>
-
-  </div>
-  <center><img class="signature" width="128px" src="//gbstatic.djyde.com/sign_square_white.png"></center>
-  <div class="post-footer">
-  <hr>
-  <p>讨论请发邮件到 randypriv@gmail.com</p>
-  <p>未经授权，禁止转载</p>
-  <p>通过支付宝 djyde520@gmail.com 或赞赏码赞助此文</p>
-  <p>或通过订阅我的<a href="/blog/my-zsxq/">知识星球</a>支持本博客</p>
-  <br>
-  <p>
-    <img class="bmc" src="//gbstatic.djyde.com/assets/006tKfTcgy1fkuufy2cadj30w00w0tb2.jpg">
-  </p>
-</div>
-
-</div>
-    </div>
-    <div id="footer">
-  <p>
-  <img width="256px" src="//s2.ax1x.com/2019/04/04/A2V9YT.png">
-  </p>
-  <p>2014-2019 <a href="/">Randy's Blog</a></p>
-
-</div>
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-72147868-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
-  </body>
-</html>
+module<span class="token punctuation" data-v-c316f882>.</span>exports <span class="token operator" data-v-c316f882>=</span> <span class="token punctuation" data-v-c316f882>{</span>
+  entry<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'./app.js'</span><span class="token punctuation" data-v-c316f882>,</span>
+  output<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+    path<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'./build'</span><span class="token punctuation" data-v-c316f882>,</span>
+    filename<span class="token punctuation" data-v-c316f882>:</span> <span class="token string" data-v-c316f882>'app.js'</span>
+  <span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>,</span>
+  module<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>{</span>
+    loaders<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>[</span>
+      <span class="token punctuation" data-v-c316f882>{</span>
+        test<span class="token punctuation" data-v-c316f882>:</span> <span class="token regex" data-v-c316f882>/\.vue$/</span><span class="token punctuation" data-v-c316f882>,</span> loader<span class="token punctuation" data-v-c316f882>:</span> vue<span class="token punctuation" data-v-c316f882>.</span><span class="token function" data-v-c316f882>withLoaders</span><span class="token punctuation" data-v-c316f882>(</span><span class="token punctuation" data-v-c316f882>{</span>
+          sass<span class="token punctuation" data-v-c316f882>:</span> ExtractTextPlugin<span class="token punctuation" data-v-c316f882>.</span><span class="token function" data-v-c316f882>extract</span><span class="token punctuation" data-v-c316f882>(</span><span class="token string" data-v-c316f882>&quot;css!sass&quot;</span><span class="token punctuation" data-v-c316f882>)</span> <span class="token comment" data-v-c316f882>// 编译 Sass</span>
+        <span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>)</span>
+      <span class="token punctuation" data-v-c316f882>}</span>
+    <span class="token punctuation" data-v-c316f882>]</span>
+  <span class="token punctuation" data-v-c316f882>}</span><span class="token punctuation" data-v-c316f882>,</span>
+  plugins<span class="token punctuation" data-v-c316f882>:</span> <span class="token punctuation" data-v-c316f882>[</span>
+    <span class="token keyword" data-v-c316f882>new</span> <span class="token class-name" data-v-c316f882>ExtractTextPlugin</span><span class="token punctuation" data-v-c316f882>(</span><span class="token string" data-v-c316f882>'app.css'</span><span class="token punctuation" data-v-c316f882>)</span> <span class="token comment" data-v-c316f882>// 输出到 output path 下的 app.css 文件</span>
+  <span class="token punctuation" data-v-c316f882>]</span>
+<span class="token punctuation" data-v-c316f882>}</span></code></pre></div><h2 id="总结" data-v-c316f882>总结</h2> <p data-v-c316f882>webpack 是一个十分好用的模块打包工具，使用它更加利于实现前端开发工程化。</p> <p data-v-c316f882>很多人认为 webpack 可以取代 Gulp/Grunt 等构建工具，其实不然。Webpack 仅仅是<strong data-v-c316f882>顺便</strong>替构建工具分担了一些预编译预处理的工作，而构建工作不仅仅只有预编译啊。</p> <p data-v-c316f882>Vue.js 和 Webpack 的结合使用方法写到这里就已经算是写完了，当然，还有很多其它的实践方法，都要靠读者自己去摸索了，这个系列仅仅是想给没有使用过 Vue.js 或者 Webpack 的读者一个大概的认识。</p> <p data-v-c316f882>最后趁这个机会感慨一下，前端开发是让人感到兴奋的，我以前也写很多有关前端的东西，但从来不愿意称自己为『前端开发者』，是由于自己对前端开发的各种浅见，认为前端开发低端、repetitive、不能成大事。但是经过更加深入的实践，才慢慢发现前端也是工程化的、有学问的、有活力的。我很高兴可以作为一名『前端开发者』，在这里感受日新月异的氛围的技术浪潮。</p> <h2 id="延伸阅读" data-v-c316f882>延伸阅读</h2> <ul data-v-c316f882><li data-v-c316f882><a rel="noopener noreferrer" target="_blank" href="https://github.com/fouber/blog/issues/10" data-v-c316f882>前端工程——基础篇</a></li> <li data-v-c316f882><a rel="noopener noreferrer" target="_blank" href="http://webpack.github.io/docs/tutorials/getting-started/" data-v-c316f882>Webpack Getting Started</a></li> <li data-v-c316f882><a rel="noopener noreferrer" target="_blank" href="http://segmentfault.com/a/1190000002551952" data-v-c316f882>Webpack 入门指迷</a></li> <li data-v-c316f882><a rel="noopener noreferrer" target="_blank" href="https://www.youtube.com/watch?v=VkTCL6Nqm6Y" data-v-c316f882>How Instagram.com Works</a></li> <li data-v-c316f882><a rel="noopener noreferrer" target="_blank" href="http://vuejs.org/guide/components.html" data-v-c316f882>Vue.js - Component System</a></li> <li data-v-c316f882><a rel="noopener noreferrer" target="_blank" href="http://vuejs.org/guide/application.html" data-v-c316f882>Vue.js - Building Larger Apps</a></li> <li data-v-c316f882><a rel="noopener noreferrer" target="_blank" href="https://github.com/vuejs/vue-router" data-v-c316f882>vue-router</a></li> <li data-v-c316f882><a rel="noopener noreferrer" target="_blank" href="http://teahour.fm/2015/08/16/vuejs-creator-evan-you.html" data-v-c316f882>和 Vue.js 框架的作者聊聊前端框架开发背后的故事</a></li></ul></div> <div class="post-footer" data-v-c316f882><hr data-v-c316f882> <p data-v-c316f882>讨论请发邮件到 randypriv@gmail.com</p> <p data-v-c316f882>未经授权，禁止转载</p> <p data-v-c316f882>通过支付宝 djyde520@gmail.com 或赞赏码赞助此文</p> <p data-v-c316f882>
+        或通过订阅我的
+        <a href="/blog/my-zsxq/" data-v-c316f882>知识星球</a>支持本博客
+      </p> <br data-v-c316f882> <p data-v-c316f882><img src="//gbstatic.djyde.com/assets/006tKfTcgy1fkuufy2cadj30w00w0tb2.jpg" class="bmc" data-v-c316f882></p></div></div></div> <div id="footer"><p><img width="256px" src="//s2.ax1x.com/2019/04/04/A2V9YT.png"></p> <p>
+      2014-2019
+      <a href="/" class="router-link-active">Randy's Blog</a></p></div></div></div><script src="/_saber/js/client.9ebc42c9.js" defer></script><script src="/_saber/js/page--_posts-vue-and-webpack-md.7bb08874.js" defer></script></body></html>
