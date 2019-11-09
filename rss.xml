@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lutaonan.com/</id>
     <title/>
-    <updated>2019-11-09T04:15:54.994Z</updated>
+    <updated>2019-11-09T19:39:41.527Z</updated>
     <generator>Saber</generator>
     <author>
         <name>Randy</name>
@@ -79,7 +79,7 @@
         <title type="html"><![CDATA[我开通了知识星球]]></title>
         <id>https://lutaonan.com/blog/my-zsxq</id>
         <link href="https://lutaonan.com/blog/my-zsxq"/>
-        <updated>2019-11-08T16:25:15.234Z</updated>
+        <updated>2019-11-09T18:38:26.221Z</updated>
         <summary type="html"><![CDATA[我不太喜欢程序员圈子的社交，写博客多年，收到了不少对我博客和文章的打赏，和一些有心的网友发长邮件对我提问，但一直没有与我的博客读者们建立起一种有效关系。我想，何不让支持我博客的读者在打赏的同时，作为回报，可以在知识星球向我提问，或获得我认为有价值的分享呢。
 ]]></summary>
         <content type="html"><![CDATA[<p>我不太喜欢程序员圈子的社交，写博客多年，收到了不少对我博客和文章的打赏，和一些有心的网友发长邮件对我提问，但一直没有与我的博客读者们建立起一种有效关系。我想，何不让支持我博客的读者在打赏的同时，作为回报，可以在知识星球向我提问，或获得我认为有价值的分享呢。</p> <p>我在我所在的领域远算不上专家，只是一路走来有很多经验和自己独特的理解可以分享出去。以我这微不足道的「影响力」，我也不会因此获得多少钱。<strong>我希望读者可以把我创建的这个知识星球当作打赏的一个副加回报去看待。</strong></p> <p>我会在知识星球分享：</p> <ul><li>回答成员的问题（包括编程、音乐和健身）</li> <li>分享自己看到有价值的项目或文章</li> <li>偶尔一些主观的短评</li></ul> <img src="https://gbstatic.djyde.com/image_554541844184_3.JPG?x-oss-process=style/80" width="30%">]]></content>
@@ -723,7 +723,7 @@ Please enter the default Docker image <span class="token punctuation">(</span>e.
         <title type="html"><![CDATA[Vue.js 和 Webpack]]></title>
         <id>https://lutaonan.com/blog/vue-and-webpack</id>
         <link href="https://lutaonan.com/blog/vue-and-webpack"/>
-        <updated>2019-11-08T16:25:15.237Z</updated>
+        <updated>2019-11-09T18:56:29.412Z</updated>
         <summary type="html"><![CDATA[转载前请务必先联系邮箱
 ]]></summary>
         <content type="html"><![CDATA[<p><strong>转载前请务必先联系邮箱</strong></p> <p>最近在把 SISE Game（我们学校的校内游戏直播网站） 从原本的 Ruby on Rails 彻底用 Node.js 重写，  经过一些考虑，决定用 Vue.js 和 Express.js 实现前后端分离的架构，在这几天的重写过程中，积累了对 Webpack 和 Vue.js 的一些新的看法。</p> <h2 id="about-vue-js">About Vue.js</h2> <p>Vue 是个很年轻的 MVVM Library，常常有很多人用 Angular 和 Vue 比较，因为两者都是 MVVM，但实际上，前者是 Framework，而后者是 Library。前者有很陡峭的学习曲线，后者可以很快地掌握运用到项目中去。</p> <p>Vue 的官方是用 <strong>a library for building modern web interfaces</strong> 来描述自己的。Vue 适合和 React 对比，因为在使用 Vue 的 Components System 开发比较大型的 Single Page Application 的时候，我发现它和 React 有一些相似的地方。如果你赞同 React 的思想，但又不想写 JSX，那么，你就可能需要试试 Vue 了。</p> <p>一个用 Vue 实现 Data binding 的 Demo：</p> <div class="saber-highlight" data-lang="html"><pre class="saber-highlight-code language-html"><code class="language-html"><span class="token comment">&lt;!-- index.html --&gt;</span>
@@ -738,8 +738,7 @@ Please enter the default Docker image <span class="token punctuation">(</span>e.
       msg<span class="token punctuation">:</span> <span class="token string">'hello Vue.js'</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span>
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></code></pre></div><h2 id="why-vue-js">Why Vue.js</h2> <p>前端开发发展到现在，我们做过的很多努力，都是在尝试把开发者从繁琐的 DOM  操作和管理 DOM state 中解放出去，我们希望只需要通过描述数据和行为，DOM 自己就可以发生对应的变化，React 在 View 这一层实现了这一目标，而 MVVM 则是通过 ViewModel 的 Data Binding。React 宣称自己是 View，那么在我看来， Vue 则是 View + ViewModel，并且 Vue 更加 lightweight 和 flexible。</p> <p>Vue 最让我喜欢的是它的 Components System，利用它可以构建组件化的中大型应用。React 当然也是组件化的，但是 Virtual DOM (JSX) 在一些场景让我很不满意。比如有一次，我用一个使用 React 的项目中，想要在一 <code>&lt;video&gt;</code> 里使用 <code>webkit-playsinline</code> 这个 attribute，但是 React 不支持，渲染的时候直接被 ignored，我必须手动地操作 DOM 给 <code>&lt;video&gt;</code> setAttribute。相反，Vue 的 Components System 当中，写的是真正的 DOM，不需要担心不支持不兼容的各种情况。</p> <p>容易被用作对比的是 Angular。我第一次听说 Vue 的时候，也是把它当作一个 lightweight 的 Angular alternative. 但是当真正实践使用 Vue 的时候，才发现它和 Angular 有着很大的不同。Angular 是一个 Framework，一旦你使用它，就必须按照它的一套去组织你的项目。以前写 Angular 项目的过程和经历对我个人来说都不太愉快，我更加倾向于 Vue 这种更灵活的方案。</p> <p>关于 Vue 和其它库和框架的对比，官方也有作者更详细的 <a rel="noopener noreferrer" target="_blank" href="http://vuejs.org/guide/faq.html">解答</a>（<a rel="noopener noreferrer" target="_blank" href="http://cn.vuejs.org/guide/faq.html">中文版本</a>）</p> <p>##Using Vue.js
-SISE Game 并不算一个大型的 Web APP，但也规范地使用组件化的开发，整个项目的结构大致如下：</p> <div class="saber-highlight" data-lang="text"><pre class="saber-highlight-code language-text"><code class="language-text">├── app
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></code></pre></div><h2 id="why-vue-js">Why Vue.js</h2> <p>前端开发发展到现在，我们做过的很多努力，都是在尝试把开发者从繁琐的 DOM  操作和管理 DOM state 中解放出去，我们希望只需要通过描述数据和行为，DOM 自己就可以发生对应的变化，React 在 View 这一层实现了这一目标，而 MVVM 则是通过 ViewModel 的 Data Binding。React 宣称自己是 View，那么在我看来， Vue 则是 View + ViewModel，并且 Vue 更加 lightweight 和 flexible。</p> <p>Vue 最让我喜欢的是它的 Components System，利用它可以构建组件化的中大型应用。React 当然也是组件化的，但是 Virtual DOM (JSX) 在一些场景让我很不满意。比如有一次，我用一个使用 React 的项目中，想要在一 <code>&lt;video&gt;</code> 里使用 <code>webkit-playsinline</code> 这个 attribute，但是 React 不支持，渲染的时候直接被 ignored，我必须手动地操作 DOM 给 <code>&lt;video&gt;</code> setAttribute。相反，Vue 的 Components System 当中，写的是真正的 DOM，不需要担心不支持不兼容的各种情况。</p> <p>容易被用作对比的是 Angular。我第一次听说 Vue 的时候，也是把它当作一个 lightweight 的 Angular alternative. 但是当真正实践使用 Vue 的时候，才发现它和 Angular 有着很大的不同。Angular 是一个 Framework，一旦你使用它，就必须按照它的一套去组织你的项目。以前写 Angular 项目的过程和经历对我个人来说都不太愉快，我更加倾向于 Vue 这种更灵活的方案。</p> <p>关于 Vue 和其它库和框架的对比，官方也有作者更详细的 <a rel="noopener noreferrer" target="_blank" href="http://vuejs.org/guide/faq.html">解答</a>（<a rel="noopener noreferrer" target="_blank" href="http://cn.vuejs.org/guide/faq.html">中文版本</a>）</p> <h2 id="using-vue-js">Using Vue.js</h2> <p>SISE Game 并不算一个大型的 Web APP，但也规范地使用组件化的开发，整个项目的结构大致如下：</p> <div class="saber-highlight" data-lang="text"><pre class="saber-highlight-code language-text"><code class="language-text">├── app
 │   ├── app.js #entry
 │   ├── app.vue
 │   ├── config.js 
